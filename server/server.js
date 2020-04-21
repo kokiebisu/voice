@@ -3,12 +3,12 @@ const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 4000;
 
-// Routes
-const mainRoute = require('./routes/mainRoute');
+// Router
+const mainRouter = require('./routes/mainRoute');
 
 app.use(cors('*'));
 
-app.use('/', mainRoute);
+app.use('/', mainRouter);
 
 app.listen(port, () => {
   console.log(`Server is listening on ${port}`);
