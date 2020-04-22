@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default () => {
@@ -8,12 +8,15 @@ export default () => {
   return (
     <>
       <View>
-        <Button onPress={() => navigation.navigate('Student Authenticate')}>
-          Student
-        </Button>
-        <Button onPress={() => navigation.navigate('Teacher Authenticate')}>
-          Teacher
-        </Button>
+        <Button
+          title='Student'
+          onPress={() => navigation.navigate('Student Authentication')}
+        />
+
+        <Button
+          title='Teacher'
+          onPress={() => navigation.navigate('Teacher Authentication')}
+        />
       </View>
     </>
   );

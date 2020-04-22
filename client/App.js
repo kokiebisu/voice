@@ -26,10 +26,7 @@ export default function App() {
           name='Teacher Authentication'
           component={TeacherAuthenticationScreen}
         />
-        <Stack.Screen
-          name='Student Authentication'
-          component={StudentSessionScreen}
-        />
+        <Stack.Screen name='Student Session' component={StudentSessionScreen} />
         <Stack.Screen name='Teacher Session' component={TeacherSessionScreen} />
       </Stack.Navigator>
     </NavigationContainer>
