@@ -1,19 +1,21 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
+// Navigation
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+// Screens
+import RoleSelectScreen from './src/screens/RoleSelectScreen';
+
+const Stack = createStackNavigator();
+
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Role Select'>
+        <Stack.Screen name='Role Select' component={RoleSelectScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
