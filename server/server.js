@@ -8,26 +8,30 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 // Router
-const router = require('./router');
+const router = require('./routes/mainRoute');
 
 const PORT = process.env.PORT || 5000;
 
+// Setting up a socket with the namespace 'connection' for new sockets
 io.on('connection', (socket) => {
-  socket.on('join', ({ room }, callback) => {
-    console.log('room', room);
-    console.log('id', socket.id);
+  console.log('new client connected');
 
+  // Listen on a new namespace called 'join'
+  socket.on('join', ({ message, error }) => {
+    console.log(message);
     if (error) {
       return callback(error);
     }
+    // Broadcast it out to all other sockets excluding the socket which sent us the data
+    socket.broadcast.emit('outgoing data', { num: data });
     callback();
   });
 
-  socket.on('disconnect', () => {
-    console.log(`${socket.id} has left the chat`);
-  });
+  // A special namespace 'disconnect' for when a client disconnects
+  socket.on('disconnect', () => console.log(`${socket.id} has left the chat`));
 });
 
-const app = express(feathers());
-
 app.use(cors('*'));
+app.use(router);
+
+server.listen(PORT, () => console.log(`Listening on ${PORT}...`));
