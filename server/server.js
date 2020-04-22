@@ -1,15 +1,33 @@
 const express = require('express');
+const http = require('http');
+const socketio = require('socket.io');
 const cors = require('cors');
+
 const app = express();
-const port = process.env.PORT || 4000;
+const server = http.createServer(app);
+const io = socketio(server);
 
 // Router
-const mainRouter = require('./routes/mainRoute');
+const router = require('./router');
+
+const PORT = process.env.PORT || 5000;
+
+io.on('connection', (socket) => {
+  socket.on('join', ({ room }, callback) => {
+    console.log('room', room);
+    console.log('id', socket.id);
+
+    if (error) {
+      return callback(error);
+    }
+    callback();
+  });
+
+  socket.on('disconnect', () => {
+    console.log(`${socket.id} has left the chat`);
+  });
+});
+
+const app = express(feathers());
 
 app.use(cors('*'));
-
-app.use('/', mainRouter);
-
-app.listen(port, () => {
-  console.log(`Server is listening on ${port}`);
-});
