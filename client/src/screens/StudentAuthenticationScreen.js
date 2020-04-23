@@ -21,7 +21,9 @@ export default () => {
         />
         <Button
           title='Join Session'
-          onPress={() => navigation.navigate('Student Session')}
+          onPress={() =>
+            navigation.navigate('Student Session', { sessionId: session })
+          }
         />
       </View>
     </>
