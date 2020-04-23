@@ -10,25 +10,27 @@ const io = socketio(server);
 // Router
 const router = require('./routes/mainRoute');
 
+// Helper
+const { createRoom } = require('./users');
+
 const PORT = process.env.PORT || 5000;
 
 // Setting up a socket with the namespace 'connection' for new sockets
 io.on('connection', (socket) => {
-  console.log('new client connected');
+  console.log(`${socket.id} has entered the room`);
+
+  socket.on('createRoom', (roomId) => {
+    const newRoom = createRoom(socket.id, roomId);
+    console.log(`${socket.id} has created the room ${newRoom.room}`);
+  });
 
   // Listen on a new namespace called 'join'
-  socket.on('join', ({ message, error }) => {
-    console.log(message);
-    if (error) {
-      return callback(error);
-    }
-    // Broadcast it out to all other sockets excluding the socket which sent us the data
-    socket.broadcast.emit('outgoing data', { num: data });
-    callback();
+  socket.on('join', () => {
+    console.log('new client joined');
   });
 
   // A special namespace 'disconnect' for when a client disconnects
-  socket.on('disconnect', () => console.log(`${socket.id} has left the chat`));
+  socket.on('disconnect', () => console.log(`${socket.id} has left the room`));
 });
 
 app.use(cors('*'));
