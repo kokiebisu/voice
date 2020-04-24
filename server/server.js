@@ -1,29 +1,54 @@
+/**
+ * @file Drives the server
+ */
+
+/**
+ * Dependencies
+ */
 const express = require('express');
 const http = require('http');
 const socketio = require('socket.io');
 const cors = require('cors');
 
+/**
+ * Setting up the server
+ */
 const app = express();
 const server = http.createServer(app);
 const io = socketio(server);
 
-// Router
+/**
+ * Router
+ */
 const authRouter = require('./routes/authRoute');
 
-// Helper
+/**
+ * Methods
+ */
 const { createRoom, findRoom, joinRoom } = require('./util/actions');
 
+/**
+ * Port
+ */
 const PORT = process.env.PORT || 5000;
 
-// Setting up a socket with the namespace 'connection' for new sockets
+/**
+ * Setting up a connection to accept new sockets
+ * @param socket - The incoming sockets
+ */
 io.on('connection', (socket) => {
-  // Teachers
+  /**
+   * Enables teachers to create a room
+   */
   socket.on('createRoom', (roomId) => {
     const newRoom = createRoom(socket.id, roomId);
     console.log(`${socket.id} has created the room ${newRoom.room}`);
   });
 
-  // Students
+  /**
+   * Enables students to join the specified room
+   * @param roomId - Roomid given by the student
+   */
   socket.on('joinRoom', (roomId, callback) => {
     const { result, error } = findRoom(roomId);
     if (error) {
@@ -37,10 +62,15 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => console.log(`${socket.id} has left the room`));
 });
 
+/**
+ * Middleware
+ */
 app.use(express.json());
 app.use(cors('*'));
 
-// Routes
+/**
+ * Routes
+ */
 app.use('/auth', authRouter);
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}...`));

@@ -1,9 +1,18 @@
+/**
+ * @file The root file that enables transition between screens
+ */
+
+/**
+ * Dependencies
+ */
 import React from 'react';
 import * as firebase from 'firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-// Screens
+/**
+ * Screens
+ */
 import RoleSelectScreen from './src/screens/RoleSelectScreen';
 import StudentAuthenticationScreen from './src/screens/StudentAuthenticationScreen';
 import StudentSessionScreen from './src/screens/StudentSessionScreen';
@@ -11,16 +20,9 @@ import TeacherAuthenticationScreen from './src/screens/TeacherAuthenticationScre
 import CreateSessionScreen from './src/screens/CreateSessionScreen';
 import TeacherSessionScreen from './src/screens/TeacherSessionScreen';
 
-// Firebase configuration
-var config = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: 'https://voice-3cf58.firebaseio.com/',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
-};
-
+/**
+ * Initializing Stack
+ */
 const Stack = createStackNavigator();
 
 export default function App() {

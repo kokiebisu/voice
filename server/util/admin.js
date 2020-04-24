@@ -1,3 +1,10 @@
+/**
+ * @file Authenticates to the firebase project as admin
+ */
+
+/**
+ * Dependencies
+ */
 const admin = require('firebase-admin');
 var serviceAccount = require('../config/serviceAccountKey.json');
 

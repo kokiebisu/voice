@@ -1,3 +1,7 @@
+/**
+ * @file Screen where teachers can either register or login to their account
+ */
+
 // Dependencies
 import React, { useState } from 'react';
 import {

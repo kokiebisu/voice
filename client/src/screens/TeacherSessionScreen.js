@@ -1,18 +1,34 @@
-// Dependencies
+/**
+ * @file Screen where teachers can monitor the feedbacks
+ * being sent from the students
+ */
+
+/**
+ * Dependencies
+ */
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button, TextInput } from 'react-native';
 import io from 'socket.io-client';
 
-// Helper
+/**
+ * Helper Method
+ */
 import { generateSessionId } from '../util/helper';
 
-// Endpoint
+/**
+ * Endpoint
+ */
 import endpoint from '../util/endpoint';
 
+/**
+ * Socket that will be eventually be connected
+ */
 let socket;
 
 export default () => {
-  // States
+  /**
+   * States
+   */
   const [sessionId, setSessionId] = useState('');
 
   useEffect(() => {

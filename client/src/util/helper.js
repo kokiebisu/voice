@@ -1,8 +1,11 @@
-/*
-All methods that are commonly used between screens are organized here
-*/
+/**
+ * @file Holds methods that can be shared between the screens
+ */
 
-// Generates a string based on the given length
+/**
+ * Generates a session id based on the given length
+ * @param length
+ */
 export const generateSessionId = (length) => {
   var result = '';
   var characters =

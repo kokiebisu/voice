@@ -1,3 +1,8 @@
+/**
+ * @file The router associated with authenticating the teacher
+ */
+
+// Dependencies
 const express = require('express');
 const router = express.Router();
 

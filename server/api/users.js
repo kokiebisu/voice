@@ -1,14 +1,25 @@
+/**
+ * @file Includes methods used for the authentication
+ */
+
+/**
+ * Dependencies
+ */
 const { admin, db } = require('../util/admin');
 const { config } = require('../config/firebase.js');
-
+const { validateLoginData, validateSignUpData } = require('../util/validators');
 const firebase = require('firebase');
 
-// Initialize Firebase
+/**
+ * Initializes Firebase
+ */
 firebase.initializeApp(config);
 
-const { validateLoginData, validateSignUpData } = require('../util/validators');
-
-// Login for Teacher
+/**
+ * Logs in the teacher
+ * @param req
+ * @param res
+ */
 const login = (req, res) => {
   const user = {
     email: req.body.email,
@@ -37,7 +48,11 @@ const login = (req, res) => {
     });
 };
 
-// Signup
+/**
+ * Signs up the teacher
+ * @param req
+ * @param res
+ */
 const signup = async (req, res) => {
   const newUser = {
     email: req.body.email,

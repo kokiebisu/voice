@@ -1,10 +1,21 @@
+/**
+ * @file Contains all the methods to validate the authentication
+ */
+
+/**
+ * Validates whether if the given string is empty
+ * @param string
+ */
 const isEmpty = (string) => {
   if (string.trim() === '') return true;
   else return false;
 };
 
-// Login
-exports.validateLoginData = (data) => {
+/**
+ * Validates whether if the login input is valid
+ * @param data
+ */
+const validateLoginData = (data) => {
   let errors = {};
   if (isEmpty(data.email)) errors.email = 'Must not be empty';
   if (isEmpty(data.password)) errors.password = 'Must not be  empty';
@@ -14,14 +25,21 @@ exports.validateLoginData = (data) => {
   };
 };
 
-// Signup
+/**
+ * Validates whether if the email is valid
+ * @param email
+ */
 const isEmail = (email) => {
   const emailRegEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
   if (email.match(emailRegEx)) return true;
   else return false;
 };
 
-exports.validateSignUpData = (data) => {
+/**
+ * Validates whether if the signup input is valid
+ * @param data
+ */
+const validateSignUpData = (data) => {
   let errors = {};
 
   if (isEmpty(data.email)) {
@@ -41,4 +59,9 @@ exports.validateSignUpData = (data) => {
     errors,
     valid: Object.keys(errors).length === 0 ? true : false,
   };
+};
+
+module.exports = {
+  validateLoginData,
+  validateSignUpData,
 };

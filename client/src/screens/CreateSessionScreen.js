@@ -1,13 +1,23 @@
-// Dependencies
+/**
+ * @file Screen where teachers can create a session with the course name
+ */
+
+/**
+ * Dependencies
+ */
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default () => {
-  // Used to navigate between screens
+  /**
+   * Used to navigate between the screens
+   */
   const navigation = useNavigation();
 
-  // States
+  /**
+   * States
+   */
   const [course, setCourse] = useState('');
 
   return (

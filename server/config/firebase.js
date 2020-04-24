@@ -1,3 +1,7 @@
+/**
+ * @file Stores the configuration data for Firebase Authentication
+ */
+
 const config = {
   apiKey: 'AIzaSyA9acS46FyiKLPHYssUZ536BbxxNdf09pQ',
   authDomain: 'voice-3cf58.firebaseapp.com',
