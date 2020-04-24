@@ -11,6 +11,9 @@ import TeacherAuthenticationScreen from './src/screens/TeacherAuthenticationScre
 import StudentSessionScreen from './src/screens/StudentSessionScreen';
 import TeacherSessionScreen from './src/screens/TeacherSessionScreen';
 
+// Route
+import { useRoute } from '@react-navigation/native';
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -27,7 +30,11 @@ export default function App() {
           component={TeacherAuthenticationScreen}
         />
         <Stack.Screen name='Student Session' component={StudentSessionScreen} />
-        <Stack.Screen name='Teacher Session' component={TeacherSessionScreen} />
+        <Stack.Screen
+          name='Teacher Session'
+          component={TeacherSessionScreen}
+          options={({ route }) => ({ title: route.params.course })}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

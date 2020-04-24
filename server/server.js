@@ -11,25 +11,31 @@ const io = socketio(server);
 const router = require('./routes/mainRoute');
 
 // Helper
-const { createRoom } = require('./users');
+const { createRoom, findRoom, joinRoom } = require('./util/actions');
 
 const PORT = process.env.PORT || 5000;
 
 // Setting up a socket with the namespace 'connection' for new sockets
 io.on('connection', (socket) => {
-  console.log(`${socket.id} has entered the room`);
+  // Teachers
 
   socket.on('createRoom', (roomId) => {
     const newRoom = createRoom(socket.id, roomId);
     console.log(`${socket.id} has created the room ${newRoom.room}`);
   });
 
-  // Listen on a new namespace called 'join'
-  socket.on('join', () => {
-    console.log('new client joined');
+  // Students
+
+  socket.on('joinRoom', (roomId, callback) => {
+    const { result, error } = findRoom(roomId);
+    if (error) {
+      return callback(error);
+    }
+    joinRoom({ id: socket.id }, roomId);
+    socket.join(result.room);
+    console.log(`Student ${socket.id} successfully joined the room ${roomId}`);
   });
 
-  // A special namespace 'disconnect' for when a client disconnects
   socket.on('disconnect', () => console.log(`${socket.id} has left the room`));
 });
 

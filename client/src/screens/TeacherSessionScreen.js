@@ -12,7 +12,6 @@ export default () => {
   // Make sure you find your
   const ENDPOINT = 'http://192.168.0.43:5000';
   const [sessionId, setSessionId] = useState('');
-  const [message, setMessage] = useState('');
 
   useEffect(() => {
     socket = io(ENDPOINT);
