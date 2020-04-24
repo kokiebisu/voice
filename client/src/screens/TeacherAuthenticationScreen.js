@@ -10,13 +10,13 @@ import {
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
-
-// Endpoint
 import ENDPOINT from '../util/endpoint';
 
 export default () => {
+  // Used to navigate between screens
   const navigation = useNavigation();
 
+  // States
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');

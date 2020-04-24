@@ -1,3 +1,8 @@
+/*
+All methods that are commonly used between screens are organized here
+*/
+
+// Generates a string based on the given length
 export const generateSessionId = (length) => {
   var result = '';
   var characters =

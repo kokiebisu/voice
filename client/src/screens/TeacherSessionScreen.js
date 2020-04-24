@@ -12,6 +12,7 @@ import endpoint from '../util/endpoint';
 let socket;
 
 export default () => {
+  // States
   const [sessionId, setSessionId] = useState('');
 
   useEffect(() => {

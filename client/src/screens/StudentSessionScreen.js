@@ -1,9 +1,8 @@
+// Dependencies
 import React, { useState, useEffect } from 'react';
 import { Text, View, Alert } from 'react-native';
-import { useRoute } from '@react-navigation/native';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import io from 'socket.io-client';
-
-import { useNavigation } from '@react-navigation/native';
 
 // Endpoint
 import ENDPOINT from '../util/endpoint';
@@ -11,8 +10,13 @@ import ENDPOINT from '../util/endpoint';
 let socket;
 
 export default () => {
+  // Used to navigate among screens
   const navigation = useNavigation();
+
+  // Used to get data from other screens
   const route = useRoute();
+
+  // States
   const [session, setSession] = useState('');
 
   const redirectBack = () => {

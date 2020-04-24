@@ -1,6 +1,5 @@
 /* 
-Endpoints
--> ENDPOINTS are used for Websockets.
+Endpoints are used for Websockets.
 -> http://<YOUR IP ADDRESS>:5000
 */
 const KENS_ENDPOINT = 'http://192.168.0.43:5000';

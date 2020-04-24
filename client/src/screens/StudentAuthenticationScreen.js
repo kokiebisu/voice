@@ -1,7 +1,6 @@
+// Dependencies
 import React, { useState } from 'react';
 import { View, TextInput, Button } from 'react-native';
-
-// Navigation
 import { useNavigation } from '@react-navigation/native';
 
 export default () => {

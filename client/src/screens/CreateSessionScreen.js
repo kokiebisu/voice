@@ -1,13 +1,14 @@
+// Dependencies
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 export default () => {
-  // State
-  const [course, setCourse] = useState('');
-
-  // Navigator
+  // Used to navigate between screens
   const navigation = useNavigation();
+
+  // States
+  const [course, setCourse] = useState('');
 
   return (
     <>
