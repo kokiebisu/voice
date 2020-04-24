@@ -6,7 +6,7 @@ import io from 'socket.io-client';
 import { useNavigation } from '@react-navigation/native';
 
 // Endpoint
-import ENDPOINT from '../../util/endpoint';
+import ENDPOINT from '../util/endpoint';
 
 let socket;
 

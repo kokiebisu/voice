@@ -8,7 +8,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 // Router
-const router = require('./routes/mainRoute');
+const authRouter = require('./routes/authRoute');
 
 // Helper
 const { createRoom, findRoom, joinRoom } = require('./util/actions');
@@ -18,14 +18,12 @@ const PORT = process.env.PORT || 5000;
 // Setting up a socket with the namespace 'connection' for new sockets
 io.on('connection', (socket) => {
   // Teachers
-
   socket.on('createRoom', (roomId) => {
     const newRoom = createRoom(socket.id, roomId);
     console.log(`${socket.id} has created the room ${newRoom.room}`);
   });
 
   // Students
-
   socket.on('joinRoom', (roomId, callback) => {
     const { result, error } = findRoom(roomId);
     if (error) {
@@ -39,7 +37,10 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => console.log(`${socket.id} has left the room`));
 });
 
+app.use(express.json());
 app.use(cors('*'));
-app.use(router);
+
+// Routes
+app.use('/auth', authRouter);
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}...`));

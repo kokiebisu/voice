@@ -1,28 +1,46 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, Text, Button, TextInput } from 'react-native';
+import axios from 'axios';
+
+// Endpoint
+import ENDPOINT from '../util/endpoint';
 
 export default () => {
-  // State
-  const [course, setCourse] = useState('');
+  const [isLogin, setIsLogin] = useState(true);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  // Navigator
-  const navigation = useNavigation();
+  const onAuthenticate = () => {
+    try {
+      axios.post(`${ENDPOINT}/auth/login`, { email, password });
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
 
   return (
     <>
       <View>
-        <Text>Course</Text>
+        <Text>{isLogin ? 'Login' : 'Register'}</Text>
         <TextInput
-          placeholder='Enter the Course Name'
-          value={course}
-          onChangeText={(text) => setCourse(text)}
+          value={email}
+          onChangeText={(text) => setEmail(text)}
+          placeholder='Enter email'
+        />
+        <TextInput
+          value={password}
+          onChangeText={(text) => setPassword(text)}
+          placeholder='Enter password'
         />
         <Button
-          title='Create Session'
-          onPress={() => navigation.navigate('Teacher Session', { course })}
+          title={`${isLogin ? 'Login' : 'Register'}`}
+          onPress={onAuthenticate}
         />
       </View>
+      <Button
+        title='Switch Authentication'
+        onPress={() => setIsLogin(!isLogin)}
+      />
     </>
   );
 };

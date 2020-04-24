@@ -3,7 +3,7 @@ import { View, Text, Button, TextInput } from 'react-native';
 import io from 'socket.io-client';
 
 // Helper
-import { generateSessionId } from '../../util/helper';
+import { generateSessionId } from '../util/helper';
 
 let socket;
 

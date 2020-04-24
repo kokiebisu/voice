@@ -1,18 +1,25 @@
 import React from 'react';
-
-// Navigation
+import * as firebase from 'firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 // Screens
 import RoleSelectScreen from './src/screens/RoleSelectScreen';
 import StudentAuthenticationScreen from './src/screens/StudentAuthenticationScreen';
-import TeacherAuthenticationScreen from './src/screens/TeacherAuthenticationScreen';
 import StudentSessionScreen from './src/screens/StudentSessionScreen';
+import TeacherAuthenticationScreen from './src/screens/TeacherAuthenticationScreen';
+import CreateSessionScreen from './src/screens/CreateSessionScreen';
 import TeacherSessionScreen from './src/screens/TeacherSessionScreen';
 
-// Route
-import { useRoute } from '@react-navigation/native';
+// Firebase configuration
+var config = {
+  apiKey: '',
+  authDomain: '',
+  databaseURL: 'https://voice-3cf58.firebaseio.com/',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: '',
+};
 
 const Stack = createStackNavigator();
 
@@ -24,6 +31,10 @@ export default function App() {
         <Stack.Screen
           name='Student Authentication'
           component={StudentAuthenticationScreen}
+        />
+        <Stack.Screen
+          name='Teacher Create Session'
+          component={CreateSessionScreen}
         />
         <Stack.Screen
           name='Teacher Authentication'
