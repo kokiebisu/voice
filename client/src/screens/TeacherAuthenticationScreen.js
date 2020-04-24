@@ -12,6 +12,7 @@ import axios from 'axios';
 
 // Endpoint
 import ENDPOINT from '../util/endpoint';
+import { set } from 'react-native-reanimated';
 
 export default () => {
   const navigation = useNavigation();
@@ -28,7 +29,6 @@ export default () => {
         password,
       });
       await AsyncStorage.setItem('AuthToken', response.data.token);
-      console.log('successfully stored authtoken');
       navigation.navigate('Teacher Create Session');
     } catch (err) {
       Alert.alert('Invalid Login');
@@ -44,9 +44,10 @@ export default () => {
         password,
         confirmPassword,
       });
-      console.log('signup response', response);
+      await AsyncStorage.setItem('AuthToken', response.data.token);
+      navigation.navigate('Teacher Create Session');
     } catch (err) {
-      throw new Error(err);
+      Alert.alert(err.response.data.message);
     }
   };
 

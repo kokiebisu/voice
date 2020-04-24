@@ -83,11 +83,12 @@ const signup = async (req, res) => {
     .catch((err) => {
       console.error(err);
       if (err.code === 'auth/email-already-in-use') {
-        return res.status(400).json({ email: 'Email already in use' });
+        console.log('email already in use');
+        return res.status(400).json({ message: 'Email already in use' });
       } else {
         return res
           .status(500)
-          .json({ general: 'Something went wrong, please try again' });
+          .json({ message: 'Something went wrong, please try again' });
       }
     });
 };
