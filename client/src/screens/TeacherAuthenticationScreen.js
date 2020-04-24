@@ -9,12 +9,25 @@ export default () => {
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const onAuthenticate = () => {
-    try {
-      axios.post(`${ENDPOINT}/auth/login`, { email, password });
-    } catch (err) {
-      throw new Error(err);
+    if (isLogin) {
+      try {
+        axios.post(`${ENDPOINT}/auth/login`, { email, password });
+      } catch (err) {
+        throw new Error(err);
+      }
+    } else {
+      try {
+        axios.post(`${ENDPOINT}/auth/signup`, {
+          email,
+          password,
+          confirmPassword,
+        });
+      } catch (err) {
+        throw new Error(err);
+      }
     }
   };
 
@@ -23,15 +36,25 @@ export default () => {
       <View>
         <Text>{isLogin ? 'Login' : 'Register'}</Text>
         <TextInput
+          autoCapitalize='none'
           value={email}
           onChangeText={(text) => setEmail(text)}
           placeholder='Enter email'
         />
         <TextInput
+          autoCapitalize='none'
           value={password}
           onChangeText={(text) => setPassword(text)}
           placeholder='Enter password'
         />
+        {!isLogin ? (
+          <TextInput
+            autoCapitalize='none'
+            value={confirmPassword}
+            onChangeText={(text) => setConfirmPassword(text)}
+            placeholder='Confirm Password'
+          />
+        ) : null}
         <Button
           title={`${isLogin ? 'Login' : 'Register'}`}
           onPress={onAuthenticate}

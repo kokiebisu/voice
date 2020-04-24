@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   apiKey: 'AIzaSyA9acS46FyiKLPHYssUZ536BbxxNdf09pQ',
   authDomain: 'voice-3cf58.firebaseapp.com',
   databaseURL: 'https://voice-3cf58.firebaseio.com',
@@ -7,3 +7,7 @@ module.exports = {
   messagingSenderId: '1034051388014',
   appId: '1:1034051388014:web:dea93ae145e0256bed5c7f',
 };
+
+const firestore_location = 'us-west3';
+
+module.exports = { config, firestore_location };
