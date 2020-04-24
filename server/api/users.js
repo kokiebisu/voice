@@ -14,8 +14,6 @@ const login = (req, res) => {
     email: req.body.email,
     password: req.body.password,
   };
-
-  console.log('db', db);
   const { valid, errors } = validateLoginData(user);
   if (!valid) return res.status(400).json(errors);
 
@@ -52,7 +50,7 @@ const signup = async (req, res) => {
   if (!valid) return res.status(400).json(errors);
 
   let token, userId;
-  db.doc(`/users/${newUser.username}`)
+  db.doc(`/users/${newUser.email}`)
     .get()
     .then((doc) => {
       if (doc.exists) {

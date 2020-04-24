@@ -1,33 +1,52 @@
 import React, { useState } from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  TextInput,
+  AsyncStorage,
+  Alert,
+} from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 
 // Endpoint
 import ENDPOINT from '../util/endpoint';
 
 export default () => {
+  const navigation = useNavigation();
+
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  const onAuthenticate = () => {
-    if (isLogin) {
-      try {
-        axios.post(`${ENDPOINT}/auth/login`, { email, password });
-      } catch (err) {
-        throw new Error(err);
-      }
-    } else {
-      try {
-        axios.post(`${ENDPOINT}/auth/signup`, {
-          email,
-          password,
-          confirmPassword,
-        });
-      } catch (err) {
-        throw new Error(err);
-      }
+  const onLogin = async () => {
+    try {
+      const response = await axios.post(`${ENDPOINT}/auth/login`, {
+        email,
+        password,
+      });
+      await AsyncStorage.setItem('AuthToken', response.data.token);
+      console.log('successfully stored authtoken');
+      navigation.navigate('Teacher Create Session');
+    } catch (err) {
+      Alert.alert('Invalid Login');
+      setEmail('');
+      setPassword('');
+    }
+  };
+
+  const onSignup = async () => {
+    try {
+      const response = await axios.post(`${ENDPOINT}/auth/signup`, {
+        email,
+        password,
+        confirmPassword,
+      });
+      console.log('signup response', response);
+    } catch (err) {
+      throw new Error(err);
     }
   };
 
@@ -55,10 +74,11 @@ export default () => {
             placeholder='Confirm Password'
           />
         ) : null}
-        <Button
-          title={`${isLogin ? 'Login' : 'Register'}`}
-          onPress={onAuthenticate}
-        />
+        {isLogin ? (
+          <Button title='Login' onPress={onLogin} />
+        ) : (
+          <Button title='Register' onPress={onSignup} />
+        )}
       </View>
       <Button
         title='Switch Authentication'
