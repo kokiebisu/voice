@@ -1,3 +1,4 @@
+// Dependencies
 import React, { useState } from 'react';
 import {
   View,
@@ -12,7 +13,6 @@ import axios from 'axios';
 
 // Endpoint
 import ENDPOINT from '../util/endpoint';
-import { set } from 'react-native-reanimated';
 
 export default () => {
   const navigation = useNavigation();
@@ -31,7 +31,7 @@ export default () => {
       await AsyncStorage.setItem('AuthToken', response.data.token);
       navigation.navigate('Teacher Create Session');
     } catch (err) {
-      Alert.alert('Invalid Login');
+      Alert.alert(err.response.data.message);
       setEmail('');
       setPassword('');
     }
@@ -65,10 +65,12 @@ export default () => {
           autoCapitalize='none'
           value={password}
           onChangeText={(text) => setPassword(text)}
+          secureTextEntry={true}
           placeholder='Enter password'
         />
         {!isLogin ? (
           <TextInput
+            secureTextEntry={true}
             autoCapitalize='none'
             value={confirmPassword}
             onChangeText={(text) => setConfirmPassword(text)}
