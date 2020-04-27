@@ -3,7 +3,7 @@
  * @todo Add in your endpoint: http://<YOUR IP ADDRESS>:5000
  */
 
-const KENS_ENDPOINT = 'http://192.168.0.43:5000';
+const KENS_ENDPOINT = 'http://192.168.0.62:5000';
 const BERT_ENDPOINT = '';
 const DAVID_ENDPOINT = '';
 const CRAIG_ENDPOINT = '';
