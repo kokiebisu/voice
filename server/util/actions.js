@@ -13,7 +13,7 @@ const rooms = [];
  * @param room
  */
 const createRoom = (id, room) => {
-  const newRoom = { admin: id, users: [], room };
+  const newRoom = { admin: id, users: [], room, feedbacks: {} };
   rooms.push(newRoom);
   return newRoom;
 };
@@ -47,8 +47,31 @@ const joinRoom = (userId, roomId) => {
   console.log('joinroom rooms', rooms);
 };
 
+/**
+ * Sends the feedback to the specified room
+ * @param feedback
+ * @param roomId
+ */
+const sendFeedbackToRoom = (feedback, roomId) => {
+  console.log('inside function feedback', feedback);
+  console.log('inside function roomid', roomId);
+  rooms.map((room) => {
+    if (room.room === roomId) {
+      // if there is not feedback property
+      if (!room[feedback]) {
+        room[feedback] = 1;
+        return;
+      }
+      room[feedback] += 1;
+    }
+    return { result: room.feedback };
+  });
+  return { error: 'room not found' };
+};
+
 module.exports = {
   createRoom,
   findRoom,
   joinRoom,
+  sendFeedbackToRoom,
 };

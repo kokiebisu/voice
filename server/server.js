@@ -25,7 +25,12 @@ const authRouter = require('./routes/authRoute');
 /**
  * Methods
  */
-const { createRoom, findRoom, joinRoom } = require('./util/actions');
+const {
+  createRoom,
+  findRoom,
+  joinRoom,
+  sendFeedbackToRoom,
+} = require('./util/actions');
 
 /**
  * Port
@@ -57,6 +62,18 @@ io.on('connection', (socket) => {
     joinRoom({ id: socket.id }, roomId);
     socket.join(result.room);
     console.log(`Student ${socket.id} successfully joined the room ${roomId}`);
+  });
+
+  socket.on('sendFeedback', (feedbackName, roomId, callback) => {
+    console.log('feedback', feedbackName);
+    console.log('roomId', roomId);
+    const { result, error } = sendFeedbackToRoom(feedbackName, roomId);
+    if (error) {
+      return callback(error);
+    }
+    console.log(
+      `Student ${socket.id} successfully sent a feedback to the room ${roomId}`
+    );
   });
 
   socket.on('disconnect', () => console.log(`${socket.id} has left the room`));

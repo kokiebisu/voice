@@ -6,7 +6,7 @@
  * Dependencies
  */
 import React, { useState, useEffect } from 'react';
-import { Text, View, Alert } from 'react-native';
+import { Text, View, Alert, Button } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import io from 'socket.io-client';
 
@@ -16,6 +16,7 @@ import io from 'socket.io-client';
 import ENDPOINT from '../util/endpoint';
 
 let socket;
+let roomId;
 
 export default () => {
   /**
@@ -43,7 +44,7 @@ export default () => {
 
   useEffect(() => {
     socket = io(ENDPOINT);
-    const roomId = route.params.sessionId;
+    roomId = route.params.sessionId;
     setSession(roomId);
     socket.emit('joinRoom', roomId, ({ error }) => {
       Alert.alert('Error', error, [
@@ -55,9 +56,24 @@ export default () => {
     });
   }, [ENDPOINT]);
 
+  const sendFeedback = (feedback, roomId) => {
+    socket.emit('sendFeedback', feedback, roomId, ({ error }) => {
+      Alert.alert('Error', error, [
+        {
+          text: 'Gotcha',
+          onPress: () => redirectBack(),
+        },
+      ]);
+    });
+  };
+
   return (
     <View>
       <Text>session: {session}</Text>
+      <Button
+        title='too slow'
+        onPress={() => sendFeedback('too slow', roomId)}
+      />
     </View>
   );
 };

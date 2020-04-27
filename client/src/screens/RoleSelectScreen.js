@@ -22,7 +22,7 @@ export default () => {
         />
         <Button
           title='Teacher'
-          onPress={() => navigation.navigate('Teacher Authentication')}
+          onPress={() => navigation.navigate('Teacher Create Session')}
         />
       </View>
     </>
