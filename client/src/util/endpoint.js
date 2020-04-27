@@ -5,7 +5,7 @@
 
 const KENS_ENDPOINT = 'http://192.168.0.43:5000';
 const BERT_ENDPOINT = '';
-const DAVID_ENDPOINT = '';
+const DAVID_ENDPOINT = 'http://192.168.0.16:5000';
 const CRAIG_ENDPOINT = '';
 
 /**
