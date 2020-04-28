@@ -53,20 +53,27 @@ const joinRoom = (userId, roomId) => {
  * @param roomId
  */
 const sendFeedbackToRoom = (feedback, roomId) => {
-  console.log('inside function feedback', feedback);
-  console.log('inside function roomid', roomId);
-  rooms.map((room) => {
+  return rooms.map((room) => {
     if (room.room === roomId) {
-      // if there is not feedback property
-      if (!room[feedback]) {
-        room[feedback] = 1;
-        return;
+      if (!room.feedbacks[feedback]) {
+        room.feedbacks[feedback] = 1;
+      } else {
+        room.feedbacks[feedback] += 1;
       }
-      room[feedback] += 1;
     }
-    return { result: room.feedback };
+    return room;
   });
-  return { error: 'room not found' };
+};
+
+const respondFeedback = (feedback, roomId) => {
+  console.log('in function feedback', feedback);
+  console.log('in function roomid', roomId);
+  return rooms.map((room) => {
+    if (room.room === roomId) {
+      delete room.feedbacks[feedback];
+      return room;
+    }
+  });
 };
 
 module.exports = {
@@ -74,4 +81,5 @@ module.exports = {
   findRoom,
   joinRoom,
   sendFeedbackToRoom,
+  respondFeedback,
 };

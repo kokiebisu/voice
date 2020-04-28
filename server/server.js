@@ -30,6 +30,7 @@ const {
   findRoom,
   joinRoom,
   sendFeedbackToRoom,
+  respondFeedback,
 } = require('./util/actions');
 
 /**
@@ -65,15 +66,17 @@ io.on('connection', (socket) => {
   });
 
   socket.on('sendFeedback', (feedbackName, roomId, callback) => {
-    console.log('feedback', feedbackName);
-    console.log('roomId', roomId);
-    const { result, error } = sendFeedbackToRoom(feedbackName, roomId);
-    if (error) {
-      return callback(error);
-    }
+    const result = sendFeedbackToRoom(feedbackName, roomId);
+    io.to(result[0].admin).emit('displayFeedbacks', result);
     console.log(
       `Student ${socket.id} successfully sent a feedback to the room ${roomId}`
     );
+  });
+
+  socket.on('respondFeedback', (feedbackName, roomId) => {
+    const result = respondFeedback(feedbackName, roomId);
+    io.to(result[0].admin).emit('displayFeedbacks', result);
+    console.log(`Teacher ${socket.id} responded to the feedback`);
   });
 
   socket.on('disconnect', () => console.log(`${socket.id} has left the room`));

@@ -6,7 +6,7 @@
  * Dependencies
  */
 import React, { useState, useEffect } from 'react';
-import { Text, View, Alert, Button } from 'react-native';
+import { Text, View, Alert, Button, StyleSheet } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import io from 'socket.io-client';
 
@@ -14,6 +14,7 @@ import io from 'socket.io-client';
  * Endpoint for the WebSocket
  */
 import ENDPOINT from '../util/endpoint';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 let socket;
 let roomId;
@@ -70,10 +71,18 @@ export default () => {
   return (
     <View>
       <Text>session: {session}</Text>
-      <Button
-        title='too slow'
-        onPress={() => sendFeedback('too slow', roomId)}
-      />
+      <Text style={styles.sectionTitle}>Voices</Text>
+      <Text style={styles.sectionTitle}>Options</Text>
+
+      <TouchableOpacity onPress={() => sendFeedback('too slow', roomId)}>
+        <Text>Too Slow</Text>
+      </TouchableOpacity>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  sectionTitle: {
+    fontWeight: 'bold',
+  },
+});
