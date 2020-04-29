@@ -43,6 +43,10 @@ export default () => {
     navigation.navigate('Student Authentication');
   };
 
+  /**
+   * Initial call when the screen is first rendered.
+   * Creates a socket when it is successful
+   */
   useEffect(() => {
     socket = io(ENDPOINT);
     roomId = route.params.sessionId;
@@ -57,6 +61,25 @@ export default () => {
     });
   }, [ENDPOINT]);
 
+  /**
+   * Student will get kicked out of the room when the teacher ends the session
+   */
+  useEffect(() => {
+    socket.on('kickFromRoom', () => {
+      Alert.alert('Session ended', 'Please go back', [
+        {
+          text: 'Gotcha',
+          onPress: () => redirectBack(),
+        },
+      ]);
+    });
+  }, []);
+
+  /**
+   * Sends a feedback to the teacher based on the button pressed
+   * @param {string} feedback
+   * @param {string} roomId
+   */
   const sendFeedback = (feedback, roomId) => {
     socket.emit('sendFeedback', feedback, roomId, ({ error }) => {
       Alert.alert('Error', error, [

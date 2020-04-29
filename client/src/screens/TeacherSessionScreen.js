@@ -31,19 +31,31 @@ export default () => {
    * States
    */
   const [sessionId, setSessionId] = useState('');
-  const [tooslow, setTooslow] = useState('');
+  const [feedbacks, setFeedbacks] = useState({
+    tooslow: '',
+    toofast: '',
+  });
 
+  // Destructuring all the available feedbacks
+  const { tooslow, toofast } = feedbacks;
+
+  /**
+   * Creates a room with a randomly generated session id
+   */
   useEffect(() => {
     socket = io(endpoint);
     roomId = generateSessionId(5);
     setSessionId(roomId);
     socket.emit('createRoom', roomId);
+    return () => {
+      socket.emit('destroyRoom', roomId);
+    };
   }, [endpoint]);
 
   useEffect(() => {
     socket.on('displayFeedbacks', (result) => {
       console.log('result', result[0].feedbacks);
-      setTooslow(result[0].feedbacks['too slow']);
+      setFeedbacks({ ...feedbacks, tooslow: result[0].feedbacks['too slow'] });
       console.log('too slow', tooslow);
     });
   }, [tooslow]);

@@ -5,12 +5,12 @@
 /**
  * Stores all the ROOMS in here
  */
-const rooms = [];
+let rooms = [];
 
 /**
  * Creates a room with the Teacher as the admin
- * @param id
- * @param room
+ * @param {string} id
+ * @param {string} room
  */
 const createRoom = (id, room) => {
   const newRoom = { admin: id, users: [], room, feedbacks: {} };
@@ -20,7 +20,7 @@ const createRoom = (id, room) => {
 
 /**
  * Checks whether is the specified room is available in rooms
- * @param roomId
+ * @param {string} roomId
  */
 const findRoom = (roomId) => {
   // Finds room from rooms array
@@ -35,8 +35,8 @@ const findRoom = (roomId) => {
 
 /**
  * Joins the room as a student
- * @param userId
- * @param roomId
+ * @param {string} userId
+ * @param {string} roomId
  */
 const joinRoom = (userId, roomId) => {
   rooms.map((room) => {
@@ -49,8 +49,8 @@ const joinRoom = (userId, roomId) => {
 
 /**
  * Sends the feedback to the specified room
- * @param feedback
- * @param roomId
+ * @param {string} feedback
+ * @param {string} roomId
  */
 const sendFeedbackToRoom = (feedback, roomId) => {
   return rooms.map((room) => {
@@ -65,9 +65,12 @@ const sendFeedbackToRoom = (feedback, roomId) => {
   });
 };
 
+/**
+ *
+ * @param {string} feedback
+ * @param {string} roomId
+ */
 const respondFeedback = (feedback, roomId) => {
-  console.log('in function feedback', feedback);
-  console.log('in function roomid', roomId);
   return rooms.map((room) => {
     if (room.room === roomId) {
       delete room.feedbacks[feedback];
@@ -76,10 +79,22 @@ const respondFeedback = (feedback, roomId) => {
   });
 };
 
+/**
+ * Removes the room from the rooms array
+ * @param {string} roomId
+ */
+const removeRoom = (roomId) => {
+  const newRoom = rooms.filter((room) => {
+    return room.room !== roomId;
+  });
+  rooms = newRoom;
+};
+
 module.exports = {
   createRoom,
   findRoom,
   joinRoom,
   sendFeedbackToRoom,
   respondFeedback,
+  removeRoom,
 };
