@@ -73,9 +73,8 @@ io.on('connection', (socket) => {
    * @param {string} roomId - RoomId which the student belongs to
    */
   socket.on('sendFeedback', (feedbackName, roomId) => {
-    const result = sendFeedbackToRoom(feedbackName, roomId);
-    console.log('sendFeedback result', result);
-    io.to(result[0].admin).emit('displayFeedbacks', result);
+    const result = sendFeedbackToRoom(feedbackName, roomId, socket.id);
+    io.to(result.admin).emit('displayFeedbacks', result);
     console.log(
       `Student ${socket.id} successfully sent a feedback to the room ${roomId}`
     );
@@ -86,11 +85,20 @@ io.on('connection', (socket) => {
    * @param {string} feedbackName - Specified feedback
    * @param {string} roomId - Id of the room the users belong in
    */
-  socket.on('respondFeedback', (feedbackName, roomId) => {
-    const result = respondFeedback(feedbackName, roomId);
-    io.to(result[0].admin).emit('displayFeedbacks', result);
-    console.log(`Teacher ${socket.id} responded to the feedback`);
-  });
+  socket.on(
+    'respondFeedback',
+    (feedbackName, roomId) => {
+      const studentIds = respondFeedback(feedbackName, roomId);
+      // Send the notice to the student screen
+      studentIds.map((id) => {
+        io.to(id).emit('teacherResponse');
+      });
+      console.log(
+        `The teacher ${socket.id} has successfully responded to the students ${studentIds}`
+      );
+    },
+    []
+  );
 
   /**
    * Enables teacher to destroy their room

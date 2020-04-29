@@ -52,16 +52,25 @@ export default () => {
     };
   }, [endpoint]);
 
+  /**
+   * Listens to any feedbacks being sent from the student
+   */
   useEffect(() => {
     socket.on('displayFeedbacks', (result) => {
-      console.log('result', result[0].feedbacks);
-      setFeedbacks({ ...feedbacks, tooslow: result[0].feedbacks['too slow'] });
-      console.log('too slow', tooslow);
+      setFeedbacks({
+        ...feedbacks,
+        tooslow: result.feedbacks['too slow'].length,
+      });
     });
   }, [tooslow]);
 
+  /**
+   * Sends the feedback pressed by the user
+   * @param {string} feedbackName
+   */
   const respond = (feedbackName) => {
     socket.emit('respondFeedback', feedbackName, roomId);
+    setFeedbacks({ ...feedbacks, tooslow: '' });
   };
 
   return (
@@ -71,7 +80,6 @@ export default () => {
         <TouchableOpacity
           onPress={() => {
             respond('too slow');
-            console.log('tooslow', tooslow);
           }}>
           <Text>Too Slow: {tooslow}</Text>
         </TouchableOpacity>

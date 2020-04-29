@@ -24,7 +24,6 @@ const createRoom = (id, room) => {
  */
 const findRoom = (roomId) => {
   // Finds room from rooms array
-  console.log('find rooms', rooms);
   const result = rooms.find((room) => room.room === roomId);
   if (result) {
     return { result };
@@ -44,7 +43,6 @@ const joinRoom = (userId, roomId) => {
       room.users.push(userId);
     }
   });
-  console.log('joinroom rooms', rooms);
 };
 
 /**
@@ -52,31 +50,36 @@ const joinRoom = (userId, roomId) => {
  * @param {string} feedback
  * @param {string} roomId
  */
-const sendFeedbackToRoom = (feedback, roomId) => {
-  return rooms.map((room) => {
+const sendFeedbackToRoom = (feedback, roomId, sender) => {
+  let sentRoom;
+  rooms.map((room) => {
     if (room.room === roomId) {
       if (!room.feedbacks[feedback]) {
-        room.feedbacks[feedback] = 1;
+        room.feedbacks[feedback] = [sender];
       } else {
-        room.feedbacks[feedback] += 1;
+        room.feedbacks[feedback].push(sender);
       }
     }
-    return room;
+    sentRoom = room;
   });
+  return sentRoom;
 };
 
 /**
- *
+ * Deletes the feedback that awas being pressed
  * @param {string} feedback
  * @param {string} roomId
  */
 const respondFeedback = (feedback, roomId) => {
-  return rooms.map((room) => {
+  let studentIds;
+  rooms.map((room) => {
     if (room.room === roomId) {
+      //gathers ids with the student id
+      studentIds = [...new Set(room.feedbacks[feedback])];
       delete room.feedbacks[feedback];
-      return room;
     }
   });
+  return studentIds;
 };
 
 /**

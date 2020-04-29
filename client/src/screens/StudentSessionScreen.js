@@ -75,6 +75,17 @@ export default () => {
     });
   }, []);
 
+  useEffect(() => {
+    socket.on('teacherResponse', () => {
+      Alert.alert('Successful', 'Thanks for your voice', [
+        {
+          text: 'No Problem',
+          onPress: () => {},
+        },
+      ]);
+    });
+  }, []);
+
   /**
    * Sends a feedback to the teacher based on the button pressed
    * @param {string} feedback
