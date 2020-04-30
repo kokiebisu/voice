@@ -61,7 +61,7 @@ Add additional notes about how to deploy this on a live system
 
 ## Authors
 
-* **Kenichi Okiebisu** - [kokoaj](https://github.com/PurpleBooth)
+* **Kenichi Okiebisu** - [kokoaj](https://github.com/kokiebisu)
 * **Bertram Nocon**
 * **David Li**
 * **Craig Goodison**
