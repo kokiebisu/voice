@@ -31,13 +31,7 @@ export default () => {
    * States
    */
   const [sessionId, setSessionId] = useState('');
-  const [feedbacks, setFeedbacks] = useState({
-    tooslow: '',
-    toofast: '',
-  });
-
-  // Destructuring all the available feedbacks
-  const { tooslow, toofast } = feedbacks;
+  const [feedbacks, setFeedbacks] = useState({});
 
   /**
    * Creates a room with a randomly generated session id
@@ -57,12 +51,11 @@ export default () => {
    */
   useEffect(() => {
     socket.on('displayFeedbacks', (result) => {
-      setFeedbacks({
-        ...feedbacks,
-        tooslow: result.feedbacks['too slow'].length,
-      });
+      setFeedbacks(result.feedbacks);
     });
-  }, [tooslow]);
+  }, []);
+
+  console.log('feedbacks', feedbacks);
 
   /**
    * Sends the feedback pressed by the user
@@ -70,18 +63,48 @@ export default () => {
    */
   const respond = (feedbackName) => {
     socket.emit('respondFeedback', feedbackName, roomId);
-    setFeedbacks({ ...feedbacks, tooslow: '' });
+    setFeedbacks({ ...feedbacks, [feedbackName]: undefined });
   };
 
   return (
     <View>
       <Text>SessionID: {sessionId}</Text>
-      {tooslow === '' || tooslow === undefined ? null : (
+      {feedbacks['too slow'] === '' ||
+      feedbacks['too slow'] === undefined ? null : (
         <TouchableOpacity
           onPress={() => {
             respond('too slow');
           }}>
-          <Text>Too Slow: {tooslow}</Text>
+          <Text>Too Slow: {feedbacks['too slow'].length}</Text>
+        </TouchableOpacity>
+      )}
+      {feedbacks['too fast'] === '' ||
+      feedbacks['too fast'] === undefined ? null : (
+        <TouchableOpacity
+          onPress={() => {
+            respond('too fast');
+          }}>
+          <Text>Too Fast: {feedbacks['too fast'].length}</Text>
+        </TouchableOpacity>
+      )}
+      {feedbacks['repeat last phrase'] === '' ||
+      feedbacks['repeat last phrase'] === undefined ? null : (
+        <TouchableOpacity
+          onPress={() => {
+            respond('repeat last phrase');
+          }}>
+          <Text>
+            Repeat Last Phrase: {feedbacks['repeat last phrase'].length}
+          </Text>
+        </TouchableOpacity>
+      )}
+      {feedbacks['confused'] === '' ||
+      feedbacks['confused'] === undefined ? null : (
+        <TouchableOpacity
+          onPress={() => {
+            respond('confused');
+          }}>
+          <Text>Confused: {feedbacks['confused'].length}</Text>
         </TouchableOpacity>
       )}
     </View>

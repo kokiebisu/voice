@@ -111,6 +111,16 @@ export default () => {
       <TouchableOpacity onPress={() => sendFeedback('too slow', roomId)}>
         <Text>Too Slow</Text>
       </TouchableOpacity>
+      <TouchableOpacity onPress={() => sendFeedback('too fast', roomId)}>
+        <Text>Too Fast</Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => sendFeedback('repeat last phrase', roomId)}>
+        <Text>Repeat Last Phrase</Text>
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => sendFeedback('confused', roomId)}>
+        <Text>Confused</Text>
+      </TouchableOpacity>
     </View>
   );
 };
