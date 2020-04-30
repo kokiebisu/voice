@@ -4,7 +4,7 @@
 
 // Dependencies
 import React from 'react';
-import { View, Button, StyleSheet, ImageBackground, Image,} from 'react-native';
+import { View, Button, StyleSheet, ImageBackground, Image,TouchableOpacity, Text} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({ 
@@ -74,18 +74,22 @@ export default () => {
       <ImageBackground source={require('../img/images.jpg')} style={styles.container}>
       <Image source ={require('../img/Voice.png')} style={styles.logo}></Image>
       <Image source ={require('../img/role.png')} style={styles.role}></Image>
-        <View style={styles.buttonContainer1}>  
-        <Button
-          title='Student'
+        
+        <TouchableOpacity style={styles.buttonContainer1}
+         
           onPress={() => navigation.navigate('Student Authentication')}
-        />
-        </View>
-        <View style={styles.buttonContainer2}>  
-        <Button
+        >
+           <Text>Student</Text>
+        </TouchableOpacity>
+       
+       
+        <TouchableOpacity style={styles.buttonContainer2}
           title='Teacher'
           onPress={() => navigation.navigate('Teacher Create Session')}
-        />
-        </View>
+        >
+        <Text>Teacher</Text>
+        </TouchableOpacity>
+       
       </ImageBackground>
     </>
   );

@@ -6,7 +6,7 @@
  * Dependencies
  */
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ImageBackground, Image, } from 'react-native';
+import { View, Text, TextInput, Button, StyleSheet, ImageBackground, Image,TouchableOpacity, } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
@@ -79,15 +79,15 @@ export default () => {
           value={session}
           onChangeText={(text) => setSession(text)}
         />
-        <View style={styles.buttonContainer}>  
-        <Button 
-          title='Enter' 
-          color="black"  
-          onPress={() =>
+       
+        <TouchableOpacity style={styles.buttonContainer} onPress={() =>
             navigation.navigate('Student Session', { sessionId: session })
-          }
-        />
-        </View>
+          }>
+          <Text>Enter</Text>
+         
+          
+          </TouchableOpacity>
+     
 
       </ImageBackground>
     </>
