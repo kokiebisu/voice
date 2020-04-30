@@ -34,6 +34,7 @@ export default () => {
    * States
    */
   const [session, setSession] = useState('');
+  const [voices, setVoices] = useState([]);
 
   /**
    * Redirects the student back to the authentication screen when
@@ -86,6 +87,19 @@ export default () => {
     });
   }, []);
 
+  useEffect(() => {
+    socket.on('displayFeedbacks', (result) => {
+      let newVoices = Object.getOwnPropertyNames(result.feedbacks);
+      setVoices(newVoices);
+    });
+  }, [voices]);
+
+  useEffect(() => {
+    socket.on('updateVoice', (result) => {
+      setVoices(Object.getOwnPropertyNames(result.feedbacks));
+    });
+  }, [voices]);
+
   /**
    * Sends a feedback to the teacher based on the button pressed
    * @param {string} feedback
@@ -106,19 +120,23 @@ export default () => {
     <View>
       <Text>session: {session}</Text>
       <Text style={styles.sectionTitle}>Voices</Text>
+      {voices &&
+        voices.length > 0 &&
+        voices.map((voice) => {
+          return <Text>{voice}</Text>;
+        })}
       <Text style={styles.sectionTitle}>Options</Text>
-
-      <TouchableOpacity onPress={() => sendFeedback('too slow', roomId)}>
+      <TouchableOpacity onPress={() => sendFeedback('Too Slow', roomId)}>
         <Text>Too Slow</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => sendFeedback('too fast', roomId)}>
+      <TouchableOpacity onPress={() => sendFeedback('Too Fast', roomId)}>
         <Text>Too Fast</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => sendFeedback('repeat last phrase', roomId)}>
+        onPress={() => sendFeedback('Repeat Last Phrase', roomId)}>
         <Text>Repeat Last Phrase</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => sendFeedback('confused', roomId)}>
+      <TouchableOpacity onPress={() => sendFeedback('Confused', roomId)}>
         <Text>Confused</Text>
       </TouchableOpacity>
     </View>

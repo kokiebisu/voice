@@ -55,8 +55,6 @@ export default () => {
     });
   }, []);
 
-  console.log('feedbacks', feedbacks);
-
   /**
    * Sends the feedback pressed by the user
    * @param {string} feedbackName
@@ -69,42 +67,42 @@ export default () => {
   return (
     <View>
       <Text>SessionID: {sessionId}</Text>
-      {feedbacks['too slow'] === '' ||
-      feedbacks['too slow'] === undefined ? null : (
+      {feedbacks['Too Slow'] === '' ||
+      feedbacks['Too Slow'] === undefined ? null : (
         <TouchableOpacity
           onPress={() => {
-            respond('too slow');
+            respond('Too Slow');
           }}>
-          <Text>Too Slow: {feedbacks['too slow'].length}</Text>
+          <Text>Too Slow: {feedbacks['Too Slow'].length}</Text>
         </TouchableOpacity>
       )}
-      {feedbacks['too fast'] === '' ||
-      feedbacks['too fast'] === undefined ? null : (
+      {feedbacks['Too Fast'] === '' ||
+      feedbacks['Too Fast'] === undefined ? null : (
         <TouchableOpacity
           onPress={() => {
-            respond('too fast');
+            respond('Too Fast');
           }}>
-          <Text>Too Fast: {feedbacks['too fast'].length}</Text>
+          <Text>Too Fast: {feedbacks['Too Fast'].length}</Text>
         </TouchableOpacity>
       )}
-      {feedbacks['repeat last phrase'] === '' ||
-      feedbacks['repeat last phrase'] === undefined ? null : (
+      {feedbacks['Repeat Last Phrase'] === '' ||
+      feedbacks['Repeat Last Phrase'] === undefined ? null : (
         <TouchableOpacity
           onPress={() => {
-            respond('repeat last phrase');
+            respond('Repeat Last Phrase');
           }}>
           <Text>
-            Repeat Last Phrase: {feedbacks['repeat last phrase'].length}
+            Repeat Last Phrase: {feedbacks['Repeat Last Phrase'].length}
           </Text>
         </TouchableOpacity>
       )}
-      {feedbacks['confused'] === '' ||
-      feedbacks['confused'] === undefined ? null : (
+      {feedbacks['Confused'] === '' ||
+      feedbacks['Confused'] === undefined ? null : (
         <TouchableOpacity
           onPress={() => {
-            respond('confused');
+            respond('Confused');
           }}>
-          <Text>Confused: {feedbacks['confused'].length}</Text>
+          <Text>Confused: {feedbacks['Confused'].length}</Text>
         </TouchableOpacity>
       )}
     </View>

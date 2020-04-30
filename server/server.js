@@ -74,7 +74,9 @@ io.on('connection', (socket) => {
    */
   socket.on('sendFeedback', (feedbackName, roomId) => {
     const result = sendFeedbackToRoom(feedbackName, roomId, socket.id);
+    // change this part
     io.to(result.admin).emit('displayFeedbacks', result);
+    io.in(roomId).emit('displayFeedbacks', result);
     console.log(
       `Student ${socket.id} successfully sent a feedback to the room ${roomId}`
     );
@@ -90,9 +92,9 @@ io.on('connection', (socket) => {
     (feedbackName, roomId) => {
       const studentIds = respondFeedback(feedbackName, roomId);
       // Send the notice to the student screen
-      studentIds.map((id) => {
-        io.to(id).emit('teacherResponse');
-      });
+      const { result } = findRoom(roomId);
+      socket.to(roomId).emit('updateVoice', result);
+      studentIds.map((id) => io.to(id).emit('teacherResponse'));
       console.log(
         `The teacher ${socket.id} has successfully responded to the students ${studentIds}`
       );
