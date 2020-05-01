@@ -21,13 +21,13 @@ A step by step series of examples that tell you how to get a development env run
 Say what the step will be
 
 ```
-cd client && npm install
+cd client && yarn install
 ```
 
 #### Server
 
 ```
-cd server && npm install
+cd server && yarn install
 ```
 
 ## Running the tests
