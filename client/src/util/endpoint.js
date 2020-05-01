@@ -11,12 +11,8 @@ const CRAIG_ENDPOINT = '';
 /**
  * @todo Change the variable name to yours
  */
-<<<<<<< HEAD
+
 module.exports = KENS_ENDPOINT;
 // module.exports = BERT_ENDPOINT;
-// module.exports = DAVID_ENDPOINT;
 // module.exports = CRAIG_ENDPOINT;
-=======
-
-module.exports = DAVID_ENDPOINT;
->>>>>>> 240cfe65ecfa65ac04bb40b384fb959220991ef0
+// module.exports = DAVID_ENDPOINT;
