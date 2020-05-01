@@ -9,7 +9,7 @@ const DAVID_ENDPOINT = 'http://192.168.0.16:5000';
 const CRAIG_ENDPOINT = '';
 
 /**
- * @todo Change the variable name to yours
+ * @todo Uncomment your part when you pull
  */
 
 module.exports = KENS_ENDPOINT;

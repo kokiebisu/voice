@@ -97,12 +97,21 @@ const removeRoom = (roomId) => {
  * Remove the feedback based on the student userId
  * @param {string} feedbackName
  * @param {string} studentId
+ * @param {string} roomId
  */
-const removeFeedbackByUserId = (feedbackName, studentId) => {
-  console.log('remove called');
-  console.log('remove feedbacKName', feedbackName);
-  console.log('remove studentid', studentId);
-  console.log('remove rooms', rooms);
+const removeFeedbackByUserId = (feedbackName, studentId, roomId) => {
+  let updatedRoom;
+  rooms.map((room) => {
+    // Find specified room
+    if (room.room === roomId) {
+      updatedRoom = room.feedbacks[feedbackName].filter(
+        (user) => user !== studentId
+      );
+      room.feedbacks[feedbackName] = updatedRoom;
+      updatedRoom = room;
+    }
+  });
+  return updatedRoom;
 };
 
 module.exports = {

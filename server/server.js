@@ -82,12 +82,16 @@ io.on('connection', (socket) => {
       `Student ${socket.id} successfully sent a feedback to the room ${roomId}`
     );
     // Removes the feedback after 2 minutes
-    setTimeout(
-      () =>
-        // RemoveFeedback function
-        removeFeedbackByUserId(feedbackName, socket.id),
-      3000
-    );
+    setTimeout(() =>
+      // RemoveFeedback function
+      {
+        let updatedRoom = removeFeedbackByUserId(
+          feedbackName,
+          socket.id,
+          roomId
+        );
+        io.to(result.admin).emit('displayFeedbacks', updatedRoom);
+      }, 10000);
 
     // Broadcast displayfeedbacks to everyone
   });

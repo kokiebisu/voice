@@ -51,9 +51,10 @@ export default () => {
    */
   useEffect(() => {
     socket.on('displayFeedbacks', (result) => {
+      console.log('client feedbacks', result.feedbacks);
       setFeedbacks(result.feedbacks);
     });
-  }, []);
+  }, [feedbacks]);
 
   /**
    * Sends the feedback pressed by the user
@@ -68,7 +69,8 @@ export default () => {
     <View>
       <Text>SessionID: {sessionId}</Text>
       {feedbacks['Too Slow'] === '' ||
-      feedbacks['Too Slow'] === undefined ? null : (
+      feedbacks['Too Slow'] === undefined ||
+      feedbacks['Too Slow'].length === 0 ? null : (
         <TouchableOpacity
           onPress={() => {
             respond('Too Slow');
@@ -77,7 +79,8 @@ export default () => {
         </TouchableOpacity>
       )}
       {feedbacks['Too Fast'] === '' ||
-      feedbacks['Too Fast'] === undefined ? null : (
+      feedbacks['Too Fast'] === undefined ||
+      feedbacks['Too Fast'].length === 0 ? null : (
         <TouchableOpacity
           onPress={() => {
             respond('Too Fast');
@@ -86,7 +89,8 @@ export default () => {
         </TouchableOpacity>
       )}
       {feedbacks['Repeat Last Phrase'] === '' ||
-      feedbacks['Repeat Last Phrase'] === undefined ? null : (
+      feedbacks['Repeat Last Phrase'] === undefined ||
+      feedbacks['Repeat Last Phrase'].length === 0 ? null : (
         <TouchableOpacity
           onPress={() => {
             respond('Repeat Last Phrase');
@@ -97,7 +101,8 @@ export default () => {
         </TouchableOpacity>
       )}
       {feedbacks['Confused'] === '' ||
-      feedbacks['Confused'] === undefined ? null : (
+      feedbacks['Confused'] === undefined ||
+      feedbacks['Confused'].length === 0 ? null : (
         <TouchableOpacity
           onPress={() => {
             respond('Confused');
