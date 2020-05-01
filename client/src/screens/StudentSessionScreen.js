@@ -46,7 +46,7 @@ export default () => {
 
   /**
    * Initial call when the screen is first rendered.
-   * Creates a socket when it is successful
+   * Creates a socket when it is successful and it fetches any voices in the room.
    */
   useEffect(() => {
     socket = io(ENDPOINT);
@@ -60,7 +60,7 @@ export default () => {
         },
       ]);
     });
-    socket.on('fetchVoices', (result) => setVoices(result.feedbacks));
+    socket.on('updateVoices', (result) => setVoices(result.feedbacks));
   }, [ENDPOINT]);
 
   /**
@@ -77,6 +77,9 @@ export default () => {
     });
   }, []);
 
+  /**
+   * Receive a response back from the teacher when the feedback is seen by the teacher
+   */
   useEffect(() => {
     socket.on('teacherResponse', () => {
       Alert.alert('Successful', 'Thanks for your voice', [
@@ -88,18 +91,14 @@ export default () => {
     });
   }, []);
 
+  /**
+   * Updates any voices that are sent in the room
+   */
   useEffect(() => {
-    socket.on('displayFeedbacks', (result) => {
+    socket.on('updateVoices', (result) => {
       setVoices(result.feedbacks);
     });
   }, [voices]);
-
-  useEffect(() => {
-    socket.on('updateVoices', (result) => {
-      console.log('update voice called', result);
-      setVoices(result.feedbacks);
-    });
-  });
 
   /**
    * Sends a feedback to the teacher based on the button pressed
@@ -116,8 +115,6 @@ export default () => {
       ]);
     });
   };
-
-  console.log('voices', voices);
 
   return (
     <View>
