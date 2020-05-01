@@ -6,12 +6,21 @@
  * Dependencies
  */
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, StyleSheet, ImageBackground, Image,TouchableOpacity, } from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  StyleSheet,
+  ImageBackground,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   textbox: {
-    position: 'absolute', 
+    position: 'absolute',
     width: 293,
     height: 73,
     left: 51,
@@ -23,8 +32,8 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
-    shadowRadius: 5,  
-    elevation: 5
+    shadowRadius: 5,
+    elevation: 5,
   },
 
   container: {
@@ -33,13 +42,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  logo:{
-    position: 'absolute', 
+  logo: {
+    position: 'absolute',
     top: 109,
   },
 
-  buttonContainer: {  
-    position: 'absolute', 
+  buttonContainer: {
+    position: 'absolute',
     width: 293,
     height: 73,
     left: 51,
@@ -51,14 +60,12 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
-    shadowRadius: 5,  
-    elevation: 5 ,
+    shadowRadius: 5,
+    elevation: 5,
     alignItems: 'center',
     justifyContent: 'center',
-  
-  },  
-
- });
+  },
+});
 export default () => {
   /**
    * Used to navigate between the screens
@@ -72,23 +79,29 @@ export default () => {
 
   return (
     <>
-      <ImageBackground source={require('../img/images.jpg')} style={styles.container}>
-        <Image source ={require('../img/Voice.png')} style={styles.logo}></Image>
-        <TextInput style={styles.textbox}
+      <ImageBackground
+        source={require('../img/images.jpg')}
+        style={styles.container}>
+        <Image source={require('../img/Voice.png')} style={styles.logo}></Image>
+        <TextInput
+          autoCapitalize={false}
+          autoCorrect={false}
+          style={styles.textbox}
           placeholder='Enter the session id'
           value={session}
-          onChangeText={(text) => setSession(text)}
+          onChangeText={(text) => {
+            setSession(text.trim());
+            console.log('session', session);
+          }}
         />
-       
-        <TouchableOpacity style={styles.buttonContainer} onPress={() =>
-            navigation.navigate('Student Session', { sessionId: session })
-          }>
-          <Text>Enter</Text>
-         
-          
-          </TouchableOpacity>
-     
 
+        <TouchableOpacity
+          style={styles.buttonContainer}
+          onPress={() => {
+            navigation.navigate('Student Session', { sessionId: session });
+          }}>
+          <Text>Enter</Text>
+        </TouchableOpacity>
       </ImageBackground>
     </>
   );

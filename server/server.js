@@ -32,6 +32,7 @@ const {
   sendFeedbackToRoom,
   respondFeedback,
   removeRoom,
+  removeFeedbackByUserId,
 } = require('./util/actions');
 
 /**
@@ -80,6 +81,15 @@ io.on('connection', (socket) => {
     console.log(
       `Student ${socket.id} successfully sent a feedback to the room ${roomId}`
     );
+    // Removes the feedback after 2 minutes
+    setTimeout(
+      () =>
+        // RemoveFeedback function
+        removeFeedbackByUserId(feedbackName, socket.id),
+      3000
+    );
+
+    // Broadcast displayfeedbacks to everyone
   });
 
   /**

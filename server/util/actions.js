@@ -93,6 +93,18 @@ const removeRoom = (roomId) => {
   rooms = newRoom;
 };
 
+/**
+ * Remove the feedback based on the student userId
+ * @param {string} feedbackName
+ * @param {string} studentId
+ */
+const removeFeedbackByUserId = (feedbackName, studentId) => {
+  console.log('remove called');
+  console.log('remove feedbacKName', feedbackName);
+  console.log('remove studentid', studentId);
+  console.log('remove rooms', rooms);
+};
+
 module.exports = {
   createRoom,
   findRoom,
@@ -100,4 +112,5 @@ module.exports = {
   sendFeedbackToRoom,
   respondFeedback,
   removeRoom,
+  removeFeedbackByUserId,
 };
