@@ -60,6 +60,7 @@ export default () => {
         },
       ]);
     });
+    socket.on('fetchVoices', (result) => setVoices(result.feedbacks));
   }, [ENDPOINT]);
 
   /**
@@ -94,10 +95,11 @@ export default () => {
   }, [voices]);
 
   useEffect(() => {
-    socket.on('updateVoice', (result) => {
-      setVoices(Object.getOwnPropertyNames(result.feedbacks));
+    socket.on('updateVoices', (result) => {
+      console.log('update voice called', result);
+      setVoices(result.feedbacks);
     });
-  }, [voices]);
+  });
 
   /**
    * Sends a feedback to the teacher based on the button pressed
@@ -114,6 +116,8 @@ export default () => {
       ]);
     });
   };
+
+  console.log('voices', voices);
 
   return (
     <View>
