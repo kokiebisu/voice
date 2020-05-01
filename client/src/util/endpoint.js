@@ -12,3 +12,4 @@ const CRAIG_ENDPOINT = '';
  * @todo Change the variable name to yours
  */
 module.exports = KENS_ENDPOINT;
+module.exports = DAVID_ENDPOINT;
