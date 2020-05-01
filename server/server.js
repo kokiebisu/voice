@@ -91,6 +91,7 @@ io.on('connection', (socket) => {
           roomId
         );
         io.to(result.admin).emit('displayFeedbacks', updatedRoom);
+        io.in(roomId).emit('displayFeedbacks', updatedRoom);
       }, 10000);
 
     // Broadcast displayfeedbacks to everyone

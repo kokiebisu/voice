@@ -89,8 +89,7 @@ export default () => {
 
   useEffect(() => {
     socket.on('displayFeedbacks', (result) => {
-      let newVoices = Object.getOwnPropertyNames(result.feedbacks);
-      setVoices(newVoices);
+      setVoices(result.feedbacks);
     });
   }, [voices]);
 
@@ -120,11 +119,26 @@ export default () => {
     <View>
       <Text>session: {session}</Text>
       <Text style={styles.sectionTitle}>Voices</Text>
-      {voices &&
-        voices.length > 0 &&
-        voices.map((voice) => {
-          return <Text>{voice}</Text>;
-        })}
+      {voices['Too Slow'] === '' ||
+      voices['Too Slow'] === undefined ||
+      voices['Too Slow'].length === 0 ? null : (
+        <Text>Too Slow</Text>
+      )}
+      {voices['Too Fast'] === '' ||
+      voices['Too Fast'] === undefined ||
+      voices['Too Fast'].length === 0 ? null : (
+        <Text>Too Fast</Text>
+      )}
+      {voices['Repeat Last Phrase'] === '' ||
+      voices['Repeat Last Phrase'] === undefined ||
+      voices['Repeat Last Phrase'].length === 0 ? null : (
+        <Text>Repeat Last Phrase</Text>
+      )}
+      {voices['Confused'] === '' ||
+      voices['Confused'] === undefined ||
+      voices['Confused'].length === 0 ? null : (
+        <Text>Confused</Text>
+      )}
       <Text style={styles.sectionTitle}>Options</Text>
       <TouchableOpacity onPress={() => sendFeedback('Too Slow', roomId)}>
         <Text>Too Slow</Text>

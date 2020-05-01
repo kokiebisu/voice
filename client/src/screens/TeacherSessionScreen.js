@@ -51,7 +51,6 @@ export default () => {
    */
   useEffect(() => {
     socket.on('displayFeedbacks', (result) => {
-      console.log('client feedbacks', result.feedbacks);
       setFeedbacks(result.feedbacks);
     });
   }, [feedbacks]);
