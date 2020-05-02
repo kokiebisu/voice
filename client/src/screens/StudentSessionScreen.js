@@ -6,7 +6,7 @@
  * Dependencies
  */
 import React, { useState, useEffect } from 'react';
-import { Text, View, Alert, Button, StyleSheet } from 'react-native';
+import { Text, View, Alert, Button, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import io from 'socket.io-client';
 
@@ -14,7 +14,7 @@ import io from 'socket.io-client';
  * Endpoint for the WebSocket
  */
 import ENDPOINT from '../util/endpoint';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 let socket;
 let roomId;
@@ -117,9 +117,10 @@ export default () => {
   };
 
   return (
-    <View>
+  
+    <View >
       <Text>session: {session}</Text>
-      <Text style={styles.sectionTitle}>Voices</Text>
+      <Text style={styles.sectionTitle1}>Voices</Text>
       {voices['Too Slow'] === '' ||
       voices['Too Slow'] === undefined ||
       voices['Too Slow'].length === 0 ? null : (
@@ -140,26 +141,106 @@ export default () => {
       voices['Confused'].length === 0 ? null : (
         <Text>Confused</Text>
       )}
-      <Text style={styles.sectionTitle}>Options</Text>
-      <TouchableOpacity onPress={() => sendFeedback('Too Slow', roomId)}>
+      
+      <View>
+      <Text style={styles.sectionTitle2}>Options</Text>
+      <Image source ={require('../img/Vector.png')} style={styles.logo}></Image>
+      
+      <TouchableOpacity style={styles.slowbutton}
+      onPress={() => sendFeedback('Too Slow', roomId)} >
+        <Image source ={require('../img/1.png')}style={styles.slowlogo}></Image>
         <Text>Too Slow</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => sendFeedback('Too Fast', roomId)}>
+      <TouchableOpacity onPress={() => sendFeedback('Too Fast', roomId)} style={styles.fastbutton}>
+      <Image source ={require('../img/3.png')}style={styles.fastlogo}></Image>
         <Text>Too Fast</Text>
       </TouchableOpacity>
       <TouchableOpacity
-        onPress={() => sendFeedback('Repeat Last Phrase', roomId)}>
-        <Text>Repeat Last Phrase</Text>
+        onPress={() => sendFeedback('Repeat Last Phrase', roomId)} style={styles.repeatbutton}>
+          <Image source ={require('../img/2.png')}style={styles.repeatlogo}></Image>
+        <Text>Repeat</Text>
       </TouchableOpacity>
-      <TouchableOpacity onPress={() => sendFeedback('Confused', roomId)}>
+      <TouchableOpacity onPress={() => sendFeedback('Confused', roomId)} style={styles.confusedbutton}>
+      <Image source ={require('../img/4.jpg')}style={styles.slowlogo}></Image>
         <Text>Confused</Text>
       </TouchableOpacity>
+      </View>
     </View>
+    
   );
 };
 
 const styles = StyleSheet.create({
-  sectionTitle: {
+  sectionTitle1: {
+    fontWeight: 'bold',
+    
+  },
+  sectionTitle2: {
+    left: 31,
+    top: 350,
     fontWeight: 'bold',
   },
+  slowbutton:{
+    position: 'absolute', 
+    width: 293,
+    height: 73,
+    left: 31,
+    top: 509,
+    
+
+  },
+  fastbutton:{
+    position: 'absolute', 
+    width: 293,
+    height: 73,
+    left: 121,
+    top: 509,
+  },
+  repeatbutton:{
+    position: 'absolute', 
+    width: 293,
+    height: 73,
+    left: 221,
+    top: 509,
+  },
+  confusedbutton:{
+  position: 'absolute', 
+  width: 293,
+  height: 73,
+  left: 301,
+  top: 509,
+},
+
+  logo:{
+    position: 'absolute', 
+    top: 395,
+    left: 338,
+  },
+  slowlogo:{
+    position: 'absolute',
+    height: 50,
+    width: 50,
+    top: -60,
+    left: 7
+
+  },
+  fastlogo:{
+    position: 'absolute',
+    height: 60,
+    width: 60,
+    top: -63,
+    left: -3
+
+  },
+  repeatlogo:{
+    position: 'absolute',
+    height: 48,
+    width: 48,
+    top: -57,
+    left: -2
+
+  },
+  confuselogo:{
+    position: 'absolute',
+  }
 });
