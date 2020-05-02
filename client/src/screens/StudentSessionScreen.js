@@ -119,6 +119,7 @@ export default () => {
   return (
   
     <View >
+      <View>
       <Text>session: {session}</Text>
       <Text style={styles.sectionTitle1}>Voices</Text>
       {voices['Too Slow'] === '' ||
@@ -141,7 +142,7 @@ export default () => {
       voices['Confused'].length === 0 ? null : (
         <Text>Confused</Text>
       )}
-      
+      </View>
       <View>
       <Text style={styles.sectionTitle2}>Options</Text>
       <Image source ={require('../img/Vector.png')} style={styles.logo}></Image>
@@ -176,6 +177,7 @@ const styles = StyleSheet.create({
     
   },
   sectionTitle2: {
+    position: "absolute",
     left: 31,
     top: 350,
     fontWeight: 'bold',
@@ -185,7 +187,7 @@ const styles = StyleSheet.create({
     width: 293,
     height: 73,
     left: 31,
-    top: 509,
+    top: 459,
     
 
   },
@@ -194,26 +196,26 @@ const styles = StyleSheet.create({
     width: 293,
     height: 73,
     left: 121,
-    top: 509,
+    top: 459,
   },
   repeatbutton:{
     position: 'absolute', 
     width: 293,
     height: 73,
     left: 221,
-    top: 509,
+    top: 459,
   },
   confusedbutton:{
   position: 'absolute', 
   width: 293,
   height: 73,
   left: 301,
-  top: 509,
+  top: 459,
 },
 
   logo:{
     position: 'absolute', 
-    top: 395,
+    top: 355,
     left: 338,
   },
   slowlogo:{
