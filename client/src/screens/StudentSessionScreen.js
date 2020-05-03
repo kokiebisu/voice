@@ -127,26 +127,48 @@ export default () => {
       {voices['Too Slow'] === '' ||
       voices['Too Slow'] === undefined ||
       voices['Too Slow'].length === 0 ? null : (
-        // <View style={styles.container1}>
+        <View >
         <Text>Too Slow</Text>
-        // </View>
+        <TouchableOpacity style={styles.slowagree}
+      onPress={() => sendFeedback('Too Slow', roomId)} >
+        <Text>I agree</Text>
+      </TouchableOpacity>
+      
+        </View>
+        
       )}
       {voices['Too Fast'] === '' ||
       voices['Too Fast'] === undefined ||
       voices['Too Fast'].length === 0 ? null : (
-        // <View style={styles.container2}>
+        <View>
         <Text>Too Fast</Text>
-        // </View>
+      <TouchableOpacity onPress={() => sendFeedback('Too Fast', roomId)} style={styles.fastagree}>
+        <Text>I agree</Text>
+      </TouchableOpacity>
+        </View>
       )}
       {voices['Repeat Last Phrase'] === '' ||
       voices['Repeat Last Phrase'] === undefined ||
       voices['Repeat Last Phrase'].length === 0 ? null : (
+        <View>
         <Text>Repeat Last Phrase</Text>
+        <TouchableOpacity
+        onPress={() => sendFeedback('Repeat Last Phrase', roomId)} style={styles.repeatagree}>
+          
+        <Text>I agree</Text>
+      </TouchableOpacity>
+        </View>
       )}
       {voices['Confused'] === '' ||
       voices['Confused'] === undefined ||
       voices['Confused'].length === 0 ? null : (
+        <View>
         <Text>Confused</Text>
+        <TouchableOpacity onPress={() => sendFeedback('Confused', roomId)} style={styles.confusedagree}>
+      
+        <Text>I agree</Text>
+      </TouchableOpacity>
+        </View>
       )}
      
      
@@ -318,6 +340,82 @@ const styles = StyleSheet.create({
     top: -55,
     left: -1,
     
+  },
+  slowagree: {
+    position: 'absolute',
+    width: 72,
+    height: 21,
+    left: 81,
+    top: -3,
+    backgroundColor: '#70AE60',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#000000',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  fastagree: {
+    position: 'absolute',
+    width: 72,
+    height: 21,
+    left: 81,
+    top: 0,
+    backgroundColor: '#70AE60',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#000000',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  repeatagree: {
+    position: 'absolute',
+    width: 72,
+    height: 21,
+    left: 141,
+    top: 0,
+    backgroundColor: '#70AE60',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#000000',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  confusedagree: {
+    position: 'absolute',
+    width: 72,
+    height: 21,
+    left: 81,
+    top: 0,
+    backgroundColor: '#70AE60',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: '#000000',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
   },
   // container1: {
   //   position: 'absolute', 
