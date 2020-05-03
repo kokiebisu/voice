@@ -6,7 +6,7 @@
  * Dependencies
  */
 import React, { useState, useEffect } from 'react';
-import { Text, View, Alert, Button, StyleSheet, TouchableOpacity, Image} from 'react-native';
+import { Text, View, Alert, Button, StyleSheet, TouchableOpacity, Image, FlatList} from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import io from 'socket.io-client';
 
@@ -122,15 +122,21 @@ export default () => {
       <View>
       <Text>session: {session}</Text>
       <Text style={styles.sectionTitle1}>Voices</Text>
+      
+
       {voices['Too Slow'] === '' ||
       voices['Too Slow'] === undefined ||
       voices['Too Slow'].length === 0 ? null : (
+        // <View style={styles.container1}>
         <Text>Too Slow</Text>
+        // </View>
       )}
       {voices['Too Fast'] === '' ||
       voices['Too Fast'] === undefined ||
       voices['Too Fast'].length === 0 ? null : (
+        // <View style={styles.container2}>
         <Text>Too Fast</Text>
+        // </View>
       )}
       {voices['Repeat Last Phrase'] === '' ||
       voices['Repeat Last Phrase'] === undefined ||
@@ -142,6 +148,8 @@ export default () => {
       voices['Confused'].length === 0 ? null : (
         <Text>Confused</Text>
       )}
+     
+     
       </View>
       <View>
       <Text style={styles.sectionTitle2}>Options</Text>
@@ -166,6 +174,27 @@ export default () => {
         <Text>Confused</Text>
       </TouchableOpacity>
       </View>
+      <TouchableOpacity style={styles.homebutton}
+         
+          onPress={() => navigation.navigate('Role Select')}
+        >
+          <Image source ={require('../img/home.png')} style={styles.homelogo}></Image>
+           <Text>Home</Text>
+        </TouchableOpacity>
+        <TouchableOpacity  style={styles.studentbutton}
+         
+          onPress={() => navigation.navigate('Student Authentication')}
+        >
+          <Image source ={require('../img/s.png')} style={styles.studentlogo}></Image>
+           <Text>Student</Text>
+        </TouchableOpacity>
+        <TouchableOpacity  style={styles.teacherbutton}
+          title='Teacher'
+          onPress={() => navigation.navigate('Teacher Create Session')}
+        >
+          <Image source ={require('../img/t.png')} style={styles.teacherlogo}></Image>
+        <Text>Teacher</Text>
+        </TouchableOpacity>
     </View>
     
   );
@@ -244,5 +273,69 @@ const styles = StyleSheet.create({
   },
   confuselogo:{
     position: 'absolute',
-  }
+  },
+  homebutton:{
+    position: 'absolute', 
+    width: 293,
+    height: 73,
+    left: 41,
+    top: 620,
+    
+
+  },
+  homelogo:{
+    position: 'absolute',
+    top: -55,
+    left: -7,
+    
+  },
+  studentbutton:{
+    position: 'absolute', 
+    width: 293,
+    height: 73,
+    left: 171,
+    top: 620,
+    
+
+  },
+  teacherbutton:{
+    position: 'absolute', 
+    width: 293,
+    height: 73,
+    left: 306,
+    top: 620,
+    
+
+  },
+  studentlogo:{
+    position: 'absolute',
+    top: -55,
+    left: -1,
+    
+  },
+  teacherlogo:{
+    position: 'absolute',
+    top: -55,
+    left: -1,
+    
+  },
+  // container1: {
+  //   position: 'absolute', 
+  //   width: 100,
+  //   height: 120,
+  //   // left: 21,
+  //   // top: 100,
+  //   backgroundColor: '#03a5fc',
+  //   borderRadius: 12,
+  // },
+
+  // container2: {
+  //   position: 'absolute', 
+  //   width: 100,
+  //   height: 120,
+  //   // left: 150,
+  //   // top: 100,
+  //   backgroundColor: '#03a5fc',
+  //   borderRadius: 12,
+  // },
 });
