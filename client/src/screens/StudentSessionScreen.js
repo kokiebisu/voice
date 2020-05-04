@@ -44,6 +44,12 @@ export default () => {
    */
   const [session, setSession] = useState('');
   const [voices, setVoices] = useState([]);
+  const [disabled, setDisabled] = useState({
+    'Too Slow': false,
+    'Too Fast': false,
+    'Repeat Last Phrase': false,
+    Confused: false,
+  });
 
   /**
    * Redirects the student back to the authentication screen when
@@ -187,6 +193,7 @@ export default () => {
           style={styles.logo}></Image>
 
         <TouchableOpacity
+          disabled={disabled['Too Slow']}
           style={styles.slowbutton}
           onPress={() => sendFeedback('Too Slow', roomId)}>
           <Image
@@ -195,6 +202,7 @@ export default () => {
           <Text>Too Slow</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          disabled={disabled['Too Fast']}
           onPress={() => sendFeedback('Too Fast', roomId)}
           style={styles.fastbutton}>
           <Image
@@ -203,14 +211,16 @@ export default () => {
           <Text>Too Fast</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          disabled={disabled['Repeat Last Phrase']}
           onPress={() => sendFeedback('Repeat Last Phrase', roomId)}
           style={styles.repeatbutton}>
           <Image
             source={require('../img/2.png')}
             style={styles.repeatlogo}></Image>
-          <Text>Repeat</Text>
+          <Text>Repeat Last Phrase</Text>
         </TouchableOpacity>
         <TouchableOpacity
+          disabled={disabled['Confused']}
           onPress={() => sendFeedback('Confused', roomId)}
           style={styles.confusedbutton}>
           <Image
@@ -219,7 +229,7 @@ export default () => {
           <Text>Confused</Text>
         </TouchableOpacity>
       </View>
-      <TouchableOpacity
+      {/* <TouchableOpacity
         style={styles.homebutton}
         onPress={() => navigation.navigate('Role Select')}>
         <Image
@@ -243,7 +253,7 @@ export default () => {
           source={require('../img/t.png')}
           style={styles.teacherlogo}></Image>
         <Text>Teacher</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
     </View>
   );
 };
