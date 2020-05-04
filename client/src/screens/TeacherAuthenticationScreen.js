@@ -16,9 +16,6 @@ import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import ENDPOINT from '../util/endpoint';
 
-// Styles
-import { styles } from '../styles/TeacherAuthenticationScreen.styles';
-
 export default () => {
   // Used to navigate between screens
   const navigation = useNavigation();
