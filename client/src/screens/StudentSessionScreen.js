@@ -140,7 +140,24 @@ export default () => {
   return (
     <View>
       <View>
-        <Text>session: {session}</Text>
+        <View style={{
+        position: 'absolute',
+        width: 300,
+        height: 87,
+        left: 50,
+        top: 0,
+        backgroundColor: '#FF5C5C',
+        borderRadius: 10,
+          
+        }}>
+        <Text style={{position: 'absolute', top:35, left: 60,fontWeight: 'bold', }}>Welcome to session: {session}</Text>
+        </View>
+        <View style={{
+        position: 'absolute',
+        left: 30,
+        top: 150,
+          
+        }}>
         <Text style={styles.sectionTitle1}>Voices</Text>
 
         {voices['Too Slow'] === '' ||
@@ -191,6 +208,7 @@ export default () => {
             </TouchableOpacity>
           </View>
         )}
+        </View>
       </View>
       <View>
         <Text style={styles.sectionTitle2}>Options</Text>
@@ -283,7 +301,7 @@ const styles = StyleSheet.create({
   sectionTitle2: {
     position: 'absolute',
     left: 31,
-    top: 350,
+    top: 390,
     fontWeight: 'bold',
   },
   slowbutton: {
@@ -291,33 +309,33 @@ const styles = StyleSheet.create({
     width: 293,
     height: 73,
     left: 31,
-    top: 459,
+    top: 499,
   },
   fastbutton: {
     position: 'absolute',
     width: 293,
     height: 73,
     left: 121,
-    top: 459,
+    top: 499,
   },
   repeatbutton: {
     position: 'absolute',
     width: 293,
     height: 73,
     left: 221,
-    top: 459,
+    top: 499,
   },
   confusedbutton: {
     position: 'absolute',
     width: 293,
     height: 73,
     left: 301,
-    top: 459,
+    top: 499,
   },
 
   logo: {
     position: 'absolute',
-    top: 355,
+    top: 395,
     left: 338,
   },
   slowlogo: {
@@ -475,4 +493,4 @@ const styles = StyleSheet.create({
   //   backgroundColor: '#03a5fc',
   //   borderRadius: 12,
   // },
-});
+})
