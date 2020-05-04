@@ -8,11 +8,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to install
 
-```
-Give examples
-```
+* [Yarn](https://yarnpkg.com) - Package Manager
+* [Expo](https://expo.io) - Platform for React Native Applications
 
 ### Installing
 
@@ -21,13 +20,13 @@ A step by step series of examples that tell you how to get a development env run
 Say what the step will be
 
 ```
-cd client && npm install
+cd client && yarn install
 ```
 
 #### Server
 
 ```
-cd server && npm install
+cd server && yarn install
 ```
 
 ## Running the tests
@@ -58,6 +57,8 @@ Add additional notes about how to deploy this on a live system
 
 * [React Native](https://reactnative.dev) - Frontend Framework
 * [Express](https://expressjs.com) - Backend Framework
+* [Socket IO](https://socket.io) - WebSockets
+* [JSDocs](https://jsdoc.app) - Documentation
 
 ## Authors
 

@@ -1,5 +1,5 @@
 /**
- * @file Drives the server
+ * @file Runs the Server
  */
 
 /**
@@ -57,7 +57,7 @@ io.on('connection', (socket) => {
   });
 
   /**
-   * Enables students to join the specified room
+   * Enables students to join the specified room and fetch the voices currently up
    * @param {string} roomId - Roomid given by the student
    */
   socket.on('joinRoom', (roomId, callback) => {
@@ -66,6 +66,8 @@ io.on('connection', (socket) => {
       return callback(error);
     }
     joinRoom({ id: socket.id }, roomId);
+    // Update the voices section
+    socket.emit('updateVoices', result);
     socket.join(result.room);
     console.log(`Student ${socket.id} successfully joined the room ${roomId}`);
   });
@@ -77,25 +79,18 @@ io.on('connection', (socket) => {
    */
   socket.on('sendFeedback', (feedbackName, roomId) => {
     const result = sendFeedbackToRoom(feedbackName, roomId, socket.id);
-    // change this part
-    io.to(result.admin).emit('displayFeedbacks', result);
-    io.in(roomId).emit('displayFeedbacks', result);
+    io.to(result.admin).emit('updateVoices', result);
+    io.in(roomId).emit('updateVoices', result);
     console.log(
       `Student ${socket.id} successfully sent a feedback to the room ${roomId}`
     );
-    // Removes the feedback after 2 minutes
-    setTimeout(() =>
-      // RemoveFeedback function
-      {
-        let updatedRoom = removeFeedbackByUserId(
-          feedbackName,
-          socket.id,
-          roomId
-        );
-        io.to(result.admin).emit('displayFeedbacks', updatedRoom);
-      }, 10000);
-
-    // Broadcast displayfeedbacks to everyone
+    // Removes the feedback after 10 seconds
+    setTimeout(() => {
+      let updatedRoom = removeFeedbackByUserId(feedbackName, socket.id, roomId);
+      io.to(result.admin).emit('updateVoices', updatedRoom);
+      io.in(roomId).emit('updateVoices', updatedRoom);
+      console.log(`Student ${socket.id}'s feedback expired`);
+    }, 10000);
   });
 
   /**
@@ -109,7 +104,7 @@ io.on('connection', (socket) => {
       const studentIds = respondFeedback(feedbackName, roomId);
       // Send the notice to the student screen
       const { result } = findRoom(roomId);
-      socket.to(roomId).emit('updateVoice', result);
+      socket.to(roomId).emit('updateVoices', result);
       studentIds.map((id) => io.to(id).emit('teacherResponse'));
       console.log(
         `The teacher ${socket.id} has successfully responded to the students ${studentIds}`

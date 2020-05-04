@@ -50,8 +50,7 @@ export default () => {
    * Listens to any feedbacks being sent from the student
    */
   useEffect(() => {
-    socket.on('displayFeedbacks', (result) => {
-      console.log('client feedbacks', result.feedbacks);
+    socket.on('updateVoices', (result) => {
       setFeedbacks(result.feedbacks);
     });
   }, [feedbacks]);

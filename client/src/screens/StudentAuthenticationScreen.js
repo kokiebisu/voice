@@ -91,7 +91,6 @@ export default () => {
           value={session}
           onChangeText={(text) => {
             setSession(text.trim());
-            console.log('session', session);
           }}
         />
 
