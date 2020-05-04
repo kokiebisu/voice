@@ -10,6 +10,9 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, Button, TextInput, TouchableOpacity } from 'react-native';
 import io from 'socket.io-client';
 
+// Styles
+import { styles } from '../styles/TeacherSessionScreen.styles';
+
 /**
  * Helper Method
  */
