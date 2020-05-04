@@ -44,12 +44,7 @@ export default () => {
    */
   const [session, setSession] = useState('');
   const [voices, setVoices] = useState([]);
-  const [disabled, setDisabled] = useState({
-    'Too Slow': false,
-    'Too Fast': false,
-    'Repeat Last Phrase': false,
-    Confused: false,
-  });
+  const [isDisabled, setIsDisabled] = useState(false);
 
   /**
    * Redirects the student back to the authentication screen when
@@ -75,7 +70,9 @@ export default () => {
         },
       ]);
     });
-    socket.on('updateVoices', (result) => setVoices(result.feedbacks));
+    socket.on('updateVoices', (result) => {
+      setVoices(result.feedbacks);
+    });
   }, [ENDPOINT]);
 
   /**
@@ -112,6 +109,8 @@ export default () => {
   useEffect(() => {
     socket.on('updateVoices', (result) => {
       setVoices(result.feedbacks);
+      console.log('finished voice called here');
+      // Dim the lights here(?)
     });
   }, [voices]);
 
@@ -121,6 +120,7 @@ export default () => {
    * @param {string} roomId
    */
   const sendFeedback = (feedback, roomId) => {
+    setIsDisabled(true);
     socket.emit('sendFeedback', feedback, roomId, ({ error }) => {
       Alert.alert('Error', error, [
         {
@@ -129,6 +129,12 @@ export default () => {
         },
       ]);
     });
+  };
+
+  const disableFeedbacks = () => {
+    setTimeout(function () {
+      setIsDisabled(false);
+    }, 10000);
   };
 
   return (
@@ -193,17 +199,23 @@ export default () => {
           style={styles.logo}></Image>
 
         <TouchableOpacity
-          disabled={disabled['Too Slow']}
+          disabled={isDisabled}
           style={styles.slowbutton}
-          onPress={() => sendFeedback('Too Slow', roomId)}>
+          onPress={() => {
+            sendFeedback('Too Slow', roomId);
+            disableFeedbacks();
+          }}>
           <Image
             source={require('../img/1.png')}
             style={styles.slowlogo}></Image>
           <Text>Too Slow</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          disabled={disabled['Too Fast']}
-          onPress={() => sendFeedback('Too Fast', roomId)}
+          disabled={isDisabled}
+          onPress={() => {
+            sendFeedback('Too Fast', roomId);
+            disableFeedbacks();
+          }}
           style={styles.fastbutton}>
           <Image
             source={require('../img/3.png')}
@@ -211,8 +223,11 @@ export default () => {
           <Text>Too Fast</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          disabled={disabled['Repeat Last Phrase']}
-          onPress={() => sendFeedback('Repeat Last Phrase', roomId)}
+          disabled={isDisabled}
+          onPress={() => {
+            sendFeedback('Repeat Last Phrase', roomId);
+            disableFeedbacks();
+          }}
           style={styles.repeatbutton}>
           <Image
             source={require('../img/2.png')}
@@ -220,8 +235,11 @@ export default () => {
           <Text>Repeat Last Phrase</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          disabled={disabled['Confused']}
-          onPress={() => sendFeedback('Confused', roomId)}
+          disabled={isDisabled}
+          onPress={() => {
+            sendFeedback('Confused', roomId);
+            disableFeedbacks();
+          }}
           style={styles.confusedbutton}>
           <Image
             source={require('../img/4.jpg')}
