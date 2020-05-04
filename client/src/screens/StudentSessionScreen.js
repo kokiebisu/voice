@@ -59,7 +59,7 @@ export default () => {
    * Creates a socket when it is successful and it fetches any voices in the room.
    */
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(ENDPOINT, { forceNode: true });
     roomId = route.params.sessionId;
     setSession(roomId);
     socket.emit('joinRoom', roomId, ({ error }) => {
@@ -109,7 +109,6 @@ export default () => {
   useEffect(() => {
     socket.on('updateVoices', (result) => {
       setVoices(result.feedbacks);
-      console.log('finished voice called here');
       // Dim the lights here(?)
     });
   }, [voices]);
@@ -140,74 +139,82 @@ export default () => {
   return (
     <View>
       <View>
-        <View style={{
-        position: 'absolute',
-        width: 300,
-        height: 87,
-        left: 50,
-        top: 0,
-        backgroundColor: '#FF5C5C',
-        borderRadius: 10,
-          
-        }}>
-        <Text style={{position: 'absolute', top:35, left: 60,fontWeight: 'bold', }}>Welcome to session: {session}</Text>
+        <View
+          style={{
+            position: 'absolute',
+            width: 300,
+            height: 87,
+            left: 50,
+            top: 0,
+            backgroundColor: '#FF5C5C',
+            borderRadius: 10,
+          }}>
+          <Text
+            style={{
+              position: 'absolute',
+              top: 35,
+              left: 60,
+              fontWeight: 'bold',
+            }}>
+            Welcome to session: {session}
+          </Text>
         </View>
-        <View style={{
-        position: 'absolute',
-        left: 30,
-        top: 150,
-          
-        }}>
-        <Text style={styles.sectionTitle1}>Voices</Text>
+        <View
+          style={{
+            position: 'absolute',
+            left: 30,
+            top: 150,
+          }}>
+          <Text style={styles.sectionTitle1}>Voices</Text>
 
-        {voices['Too Slow'] === '' ||
-        voices['Too Slow'] === undefined ||
-        voices['Too Slow'].length === 0 ? null : (
-          <View>
-            <Text>Too Slow</Text>
-            <TouchableOpacity
-              style={styles.slowagree}
-              onPress={() => sendFeedback('Too Slow', roomId)}>
-              <Text>I agree</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        {voices['Too Fast'] === '' ||
-        voices['Too Fast'] === undefined ||
-        voices['Too Fast'].length === 0 ? null : (
-          <View>
-            <Text>Too Fast</Text>
-            <TouchableOpacity
-              onPress={() => sendFeedback('Too Fast', roomId)}
-              style={styles.fastagree}>
-              <Text>I agree</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        {voices['Repeat Last Phrase'] === '' ||
-        voices['Repeat Last Phrase'] === undefined ||
-        voices['Repeat Last Phrase'].length === 0 ? null : (
-          <View>
-            <Text>Repeat Last Phrase</Text>
-            <TouchableOpacity
-              onPress={() => sendFeedback('Repeat Last Phrase', roomId)}
-              style={styles.repeatagree}>
-              <Text>I agree</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        {voices['Confused'] === '' ||
-        voices['Confused'] === undefined ||
-        voices['Confused'].length === 0 ? null : (
-          <View>
-            <Text>Confused</Text>
-            <TouchableOpacity
-              onPress={() => sendFeedback('Confused', roomId)}
-              style={styles.confusedagree}>
-              <Text>I agree</Text>
-            </TouchableOpacity>
-          </View>
-        )}
+          {voices['Too Slow'] === '' ||
+          voices['Too Slow'] === undefined ||
+          voices['Too Slow'].length === 0 ? null : (
+            <View>
+              <Text>Too Slow</Text>
+              <TouchableOpacity
+                style={styles.slowagree}
+                onPress={() => sendFeedback('Too Slow', roomId)}>
+                <Text>I agree</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {voices['Too Fast'] === '' ||
+          voices['Too Fast'] === undefined ||
+          voices['Too Fast'].length === 0 ? null : (
+            <View>
+              <Text>Too Fast</Text>
+              <TouchableOpacity
+                onPress={() => sendFeedback('Too Fast', roomId)}
+                style={styles.fastagree}>
+                <Text>I agree</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {voices['Repeat Last Phrase'] === '' ||
+          voices['Repeat Last Phrase'] === undefined ||
+          voices['Repeat Last Phrase'].length === 0 ? null : (
+            <View>
+              <Text>Repeat Last Phrase</Text>
+              <TouchableOpacity
+                onPress={() => sendFeedback('Repeat Last Phrase', roomId)}
+                style={styles.repeatagree}>
+                <Text>I agree</Text>
+              </TouchableOpacity>
+            </View>
+          )}
+          {voices['Confused'] === '' ||
+          voices['Confused'] === undefined ||
+          voices['Confused'].length === 0 ? null : (
+            <View>
+              <Text>Confused</Text>
+              <TouchableOpacity
+                onPress={() => sendFeedback('Confused', roomId)}
+                style={styles.confusedagree}>
+                <Text>I agree</Text>
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
       </View>
       <View>
@@ -493,4 +500,4 @@ const styles = StyleSheet.create({
   //   backgroundColor: '#03a5fc',
   //   borderRadius: 12,
   // },
-})
+});
