@@ -7,7 +7,7 @@
  * Dependencies
  */
 import React, { useEffect, useState } from 'react';
-import {View, Text, Button, TextInput, TouchableOpacity, StyleSheet, ImageBackground, Image} from 'react-native';
+import { View, Text, Button, TextInput, TouchableOpacity } from 'react-native';
 import io from 'socket.io-client';
 
 /**
@@ -19,37 +19,8 @@ import { generateSessionId } from '../util/helper';
  * Endpoint
  */
 import endpoint from '../util/endpoint';
-const styles = StyleSheet.create({
-  textbox: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 10,
-    top: 70,
-    backgroundColor: '#3C95A8',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'grey',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5
-  },
 
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  logo:{
-    position: 'absolute',
-    top: 159,
-  },
-});
-
-  /**
+/**
  * Socket that will be eventually be connected
  */
 let socket;
@@ -83,10 +54,7 @@ export default () => {
 
   return (
     <View>
-      <ImageBackground source={require('../img/images.jpg')} style={styles.container}>
-        <Image source ={require('../img/Voice.png')} style={styles.logo}></Image>
-      </ImageBackground>
-      <Text style={styles.textbox}>SessionID: {sessionId}</Text>
+      <Text>SessionID: {sessionId}</Text>
       {tooslow === '' || tooslow === undefined ? null : (
         <TouchableOpacity
           onPress={() => {
@@ -97,6 +65,5 @@ export default () => {
         </TouchableOpacity>
       )}
     </View>
-
   );
 };

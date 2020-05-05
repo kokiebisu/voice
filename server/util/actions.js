@@ -5,12 +5,12 @@
 /**
  * Stores all the ROOMS in here
  */
-const rooms = [];
+let rooms = [];
 
 /**
  * Creates a room with the Teacher as the admin
- * @param id
- * @param room
+ * @param {string} id
+ * @param {string} room
  */
 const createRoom = (id, room) => {
   const newRoom = { admin: id, users: [], room, feedbacks: {} };
@@ -20,11 +20,10 @@ const createRoom = (id, room) => {
 
 /**
  * Checks whether is the specified room is available in rooms
- * @param roomId
+ * @param {string} roomId
  */
 const findRoom = (roomId) => {
   // Finds room from rooms array
-  console.log('find rooms', rooms);
   const result = rooms.find((room) => room.room === roomId);
   if (result) {
     return { result };
@@ -35,8 +34,8 @@ const findRoom = (roomId) => {
 
 /**
  * Joins the room as a student
- * @param userId
- * @param roomId
+ * @param {string} userId
+ * @param {string} roomId
  */
 const joinRoom = (userId, roomId) => {
   rooms.map((room) => {
@@ -44,36 +43,75 @@ const joinRoom = (userId, roomId) => {
       room.users.push(userId);
     }
   });
-  console.log('joinroom rooms', rooms);
 };
 
 /**
  * Sends the feedback to the specified room
- * @param feedback
- * @param roomId
+ * @param {string} feedback
+ * @param {string} roomId
  */
-const sendFeedbackToRoom = (feedback, roomId) => {
-  return rooms.map((room) => {
+const sendFeedbackToRoom = (feedback, roomId, sender) => {
+  let sentRoom;
+  rooms.map((room) => {
     if (room.room === roomId) {
       if (!room.feedbacks[feedback]) {
-        room.feedbacks[feedback] = 1;
+        room.feedbacks[feedback] = [sender];
       } else {
-        room.feedbacks[feedback] += 1;
+        room.feedbacks[feedback].push(sender);
       }
     }
-    return room;
+    sentRoom = room;
   });
+  return sentRoom;
 };
 
+/**
+ * Deletes the feedback that awas being pressed
+ * @param {string} feedback
+ * @param {string} roomId
+ */
 const respondFeedback = (feedback, roomId) => {
-  console.log('in function feedback', feedback);
-  console.log('in function roomid', roomId);
-  return rooms.map((room) => {
+  let studentIds;
+  rooms.map((room) => {
     if (room.room === roomId) {
+      //gathers ids with the student id
+      studentIds = [...new Set(room.feedbacks[feedback])];
       delete room.feedbacks[feedback];
-      return room;
     }
   });
+  return studentIds;
+};
+
+/**
+ * Removes the room from the rooms array
+ * @param {string} roomId
+ */
+const removeRoom = (roomId) => {
+  const newRoom = rooms.filter((room) => {
+    return room.room !== roomId;
+  });
+  rooms = newRoom;
+};
+
+/**
+ * Remove the feedback based on the student userId
+ * @param {string} feedbackName
+ * @param {string} studentId
+ * @param {string} roomId
+ */
+const removeFeedbackByUserId = (feedbackName, studentId, roomId) => {
+  let updatedRoom;
+  rooms.map((room) => {
+    // Find specified room
+    if (room.room === roomId) {
+      updatedRoom = room.feedbacks[feedbackName].filter(
+        (user) => user !== studentId
+      );
+      room.feedbacks[feedbackName] = updatedRoom;
+      updatedRoom = room;
+    }
+  });
+  return updatedRoom;
 };
 
 module.exports = {
@@ -82,4 +120,6 @@ module.exports = {
   joinRoom,
   sendFeedbackToRoom,
   respondFeedback,
+  removeRoom,
+  removeFeedbackByUserId,
 };
