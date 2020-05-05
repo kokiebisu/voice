@@ -84,7 +84,7 @@ export default () => {
         style={styles.container}>
         <Image source={require('../img/Voice.png')} style={styles.logo}></Image>
         <TextInput
-          autoCapitalize={false}
+          autoCapitalize='none'
           autoCorrect={false}
           style={styles.textbox}
           placeholder='Enter the session id'

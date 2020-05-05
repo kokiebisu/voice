@@ -6,12 +6,21 @@
  * Dependencies
  */
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, ImageBackground, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  TextInput,
+  Button,
+  ImageBackground,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-const styles = StyleSheet.create({ 
+const styles = StyleSheet.create({
   textbox: {
-    position: 'absolute', 
+    position: 'absolute',
     width: 293,
     height: 73,
     left: 51,
@@ -23,21 +32,21 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
-    shadowRadius: 5,  
-    elevation: 5
+    shadowRadius: 5,
+    elevation: 5,
   },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  logo:{
-    position: 'absolute', 
+  logo: {
+    position: 'absolute',
     top: 109,
   },
 
-  buttonContainer: {  
-    position: 'absolute', 
+  buttonContainer: {
+    position: 'absolute',
     width: 293,
     height: 73,
     left: 51,
@@ -49,12 +58,11 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
-    shadowRadius: 5,  
-    elevation: 5 ,
+    shadowRadius: 5,
+    elevation: 5,
     alignItems: 'center',
     justifyContent: 'center',
-  
-  },  
+  },
 });
 export default () => {
   /**
@@ -69,17 +77,19 @@ export default () => {
 
   return (
     <>
-     <ImageBackground source={require('../img/images.jpg')} style={styles.container}>
-     <Image source ={require('../img/Voice.png')} style={styles.logo}></Image>
-        <TextInput style={styles.textbox}
+      <ImageBackground
+        source={require('../img/images.jpg')}
+        style={styles.container}>
+        <Image source={require('../img/Voice.png')} style={styles.logo}></Image>
+        <TextInput
+          style={styles.textbox}
           placeholder='Enter the Course Name'
           value={course}
           onChangeText={(text) => setCourse(text)}
         />
         <TouchableOpacity
           style={styles.buttonContainer}
-          onPress={() => navigation.navigate('Teacher Session', { course })}
-        >
+          onPress={() => navigation.navigate('Teacher Session', { course })}>
           <Text>Create Session</Text>
         </TouchableOpacity>
       </ImageBackground>
