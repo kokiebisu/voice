@@ -219,10 +219,6 @@ export default () => {
       </View>
       <View>
         <Text style={styles.sectionTitle2}>Options</Text>
-        <Image
-          source={require('../img/Vector.png')}
-          style={styles.logo}></Image>
-
         <TouchableOpacity
           disabled={isDisabled}
           style={styles.slowbutton}
