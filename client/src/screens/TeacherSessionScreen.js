@@ -37,7 +37,7 @@ export default () => {
    * Creates a room with a randomly generated session id
    */
   useEffect(() => {
-    socket = io(endpoint, { forceNode: true });
+    socket = io(endpoint);
     roomId = generateSessionId(5);
     setSessionId(roomId);
     socket.emit('createRoom', roomId);
