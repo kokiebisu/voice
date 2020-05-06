@@ -59,7 +59,7 @@ export default () => {
    * Creates a socket when it is successful and it fetches any voices in the room.
    */
   useEffect(() => {
-    socket = io(ENDPOINT, { forceNode: true });
+    socket = io(ENDPOINT);
     roomId = route.params.sessionId;
     setSession(roomId);
     socket.emit('joinRoom', roomId, ({ error }) => {
@@ -219,10 +219,6 @@ export default () => {
       </View>
       <View>
         <Text style={styles.sectionTitle2}>Options</Text>
-        <Image
-          source={require('../img/Vector.png')}
-          style={styles.logo}></Image>
-
         <TouchableOpacity
           disabled={isDisabled}
           style={styles.slowbutton}
@@ -230,10 +226,12 @@ export default () => {
             sendFeedback('Too Slow', roomId);
             disableFeedbacks();
           }}>
-          <Image
-            source={require('../img/1.png')}
-            style={styles.slowlogo}></Image>
-          <Text>Too Slow</Text>
+          <View>
+            <Image
+              source={require('../img/1.png')}
+              style={styles.slowlogo}></Image>
+            <Text>Too Slow</Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           disabled={isDisabled}
@@ -242,10 +240,10 @@ export default () => {
             disableFeedbacks();
           }}
           style={styles.fastbutton}>
-          <Image
-            source={require('../img/3.png')}
-            style={styles.fastlogo}></Image>
-          <Text>Too Fast</Text>
+          <View>
+            <Image source={require('../img/3.png')} style={styles.fastlogo} />
+            <Text>Too Fast</Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           disabled={isDisabled}
@@ -254,10 +252,10 @@ export default () => {
             disableFeedbacks();
           }}
           style={styles.repeatbutton}>
-          <Image
-            source={require('../img/2.png')}
-            style={styles.repeatlogo}></Image>
-          <Text>Repeat Last Phrase</Text>
+          <View>
+            <Image source={require('../img/2.png')} style={styles.repeatlogo} />
+            <Text>Repeat Last Phrase</Text>
+          </View>
         </TouchableOpacity>
         <TouchableOpacity
           disabled={isDisabled}
@@ -266,10 +264,10 @@ export default () => {
             disableFeedbacks();
           }}
           style={styles.confusedbutton}>
-          <Image
-            source={require('../img/4.jpg')}
-            style={styles.slowlogo}></Image>
-          <Text>Confused</Text>
+          <View>
+            <Image source={require('../img/4.jpg')} style={styles.slowlogo} />
+            <Text>Confused</Text>
+          </View>
         </TouchableOpacity>
       </View>
       {/* <TouchableOpacity
