@@ -19,22 +19,28 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-around',
   },
   logo: {
-    position: 'absolute',
-    top: 109,
+    // position: 'absolute',
+    // top: 109,
+    marginBottom: -60,
+    marginTop: 15,
+   
+  
   },
   role: {
-    position: 'absolute',
-    top: 249,
+    // position: 'absolute',
+    // top: 249,
+   
   },
   buttonContainer1: {
-    position: 'absolute',
+    // position: 'absolute',
     width: 293,
     height: 73,
-    left: 51,
-    top: 479,
+    // left: 51,
+    // top: 479,
+    marginTop: 40,
     backgroundColor: '#03a5fc',
     borderWidth: 1,
     borderStyle: 'solid',
@@ -49,11 +55,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonContainer2: {
-    position: 'absolute',
+    // position: 'absolute',
     width: 293,
     height: 73,
-    left: 51,
-    top: 350,
+    // left: 51,
+    // top: 350,
+    marginTop: -50,
     backgroundColor: '#03a5fc',
     borderWidth: 1,
     borderStyle: 'solid',
@@ -67,6 +74,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+  titleText: {
+    fontSize: 20,
+    fontWeight: "bold"
+  }
 });
 export default () => {
   /**
@@ -85,14 +96,14 @@ export default () => {
         <TouchableOpacity
           style={styles.buttonContainer1}
           onPress={() => navigation.navigate('Student Authentication')}>
-          <Text>Student</Text>
+          <Text style={styles.titleText}>Student</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.buttonContainer2}
-          title='Teacher'
+          
           onPress={() => navigation.navigate('Teacher Create Session')}>
-          <Text>Teacher</Text>
+          <Text style={styles.titleText}>Teacher</Text>
         </TouchableOpacity>
       </ImageBackground>
     </>
