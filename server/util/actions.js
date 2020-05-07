@@ -6,6 +6,7 @@
  * Stores all the ROOMS in here
  */
 let rooms = [];
+let students = [];
 
 /**
  * Creates a room with the Teacher as the admin
@@ -43,6 +44,8 @@ const joinRoom = (userId, roomId) => {
       room.users.push(userId);
     }
   });
+  students.push(userId);
+  return students;
 };
 
 /**
@@ -114,6 +117,11 @@ const removeFeedbackByUserId = (feedbackName, studentId, roomId) => {
   return updatedRoom;
 };
 
+const leaveRoom = (userId) => {
+  students = students.filter((student) => student.id !== userId);
+  return students;
+};
+
 module.exports = {
   createRoom,
   findRoom,
@@ -122,4 +130,5 @@ module.exports = {
   respondFeedback,
   removeRoom,
   removeFeedbackByUserId,
+  leaveRoom,
 };

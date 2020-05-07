@@ -499,3 +499,25 @@ const styles = StyleSheet.create({
   //   borderRadius: 12,
   // },
 });
+
+export const leaveStudentRoom = (navigation) => {
+  Alert.alert(
+    'Are you sure?',
+    'You will be leaving the room',
+    [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Leave',
+        onPress: () => {
+          socket.emit('leaveRoom', roomId);
+          navigation.goBack();
+        },
+      },
+    ],
+    { cancelable: true }
+  );
+};

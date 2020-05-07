@@ -25,7 +25,7 @@ export const generateSessionId = (length) => {
  * Prompts the teacher if they are certain to leave the session
  * @param {object} navigation
  */
-export const leaveRoom = (navigation) => {
+export const leaveTeacherRoom = (navigation) => {
   Alert.alert(
     'Are you sure?',
     'You will be finishing the session',

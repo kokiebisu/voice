@@ -33,6 +33,7 @@ const {
   respondFeedback,
   removeRoom,
   removeFeedbackByUserId,
+  leaveRoom,
 } = require('./util/actions');
 
 /**
@@ -63,8 +64,9 @@ io.on('connection', (socket) => {
     if (error) {
       return callback(error);
     }
-    joinRoom({ id: socket.id }, roomId);
+    const students = joinRoom({ id: socket.id }, roomId);
     // Update the voices section
+    io.to(result.admin).emit('updateStudents', students);
     socket.emit('updateVoices', result);
     socket.join(result.room);
     console.log(`Student ${socket.id} successfully joined the room ${roomId}`);
@@ -110,6 +112,13 @@ io.on('connection', (socket) => {
     },
     []
   );
+
+  socket.on('leaveRoom', (roomId) => {
+    const students = leaveRoom(socket.id);
+    const { result } = findRoom(roomId);
+    io.to(result.admin).emit('updateStudents', students);
+    console.log(`Student ${socket.id} left the room`);
+  });
 
   /**
    * Enables teacher to destroy their room

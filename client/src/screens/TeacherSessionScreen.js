@@ -32,6 +32,7 @@ export default () => {
    */
   const [sessionId, setSessionId] = useState('');
   const [feedbacks, setFeedbacks] = useState({});
+  const [studentNumber, setStudentNumber] = useState(0);
 
   /**
    * Creates a room with a randomly generated session id
@@ -55,6 +56,12 @@ export default () => {
     });
   }, [feedbacks]);
 
+  useEffect(() => {
+    socket.on('updateStudents', (students) => {
+      setStudentNumber(students.length);
+    });
+  }, []);
+
   /**
    * Sends the feedback pressed by the user
    * @param {string} feedbackName
@@ -67,6 +74,7 @@ export default () => {
   return (
     <View>
       <Text>SessionID: {sessionId}</Text>
+      <Text>People Joined: {studentNumber}</Text>
       {feedbacks['Too Slow'] === '' ||
       feedbacks['Too Slow'] === undefined ||
       feedbacks['Too Slow'].length === 0 ? null : (

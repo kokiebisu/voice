@@ -15,7 +15,8 @@ import {
 /**
  * Helper
  */
-import { leaveRoom } from './src/util/helper';
+import { leaveTeacherRoom } from './src/util/helper';
+import { leaveStudentRoom } from './src/screens/StudentSessionScreen';
 
 /**
  * Screens
@@ -51,14 +52,22 @@ export default function App() {
           name='Teacher Authentication'
           component={TeacherAuthenticationScreen}
         />
-        <Stack.Screen name='Student Session' component={StudentSessionScreen} />
+        <Stack.Screen
+          name='Student Session'
+          component={StudentSessionScreen}
+          options={({ navigation }) => ({
+            headerLeft: () => (
+              <HeaderBackButton onPress={() => leaveStudentRoom(navigation)} />
+            ),
+          })}
+        />
         <Stack.Screen
           name='Teacher Session'
           component={TeacherSessionScreen}
           options={({ route, navigation }) => ({
             title: route.params.course,
             headerLeft: () => (
-              <HeaderBackButton onPress={() => leaveRoom(navigation)} />
+              <HeaderBackButton onPress={() => leaveTeacherRoom(navigation)} />
             ),
           })}
         />
