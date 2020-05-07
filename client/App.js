@@ -6,9 +6,16 @@
  * Dependencies
  */
 import React from 'react';
-import * as firebase from 'firebase';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  HeaderBackButton,
+} from '@react-navigation/stack';
+
+/**
+ * Helper
+ */
+import { leaveRoom } from './src/util/helper';
 
 /**
  * Screens
@@ -24,6 +31,8 @@ import TeacherSessionScreen from './src/screens/TeacherSessionScreen';
  * Initializing Stack
  */
 const Stack = createStackNavigator();
+
+// Components
 
 export default function App() {
   return (
@@ -46,7 +55,12 @@ export default function App() {
         <Stack.Screen
           name='Teacher Session'
           component={TeacherSessionScreen}
-          options={({ route }) => ({ title: route.params.course })}
+          options={({ route, navigation }) => ({
+            title: route.params.course,
+            headerLeft: () => (
+              <HeaderBackButton onPress={() => leaveRoom(navigation)} />
+            ),
+          })}
         />
       </Stack.Navigator>
     </NavigationContainer>
