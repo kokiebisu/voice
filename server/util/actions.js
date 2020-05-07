@@ -6,7 +6,6 @@
  * Stores all the ROOMS in here
  */
 let rooms = [];
-let students = [];
 
 /**
  * Creates a room with the Teacher as the admin
@@ -39,13 +38,14 @@ const findRoom = (roomId) => {
  * @param {string} roomId
  */
 const joinRoom = (userId, roomId) => {
+  let specifiedRoom;
   rooms.map((room) => {
     if (room.room === roomId) {
       room.users.push(userId);
+      specifiedRoom = room;
     }
   });
-  students.push(userId);
-  return students;
+  return specifiedRoom;
 };
 
 /**
@@ -117,9 +117,16 @@ const removeFeedbackByUserId = (feedbackName, studentId, roomId) => {
   return updatedRoom;
 };
 
-const leaveRoom = (userId) => {
-  students = students.filter((student) => student.id !== userId);
-  return students;
+const leaveRoom = (userId, roomId) => {
+  let updatedRoom;
+  rooms.map((room) => {
+    if (room.room === roomId) {
+      updatedUsers = room.users.filter((user) => user.id !== userId);
+      room.users = updatedUsers;
+      updatedRoom = room;
+    }
+  });
+  return updatedRoom;
 };
 
 module.exports = {

@@ -57,8 +57,8 @@ export default () => {
   }, [feedbacks]);
 
   useEffect(() => {
-    socket.on('updateStudents', (students) => {
-      setStudentNumber(students.length);
+    socket.on('updateStudents', (result) => {
+      setStudentNumber(result.users.length);
     });
   }, []);
 
