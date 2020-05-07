@@ -18,31 +18,40 @@ const styles = StyleSheet.create({
   logo: {
     // position: 'absolute',
     // top: 109,
-    marginBottom: 200,
+    marginBottom: -60,
     marginTop: 15,
   },
   textviewcontainer: {
-    flex: 1,
-    alignItems: 'center',
-    width: 150
+  
+    width: 293,
+    height: 73,
+    paddingTop: 25,
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'grey',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
+    elevation: 5,
+    marginTop: 180,
   },
-  courseContentContainer: {
-    alignSelf: 'flex-end',
-    position: 'absolute',
-    bottom: 20,
-    fontSize: 30,
-    width: 350,
-    height: 300,
-    paddingLeft: 230,
-  },
+  // courseContentContainer: {
+  //   alignSelf: 'flex-end',
+  //   position: 'absolute',
+  //   bottom: 20,
+  //   fontSize: 30,
+  //   width: 350,
+  //   height: 300,
+  //   paddingLeft: 230,
+  // },
   buttonContainer1: {
-    // position: 'absolute',
-    width: 150,
-    height: 110,
+    width: 293,
+    height: 73,
     // left: 51,
     // top: 350,
-    marginTop: -200,
-    marginLeft: 160,
+    marginTop: -50,
     backgroundColor: '#03a5fc',
     borderWidth: 1,
     borderStyle: 'solid',
@@ -57,14 +66,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonContainer2: {
-    // position: 'absolute',
-
-    width: 150,
-    height: 110,
+    width: 293,
+    height: 73,
     // left: 51,
     // top: 350,
-    marginTop: -100,
-    marginRight: 160,
+    marginTop: -50,
     backgroundColor: '#03a5fc',
     borderWidth: 1,
     borderStyle: 'solid',
@@ -96,29 +102,30 @@ export default () => {
         source={require('../img/images.jpg')}
         style={styles.container}>
       <Image source={require('../img/Voice.png')} style={styles.logo}></Image>
+
       <View style={styles.textviewcontainer}>
-        <TextInput style={styles.courseContentContainer}
+        <TextInput 
           placeholder='Course Name'
           value={course}
           onChangeText={(text) => setCourse(text)}
         />
       </View>
-      <View style={styles.container}>
+     
         <TouchableOpacity
             style={styles.buttonContainer2}
 
             onPress={() => navigation.navigate('Teacher Session', { course })}>
           <Text style={styles.titleText}>Create Session</Text>
         </TouchableOpacity>
-      </View>
-    <View style={styles.container}>
+     
+    
         <TouchableOpacity
             style={styles.buttonContainer1}
 
             onPress={() => navigation.navigate('Teacher Create Session')}>
           <Text style={styles.titleText}>Course List</Text>
         </TouchableOpacity>
-      </View>
+     
     </ImageBackground>
     </>
   );
