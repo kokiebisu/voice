@@ -6,18 +6,15 @@
  * Dependencies
  */
 import React, { useState, useEffect } from 'react';
-import {
-  Text,
-  View,
-  Alert,
-  Button,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  FlatList,
-} from 'react-native';
+import { View, Alert, StyleSheet } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import io from 'socket.io-client';
+
+// Components
+import { Section } from '../components/Section';
+import { StudentSessionHeader } from '../components/StudentSessionHeader';
+import { Voice } from '../components/Voice';
+import { Option } from '../components/Option';
 
 /**
  * Endpoint for the WebSocket
@@ -67,6 +64,7 @@ export default () => {
   const [session, setSession] = useState('');
   const [voices, setVoices] = useState([]);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [isPressed, setIsPressed] = useState(false);
 
   /**
    * Redirects the student back to the authentication screen when
@@ -152,402 +150,100 @@ export default () => {
     });
   };
 
+  /**
+   * Disables feedback fpr a specified time span when a feedback is pressed
+   */
   const disableFeedbacks = () => {
     setTimeout(function () {
       setIsDisabled(false);
     }, 10000);
+    setIsPressed(false);
   };
 
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          width: 300,
-          height: 87,
-          backgroundColor: '#FF5C5C',
-          borderRadius: 10,
-
-          // flex: 1,
-        }}>
-        <Text
-          style={{
-            position: 'absolute',
-            top: 35,
-            left: 60,
-            fontWeight: 'bold',
-          }}>
-          Welcome to session: {session}
-        </Text>
-      </View>
-      <View
-        style={{
-          // position: 'absolute',
-          // left: 30,
-          // top: 150,
-          // backgroundColor: 'blue',
-          marginRight: 300,
-          flex: 1,
-          paddingBottom: 120,
-          paddingTop: 30,
-        }}>
-        <Text style={styles.sectionTitle1}>Voices</Text>
-
+      <StudentSessionHeader session={session} />
+      <Section title='Voices'>
         {voices['Too Slow'] === '' ||
         voices['Too Slow'] === undefined ||
         voices['Too Slow'].length === 0 ? null : (
-          <View>
-            <Text>Too Slow</Text>
-            <TouchableOpacity
-              style={styles.slowagree}
-              onPress={() => sendFeedback('Too Slow', roomId)}>
-              <Text>I agree</Text>
-            </TouchableOpacity>
-          </View>
+          <Voice
+            feedbackName='Too Slow'
+            sendFeedback={sendFeedback}
+            isPressed={isPressed}
+          />
         )}
         {voices['Too Fast'] === '' ||
         voices['Too Fast'] === undefined ||
         voices['Too Fast'].length === 0 ? null : (
-          <View>
-            <Text>Too Fast</Text>
-            <TouchableOpacity
-              onPress={() => sendFeedback('Too Fast', roomId)}
-              style={styles.fastagree}>
-              <Text>I agree</Text>
-            </TouchableOpacity>
-          </View>
+          <Voice
+            feedbackName='Too Fast'
+            sendFeedback={sendFeedback}
+            isPressed={isPressed}
+          />
         )}
         {voices['Repeat Last Phrase'] === '' ||
         voices['Repeat Last Phrase'] === undefined ||
         voices['Repeat Last Phrase'].length === 0 ? null : (
-          <View>
-            <Text>Repeat Last Phrase</Text>
-            <TouchableOpacity
-              onPress={() => sendFeedback('Repeat Last Phrase', roomId)}
-              style={styles.repeatagree}>
-              <Text>I agree</Text>
-            </TouchableOpacity>
-          </View>
+          <Voice
+            feedbackName='Repeat Last Phrase'
+            sendFeedback={sendFeedback}
+            isPressed={isPressed}
+          />
         )}
         {voices['Confused'] === '' ||
         voices['Confused'] === undefined ||
         voices['Confused'].length === 0 ? null : (
-          <View>
-            <Text>Confused</Text>
-            <TouchableOpacity
-              onPress={() => sendFeedback('Confused', roomId)}
-              style={styles.confusedagree}>
-              <Text>I agree</Text>
-            </TouchableOpacity>
-          </View>
+          <Voice
+            feedbackName='Confused'
+            sendFeedback={sendFeedback}
+            isPressed={isPressed}
+          />
         )}
-      </View>
-      <View
-        style={{
-          flex: 1,
-          // backgroundColor: 'pink',
-
-          width: '100%',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          marginRight: 300,
-        }}>
-        <Text style={styles.sectionTitle2}>Options</Text>
-      </View>
-      <View
-        style={{
-          flex: 1,
-          // backgroundColor: 'green',
-
-          width: '100%',
-          flexDirection: 'row',
-          justifyContent: 'space-around',
-          //  paddingTop: 40,
-          marginTop: -90,
-        }}>
-        <View
-          style={
-            {
-              // backgroundColor: 'yellow',
-              // flex: 1,
-            }
-          }>
-          <TouchableOpacity
-            disabled={isDisabled}
-            style={styles.slowbutton}
-            onPress={() => {
-              sendFeedback('Too Slow', roomId);
-              disableFeedbacks();
-            }}>
-            <View>
-              <Image
-                source={require('../img/1.png')}
-                style={styles.slowlogo}></Image>
-              <Text>Too Slow</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={
-            {
-              // backgroundColor: 'blue',
-              // flex: 1,
-            }
-          }>
-          <TouchableOpacity
-            disabled={isDisabled}
-            onPress={() => {
-              sendFeedback('Too Fast', roomId);
-              disableFeedbacks();
-            }}
-            style={styles.fastbutton}>
-            <View>
-              <Image
-                source={require('../img/shape.png')}
-                style={styles.fastlogo}
-              />
-              <Text>Too Fast</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={
-            {
-              // backgroundColor: 'brown',
-              // flex: 1,
-            }
-          }>
-          <TouchableOpacity
-            disabled={isDisabled}
-            onPress={() => {
-              sendFeedback('Repeat Last Phrase', roomId);
-              disableFeedbacks();
-            }}
-            style={styles.repeatbutton}>
-            <View>
-              <Image
-                source={require('../img/arrows.png')}
-                style={styles.repeatlogo}
-              />
-              <Text>Repeat</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-        <View
-          style={
-            {
-              // backgroundColor: 'pink',
-              // flex: 1,
-            }
-          }>
-          <TouchableOpacity
-            disabled={isDisabled}
-            onPress={() => {
-              sendFeedback('Confused', roomId);
-              disableFeedbacks();
-            }}
-            style={styles.confusedbutton}>
-            <View>
-              <Image
-                source={require('../img/job.png')}
-                style={styles.confuselogo}
-              />
-              <Text>Confused</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
-      <View style={styles.containerbottom}>
-        <View>
-          <TouchableOpacity
-            style={styles.homebutton}
-            onPress={() => navigation.navigate('Role Select')}>
-            <Image
-              source={require('../img/home.png')}
-              style={styles.homelogo}></Image>
-            <Text>Home</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity
-            style={styles.studentbutton}
-            onPress={() => navigation.navigate('Student Authentication')}>
-            <Image
-              source={require('../img/s.png')}
-              style={styles.studentlogo}></Image>
-            <Text>Student</Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <TouchableOpacity
-            style={styles.teacherbutton}
-            onPress={() => navigation.navigate('Teacher Create Session')}>
-            <Image
-              source={require('../img/t.png')}
-              style={styles.teacherlogo}></Image>
-            <Text>Teacher</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
+      </Section>
+      <Section title='Options'>
+        <Option
+          feedbackName='Too Slow'
+          roomId={roomId}
+          imgSrc='../img/1.png'
+          sendFeedback={sendFeedback}
+          disableFeedbacks={disableFeedbacks}
+          isDisabled={isDisabled}
+        />
+        <Option
+          feedbackName='Too Fast'
+          roomId={roomId}
+          imgSrc='../img/1.png'
+          sendFeedback={sendFeedback}
+          disableFeedbacks={disableFeedbacks}
+          isDisabled={isDisabled}
+        />
+        <Option
+          feedbackName='Repeat Last Phrase'
+          roomId={roomId}
+          imgSrc='../img/arrows.png'
+          sendFeedback={sendFeedback}
+          disableFeedbacks={disableFeedbacks}
+          isDisabled={isDisabled}
+        />
+        <Option
+          feedbackName='Confused'
+          roomId={roomId}
+          imgSrc='../img/job.png'
+          sendFeedback={sendFeedback}
+          disableFeedbacks={disableFeedbacks}
+          isDisabled={isDisabled}
+        />
+      </Section>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  sectionTitle1: {
-    fontWeight: 'bold',
-  },
-  sectionTitle2: {
-    // position: 'absolute',
-    // left: 31,
-    // top: 390,
-    fontWeight: 'bold',
-  },
-  slowbutton: {
-    // position: 'absolute',
-    // width: 293,
-    // height: 73,
-    // left: 31,
-    // top: 20,
-  },
-  fastbutton: {
-    // position: 'absolute',
-    // width: 293,
-    // height: 73,
-    // left: 121,
-    // top: 499,
-  },
-  repeatbutton: {
-    // position: 'absolute',
-    // width: 293,
-    // height: 73,
-    // left: 221,
-    // top: 499,
-  },
-  confusedbutton: {
-    // position: 'absolute',
-    // width: 293,
-    // height: 73,
-    // left: 301,
-    // top: 499,
-  },
-
-  slowlogo: {
-    // position: 'absolute',
-    height: 50,
-    width: 50,
-    // top: -60,
-    // left: 7,
-  },
-  fastlogo: {
-    // position: 'absolute',
-    height: 50,
-    width: 50,
-    // top: -63,
-    // left: -3,
-  },
-  repeatlogo: {
-    // position: 'absolute',
-    height: 50,
-    width: 50,
-    // top: -57,
-    // left: -2,
-  },
-  confuselogo: {
-    // position: 'absolute',
-    height: 50,
-    width: 50,
-  },
-
-  slowagree: {
-    position: 'absolute',
-    width: 72,
-    height: 21,
-    left: 81,
-    top: -3,
-    backgroundColor: '#70AE60',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#000000',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-  },
-  fastagree: {
-    position: 'absolute',
-    width: 72,
-    height: 21,
-    left: 81,
-    top: 0,
-    backgroundColor: '#70AE60',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#000000',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-  },
-  repeatagree: {
-    position: 'absolute',
-    width: 72,
-    height: 21,
-    left: 141,
-    top: 0,
-    backgroundColor: '#70AE60',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#000000',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-  },
-  confusedagree: {
-    position: 'absolute',
-    width: 72,
-    height: 21,
-    left: 81,
-    top: 0,
-    backgroundColor: '#70AE60',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#000000',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-  },
   container: {
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'center',
-    // backgroundColor: 'grey',
     flex: 1,
-  },
-  containerbottom: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    // backgroundColor: 'yellow',
-    // marginRight: ,
-    padding: 25,
-    width: '100%',
-    // flex: 1,
   },
 });
