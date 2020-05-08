@@ -82,11 +82,11 @@ const validateSignUpData = (data) => {
   if (isValid(data.password))
     errors.confirmPassword = 'Please confirm your password';
   if (isEmpty(data.confirmPassword))
-    errors.confirmPassword = 'Please confirm your password';
-  if (isValid(data.confirmPassword))
-    errors.confirmPassword = 'email';
+    errors.confirmPassword = "Confirm your password";
   if (data.password !== data.confirmPassword)
     errors.confirmPassword = 'Passwords must be the same';
+  if (isValid(data.confirmPassword))
+    errors.confirmPassword = 'OK';
 
   return {
     errors,
