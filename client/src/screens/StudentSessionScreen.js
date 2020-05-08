@@ -28,6 +28,28 @@ import ENDPOINT from '../util/endpoint';
 let socket;
 let roomId;
 
+export const leaveStudentRoom = (navigation) => {
+  Alert.alert(
+    'Are you sure?',
+    'You will be leaving the room',
+    [
+      {
+        text: 'Cancel',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Leave',
+        onPress: () => {
+          socket.emit('leaveRoom', roomId);
+          navigation.goBack();
+        },
+      },
+    ],
+    { cancelable: true }
+  );
+};
+
 export default () => {
   /**
    * Used to navigate between the screens
@@ -137,164 +159,235 @@ export default () => {
   };
 
   return (
-    <View>
-      <View>
-        <View
-          style={{
-            position: 'absolute',
-            width: 300,
-            height: 87,
-            left: 50,
-            top: 0,
-            backgroundColor: '#FF5C5C',
-            borderRadius: 10,
-          }}>
-          <Text
-            style={{
-              position: 'absolute',
-              top: 35,
-              left: 60,
-              fontWeight: 'bold',
-            }}>
-            Welcome to session: {session}
-          </Text>
-        </View>
-        <View
-          style={{
-            position: 'absolute',
-            left: 30,
-            top: 150,
-          }}>
-          <Text style={styles.sectionTitle1}>Voices</Text>
+    <View style={styles.container}>
+      <View
+        style={{
+          width: 300,
+          height: 87,
+          backgroundColor: '#FF5C5C',
+          borderRadius: 10,
 
-          {voices['Too Slow'] === '' ||
-          voices['Too Slow'] === undefined ||
-          voices['Too Slow'].length === 0 ? null : (
+          // flex: 1,
+        }}>
+        <Text
+          style={{
+            position: 'absolute',
+            top: 35,
+            left: 60,
+            fontWeight: 'bold',
+          }}>
+          Welcome to session: {session}
+        </Text>
+      </View>
+      <View
+        style={{
+          // position: 'absolute',
+          // left: 30,
+          // top: 150,
+          // backgroundColor: 'blue',
+          marginRight: 300,
+          flex: 1,
+          paddingBottom: 120,
+          paddingTop: 30,
+        }}>
+        <Text style={styles.sectionTitle1}>Voices</Text>
+
+        {voices['Too Slow'] === '' ||
+        voices['Too Slow'] === undefined ||
+        voices['Too Slow'].length === 0 ? null : (
+          <View>
+            <Text>Too Slow</Text>
+            <TouchableOpacity
+              style={styles.slowagree}
+              onPress={() => sendFeedback('Too Slow', roomId)}>
+              <Text>I agree</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        {voices['Too Fast'] === '' ||
+        voices['Too Fast'] === undefined ||
+        voices['Too Fast'].length === 0 ? null : (
+          <View>
+            <Text>Too Fast</Text>
+            <TouchableOpacity
+              onPress={() => sendFeedback('Too Fast', roomId)}
+              style={styles.fastagree}>
+              <Text>I agree</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        {voices['Repeat Last Phrase'] === '' ||
+        voices['Repeat Last Phrase'] === undefined ||
+        voices['Repeat Last Phrase'].length === 0 ? null : (
+          <View>
+            <Text>Repeat Last Phrase</Text>
+            <TouchableOpacity
+              onPress={() => sendFeedback('Repeat Last Phrase', roomId)}
+              style={styles.repeatagree}>
+              <Text>I agree</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        {voices['Confused'] === '' ||
+        voices['Confused'] === undefined ||
+        voices['Confused'].length === 0 ? null : (
+          <View>
+            <Text>Confused</Text>
+            <TouchableOpacity
+              onPress={() => sendFeedback('Confused', roomId)}
+              style={styles.confusedagree}>
+              <Text>I agree</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      </View>
+      <View
+        style={{
+          flex: 1,
+          // backgroundColor: 'pink',
+
+          width: '100%',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          marginRight: 300,
+        }}>
+        <Text style={styles.sectionTitle2}>Options</Text>
+      </View>
+      <View
+        style={{
+          flex: 1,
+          // backgroundColor: 'green',
+
+          width: '100%',
+          flexDirection: 'row',
+          justifyContent: 'space-around',
+          //  paddingTop: 40,
+          marginTop: -90,
+        }}>
+        <View
+          style={
+            {
+              // backgroundColor: 'yellow',
+              // flex: 1,
+            }
+          }>
+          <TouchableOpacity
+            disabled={isDisabled}
+            style={styles.slowbutton}
+            onPress={() => {
+              sendFeedback('Too Slow', roomId);
+              disableFeedbacks();
+            }}>
             <View>
+              <Image
+                source={require('../img/1.png')}
+                style={styles.slowlogo}></Image>
               <Text>Too Slow</Text>
-              <TouchableOpacity
-                style={styles.slowagree}
-                onPress={() => sendFeedback('Too Slow', roomId)}>
-                <Text>I agree</Text>
-              </TouchableOpacity>
             </View>
-          )}
-          {voices['Too Fast'] === '' ||
-          voices['Too Fast'] === undefined ||
-          voices['Too Fast'].length === 0 ? null : (
+          </TouchableOpacity>
+        </View>
+        <View
+          style={
+            {
+              // backgroundColor: 'blue',
+              // flex: 1,
+            }
+          }>
+          <TouchableOpacity
+            disabled={isDisabled}
+            onPress={() => {
+              sendFeedback('Too Fast', roomId);
+              disableFeedbacks();
+            }}
+            style={styles.fastbutton}>
             <View>
+              <Image
+                source={require('../img/shape.png')}
+                style={styles.fastlogo}
+              />
               <Text>Too Fast</Text>
-              <TouchableOpacity
-                onPress={() => sendFeedback('Too Fast', roomId)}
-                style={styles.fastagree}>
-                <Text>I agree</Text>
-              </TouchableOpacity>
             </View>
-          )}
-          {voices['Repeat Last Phrase'] === '' ||
-          voices['Repeat Last Phrase'] === undefined ||
-          voices['Repeat Last Phrase'].length === 0 ? null : (
+          </TouchableOpacity>
+        </View>
+        <View
+          style={
+            {
+              // backgroundColor: 'brown',
+              // flex: 1,
+            }
+          }>
+          <TouchableOpacity
+            disabled={isDisabled}
+            onPress={() => {
+              sendFeedback('Repeat Last Phrase', roomId);
+              disableFeedbacks();
+            }}
+            style={styles.repeatbutton}>
             <View>
-              <Text>Repeat Last Phrase</Text>
-              <TouchableOpacity
-                onPress={() => sendFeedback('Repeat Last Phrase', roomId)}
-                style={styles.repeatagree}>
-                <Text>I agree</Text>
-              </TouchableOpacity>
+              <Image
+                source={require('../img/arrows.png')}
+                style={styles.repeatlogo}
+              />
+              <Text>Repeat</Text>
             </View>
-          )}
-          {voices['Confused'] === '' ||
-          voices['Confused'] === undefined ||
-          voices['Confused'].length === 0 ? null : (
+          </TouchableOpacity>
+        </View>
+        <View
+          style={
+            {
+              // backgroundColor: 'pink',
+              // flex: 1,
+            }
+          }>
+          <TouchableOpacity
+            disabled={isDisabled}
+            onPress={() => {
+              sendFeedback('Confused', roomId);
+              disableFeedbacks();
+            }}
+            style={styles.confusedbutton}>
             <View>
+              <Image
+                source={require('../img/job.png')}
+                style={styles.confuselogo}
+              />
               <Text>Confused</Text>
-              <TouchableOpacity
-                onPress={() => sendFeedback('Confused', roomId)}
-                style={styles.confusedagree}>
-                <Text>I agree</Text>
-              </TouchableOpacity>
             </View>
-          )}
+          </TouchableOpacity>
         </View>
       </View>
-      <View>
-        <Text style={styles.sectionTitle2}>Options</Text>
-        <TouchableOpacity
-          disabled={isDisabled}
-          style={styles.slowbutton}
-          onPress={() => {
-            sendFeedback('Too Slow', roomId);
-            disableFeedbacks();
-          }}>
-          <View>
+      <View style={styles.containerbottom}>
+        <View>
+          <TouchableOpacity
+            style={styles.homebutton}
+            onPress={() => navigation.navigate('Role Select')}>
             <Image
-              source={require('../img/1.png')}
-              style={styles.slowlogo}></Image>
-            <Text>Too Slow</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          disabled={isDisabled}
-          onPress={() => {
-            sendFeedback('Too Fast', roomId);
-            disableFeedbacks();
-          }}
-          style={styles.fastbutton}>
-          <View>
-            <Image source={require('../img/3.png')} style={styles.fastlogo} />
-            <Text>Too Fast</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          disabled={isDisabled}
-          onPress={() => {
-            sendFeedback('Repeat Last Phrase', roomId);
-            disableFeedbacks();
-          }}
-          style={styles.repeatbutton}>
-          <View>
-            <Image source={require('../img/2.png')} style={styles.repeatlogo} />
-            <Text>Repeat Last Phrase</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity
-          disabled={isDisabled}
-          onPress={() => {
-            sendFeedback('Confused', roomId);
-            disableFeedbacks();
-          }}
-          style={styles.confusedbutton}>
-          <View>
-            <Image source={require('../img/4.jpg')} style={styles.slowlogo} />
-            <Text>Confused</Text>
-          </View>
-        </TouchableOpacity>
+              source={require('../img/home.png')}
+              style={styles.homelogo}></Image>
+            <Text>Home</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.studentbutton}
+            onPress={() => navigation.navigate('Student Authentication')}>
+            <Image
+              source={require('../img/s.png')}
+              style={styles.studentlogo}></Image>
+            <Text>Student</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <TouchableOpacity
+            style={styles.teacherbutton}
+            onPress={() => navigation.navigate('Teacher Create Session')}>
+            <Image
+              source={require('../img/t.png')}
+              style={styles.teacherlogo}></Image>
+            <Text>Teacher</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-      {/* <TouchableOpacity
-        style={styles.homebutton}
-        onPress={() => navigation.navigate('Role Select')}>
-        <Image
-          source={require('../img/home.png')}
-          style={styles.homelogo}></Image>
-        <Text>Home</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.studentbutton}
-        onPress={() => navigation.navigate('Student Authentication')}>
-        <Image
-          source={require('../img/s.png')}
-          style={styles.studentlogo}></Image>
-        <Text>Student</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.teacherbutton}
-        title='Teacher'
-        onPress={() => navigation.navigate('Teacher Create Session')}>
-        <Image
-          source={require('../img/t.png')}
-          style={styles.teacherlogo}></Image>
-        <Text>Teacher</Text>
-      </TouchableOpacity> */}
     </View>
   );
 };
@@ -304,105 +397,67 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   sectionTitle2: {
-    position: 'absolute',
-    left: 31,
-    top: 390,
+    // position: 'absolute',
+    // left: 31,
+    // top: 390,
     fontWeight: 'bold',
   },
   slowbutton: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 31,
-    top: 499,
+    // position: 'absolute',
+    // width: 293,
+    // height: 73,
+    // left: 31,
+    // top: 20,
   },
   fastbutton: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 121,
-    top: 499,
+    // position: 'absolute',
+    // width: 293,
+    // height: 73,
+    // left: 121,
+    // top: 499,
   },
   repeatbutton: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 221,
-    top: 499,
+    // position: 'absolute',
+    // width: 293,
+    // height: 73,
+    // left: 221,
+    // top: 499,
   },
   confusedbutton: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 301,
-    top: 499,
+    // position: 'absolute',
+    // width: 293,
+    // height: 73,
+    // left: 301,
+    // top: 499,
   },
 
-  logo: {
-    position: 'absolute',
-    top: 395,
-    left: 338,
-  },
   slowlogo: {
-    position: 'absolute',
+    // position: 'absolute',
     height: 50,
     width: 50,
-    top: -60,
-    left: 7,
+    // top: -60,
+    // left: 7,
   },
   fastlogo: {
-    position: 'absolute',
-    height: 60,
-    width: 60,
-    top: -63,
-    left: -3,
+    // position: 'absolute',
+    height: 50,
+    width: 50,
+    // top: -63,
+    // left: -3,
   },
   repeatlogo: {
-    position: 'absolute',
-    height: 48,
-    width: 48,
-    top: -57,
-    left: -2,
+    // position: 'absolute',
+    height: 50,
+    width: 50,
+    // top: -57,
+    // left: -2,
   },
   confuselogo: {
-    position: 'absolute',
+    // position: 'absolute',
+    height: 50,
+    width: 50,
   },
-  homebutton: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 41,
-    top: 620,
-  },
-  homelogo: {
-    position: 'absolute',
-    top: -55,
-    left: -7,
-  },
-  studentbutton: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 171,
-    top: 620,
-  },
-  teacherbutton: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 306,
-    top: 620,
-  },
-  studentlogo: {
-    position: 'absolute',
-    top: -55,
-    left: -1,
-  },
-  teacherlogo: {
-    position: 'absolute',
-    top: -55,
-    left: -1,
-  },
+
   slowagree: {
     position: 'absolute',
     width: 72,
@@ -479,23 +534,20 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
   },
-  // container1: {
-  //   position: 'absolute',
-  //   width: 100,
-  //   height: 120,
-  //   // left: 21,
-  //   // top: 100,
-  //   backgroundColor: '#03a5fc',
-  //   borderRadius: 12,
-  // },
-
-  // container2: {
-  //   position: 'absolute',
-  //   width: 100,
-  //   height: 120,
-  //   // left: 150,
-  //   // top: 100,
-  //   backgroundColor: '#03a5fc',
-  //   borderRadius: 12,
-  // },
+  container: {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    // backgroundColor: 'grey',
+    flex: 1,
+  },
+  containerbottom: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    // backgroundColor: 'yellow',
+    // marginRight: ,
+    padding: 25,
+    width: '100%',
+    // flex: 1,
+  },
 });
