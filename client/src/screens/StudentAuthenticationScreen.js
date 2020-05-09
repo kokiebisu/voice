@@ -17,6 +17,7 @@ import {
 /**
  * Components
  */
+import { ScreenWrapper } from '../components/ScreenWrapper';
 import { CustomButton } from '../components/CustomButton';
 import { Input } from '../components/Input';
 
@@ -28,9 +29,7 @@ export default () => {
 
   return (
     <>
-      <ImageBackground
-        source={require('../img/images.jpg')}
-        style={styles.container}>
+      <ScreenWrapper>
         <Image source={require('../img/Voice.png')} style={styles.logo}></Image>
         <View style={styles.inputWrapper}>
           <Input
@@ -45,7 +44,7 @@ export default () => {
         <View>
           <CustomButton name='Enter' screen='Student Session' data={session} />
         </View>
-      </ImageBackground>
+      </ScreenWrapper>
     </>
   );
 };

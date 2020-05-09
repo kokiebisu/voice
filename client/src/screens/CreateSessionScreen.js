@@ -6,13 +6,14 @@
  * Dependencies
  */
 import React, { useState } from 'react';
-import { View, StyleSheet, ImageBackground, Image } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
 /**
  * Components
  */
 import { Input } from '../components/Input';
 import { CustomButton } from '../components/CustomButton';
+import { ScreenWrapper } from '../components/ScreenWrapper';
 
 export default () => {
   /**
@@ -21,14 +22,12 @@ export default () => {
   const [course, setCourse] = useState('');
   return (
     <>
-      <ImageBackground
-        source={require('../img/images.jpg')}
-        style={styles.backgroundWrapper}>
+      <ScreenWrapper>
         <Image source={require('../img/Voice.png')} style={styles.appLogo} />
         <View style={styles.inputWrapper}>
           <Input
             placeholder='Course Name'
-            course={course}
+            value={course}
             type={(text) => setCourse(text)}
           />
         </View>
@@ -39,7 +38,7 @@ export default () => {
             data={course}
           />
         </View>
-      </ImageBackground>
+      </ScreenWrapper>
     </>
   );
 };

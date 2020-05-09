@@ -4,7 +4,6 @@ import { View, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 export const Option = ({
   feedbackName,
   roomId,
-  imgSrc,
   sendFeedback,
   disableFeedbacks,
   isDisabled,

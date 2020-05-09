@@ -4,7 +4,7 @@ import { StyleSheet, View, TextInput } from 'react-native';
 export const Input = ({
   placeholder,
   type,
-  course,
+  value,
   autoCapitalize,
   autoCorrect,
   trim,
@@ -15,7 +15,7 @@ export const Input = ({
         autoCorrect={autoCorrect}
         autoCapitalize={autoCapitalize}
         placeholder={placeholder}
-        value={course}
+        value={value}
         onChangeText={(text) => {
           if (!!trim) {
             text = text.trim();
