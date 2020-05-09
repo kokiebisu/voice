@@ -4,6 +4,7 @@ import { View, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 export const Option = ({
   feedbackName,
   roomId,
+  imgSrc,
   sendFeedback,
   disableFeedbacks,
   isDisabled,
@@ -17,7 +18,7 @@ export const Option = ({
           disableFeedbacks();
         }}>
         <View>
-          {/* <Image source={require(imgSrc)} style={styles.logo}></Image> */}
+          <Image source={imgSrc} style={styles.logo}></Image>
           <Text>{feedbackName}</Text>
         </View>
       </TouchableOpacity>

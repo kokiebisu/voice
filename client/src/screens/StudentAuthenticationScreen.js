@@ -6,13 +6,7 @@
  * Dependencies
  */
 import React, { useState } from 'react';
-import {
-  View,
-  TextInput,
-  StyleSheet,
-  ImageBackground,
-  Image,
-} from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 
 /**
  * Components

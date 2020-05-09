@@ -4,14 +4,7 @@
 
 // Dependencies
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Button,
-  TextInput,
-  AsyncStorage,
-  Alert,
-} from 'react-native';
+import { View, Text, Button, AsyncStorage, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import ENDPOINT from '../util/endpoint';

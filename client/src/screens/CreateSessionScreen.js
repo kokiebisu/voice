@@ -20,6 +20,7 @@ export default () => {
    * States
    */
   const [course, setCourse] = useState('');
+
   return (
     <>
       <ScreenWrapper>

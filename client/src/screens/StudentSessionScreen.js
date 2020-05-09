@@ -13,14 +13,13 @@ import io from 'socket.io-client';
 // Components
 import { Section } from '../components/Section';
 import { StudentSessionHeader } from '../components/StudentSessionHeader';
-import { Voice } from '../components/Voice';
-import { Option } from '../components/Option';
+import { VoicesWrapper } from '../components/VoicesWrapper';
+import { OptionsWrapper } from '../components/OptionsWrapper';
 
 /**
  * Endpoint for the WebSocket
  */
 import ENDPOINT from '../util/endpoint';
-// import { TouchableOpacity } from 'react-native-gesture-handler';
 
 let socket;
 let roomId;
@@ -164,72 +163,15 @@ export default () => {
     <View style={styles.container}>
       <StudentSessionHeader session={session} />
       <Section title='Voices'>
-        {voices['Too Slow'] === '' ||
-        voices['Too Slow'] === undefined ||
-        voices['Too Slow'].length === 0 ? null : (
-          <Voice
-            feedbackName='Too Slow'
-            sendFeedback={sendFeedback}
-            isPressed={isPressed}
-          />
-        )}
-        {voices['Too Fast'] === '' ||
-        voices['Too Fast'] === undefined ||
-        voices['Too Fast'].length === 0 ? null : (
-          <Voice
-            feedbackName='Too Fast'
-            sendFeedback={sendFeedback}
-            isPressed={isPressed}
-          />
-        )}
-        {voices['Repeat Last Phrase'] === '' ||
-        voices['Repeat Last Phrase'] === undefined ||
-        voices['Repeat Last Phrase'].length === 0 ? null : (
-          <Voice
-            feedbackName='Repeat Last Phrase'
-            sendFeedback={sendFeedback}
-            isPressed={isPressed}
-          />
-        )}
-        {voices['Confused'] === '' ||
-        voices['Confused'] === undefined ||
-        voices['Confused'].length === 0 ? null : (
-          <Voice
-            feedbackName='Confused'
-            sendFeedback={sendFeedback}
-            isPressed={isPressed}
-          />
-        )}
+        <VoicesWrapper
+          voices={voices}
+          sendFeedback={sendFeedback}
+          isPressed={isPressed}
+        />
       </Section>
       <Section title='Options'>
-        <Option
-          feedbackName='Too Slow'
+        <OptionsWrapper
           roomId={roomId}
-          imgSrc='../img/1.png'
-          sendFeedback={sendFeedback}
-          disableFeedbacks={disableFeedbacks}
-          isDisabled={isDisabled}
-        />
-        <Option
-          feedbackName='Too Fast'
-          roomId={roomId}
-          imgSrc='../img/1.png'
-          sendFeedback={sendFeedback}
-          disableFeedbacks={disableFeedbacks}
-          isDisabled={isDisabled}
-        />
-        <Option
-          feedbackName='Repeat Last Phrase'
-          roomId={roomId}
-          imgSrc='../img/arrows.png'
-          sendFeedback={sendFeedback}
-          disableFeedbacks={disableFeedbacks}
-          isDisabled={isDisabled}
-        />
-        <Option
-          feedbackName='Confused'
-          roomId={roomId}
-          imgSrc='../img/job.png'
           sendFeedback={sendFeedback}
           disableFeedbacks={disableFeedbacks}
           isDisabled={isDisabled}
