@@ -80,7 +80,7 @@ export default () => {
    */
   useEffect(() => {
     socket = io(ENDPOINT);
-    roomId = route.params.sessionId;
+    roomId = route.params.data;
     setSession(roomId);
     socket.emit('joinRoom', roomId, ({ error }) => {
       Alert.alert('Error', error, [

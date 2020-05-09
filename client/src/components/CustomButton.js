@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     width: 293,
     height: 73,
-    marginTop: -50,
     backgroundColor: '#03a5fc',
     borderWidth: 1,
     borderStyle: 'solid',

@@ -6,7 +6,7 @@
  * Dependencies
  */
 import React, { useState } from 'react';
-import { StyleSheet, ImageBackground, Image } from 'react-native';
+import { View, StyleSheet, ImageBackground, Image } from 'react-native';
 
 /**
  * Components
@@ -24,19 +24,21 @@ export default () => {
       <ImageBackground
         source={require('../img/images.jpg')}
         style={styles.backgroundWrapper}>
-        <Image
-          source={require('../img/Voice.png')}
-          style={styles.appLogo}></Image>
-        <Input
-          placeholder='Course Name'
-          course={course}
-          type={(text) => setCourse(text)}
-        />
-        <CustomButton
-          name='Create Session'
-          screen='Teacher Session'
-          data={course}
-        />
+        <Image source={require('../img/Voice.png')} style={styles.appLogo} />
+        <View style={styles.inputWrapper}>
+          <Input
+            placeholder='Course Name'
+            course={course}
+            type={(text) => setCourse(text)}
+          />
+        </View>
+        <View>
+          <CustomButton
+            name='Create Session'
+            screen='Teacher Session'
+            data={course}
+          />
+        </View>
       </ImageBackground>
     </>
   );
@@ -46,10 +48,9 @@ const styles = StyleSheet.create({
   backgroundWrapper: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'center',
   },
-  appLogo: {
-    marginBottom: -60,
-    marginTop: 15,
+  inputWrapper: {
+    marginBottom: 50,
   },
 });

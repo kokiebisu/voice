@@ -1,13 +1,27 @@
 import React from 'react';
 import { StyleSheet, View, TextInput } from 'react-native';
 
-export const Input = ({ placeholder, type, course }) => {
+export const Input = ({
+  placeholder,
+  type,
+  course,
+  autoCapitalize,
+  autoCorrect,
+  trim,
+}) => {
   return (
     <View style={styles.inputWrapper}>
       <TextInput
+        autoCorrect={autoCorrect}
+        autoCapitalize={autoCapitalize}
         placeholder={placeholder}
         value={course}
-        onChangeText={(text) => type(text)}
+        onChangeText={(text) => {
+          if (!!trim) {
+            text = text.trim();
+          }
+          type(text);
+        }}
       />
     </View>
   );
