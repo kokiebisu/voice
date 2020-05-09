@@ -7,8 +7,13 @@
  * Dependencies
  */
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text } from 'react-native';
 import io from 'socket.io-client';
+
+/**
+ * Components
+ */
+import { TeacherCardWrapper } from '../components/TeacherCardWrapper';
 
 /**
  * Helper Method
@@ -54,7 +59,7 @@ export default () => {
     socket.on('updateVoices', (result) => {
       setFeedbacks(result.feedbacks);
     });
-  }, [feedbacks]);
+  });
 
   useEffect(() => {
     socket.on('updateStudents', (result) => {
@@ -75,48 +80,7 @@ export default () => {
     <View>
       <Text>SessionID: {sessionId}</Text>
       <Text>People Joined: {studentNumber}</Text>
-      {feedbacks['Too Slow'] === '' ||
-      feedbacks['Too Slow'] === undefined ||
-      feedbacks['Too Slow'].length === 0 ? null : (
-        <TouchableOpacity
-          onPress={() => {
-            respond('Too Slow');
-          }}>
-          <Text>Too Slow: {feedbacks['Too Slow'].length}</Text>
-        </TouchableOpacity>
-      )}
-      {feedbacks['Too Fast'] === '' ||
-      feedbacks['Too Fast'] === undefined ||
-      feedbacks['Too Fast'].length === 0 ? null : (
-        <TouchableOpacity
-          onPress={() => {
-            respond('Too Fast');
-          }}>
-          <Text>Too Fast: {feedbacks['Too Fast'].length}</Text>
-        </TouchableOpacity>
-      )}
-      {feedbacks['Repeat Last Phrase'] === '' ||
-      feedbacks['Repeat Last Phrase'] === undefined ||
-      feedbacks['Repeat Last Phrase'].length === 0 ? null : (
-        <TouchableOpacity
-          onPress={() => {
-            respond('Repeat Last Phrase');
-          }}>
-          <Text>
-            Repeat Last Phrase: {feedbacks['Repeat Last Phrase'].length}
-          </Text>
-        </TouchableOpacity>
-      )}
-      {feedbacks['Confused'] === '' ||
-      feedbacks['Confused'] === undefined ||
-      feedbacks['Confused'].length === 0 ? null : (
-        <TouchableOpacity
-          onPress={() => {
-            respond('Confused');
-          }}>
-          <Text>Confused: {feedbacks['Confused'].length}</Text>
-        </TouchableOpacity>
-      )}
+      <TeacherCardWrapper feedbacks={feedbacks} respond={respond} />
     </View>
   );
 };

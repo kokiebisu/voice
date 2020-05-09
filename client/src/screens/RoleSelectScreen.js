@@ -4,108 +4,39 @@
 
 // Dependencies
 import React from 'react';
-import {
-  View,
-  Button,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-  Text,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, StyleSheet, Image } from 'react-native';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'space-around',
-  },
-  logo: {
-    // position: 'absolute',
-    // top: 109,
-    marginBottom: -60,
-    marginTop: 15,
-   
-  
-  },
-  role: {
-    // position: 'absolute',
-    // top: 249,
-   
-  },
-  buttonContainer1: {
-    // position: 'absolute',
-    width: 293,
-    height: 73,
-    // left: 51,
-    // top: 479,
-    marginTop: 40,
-    backgroundColor: '#03a5fc',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#000000',
-    borderRadius: 50,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  buttonContainer2: {
-    // position: 'absolute',
-    width: 293,
-    height: 73,
-    // left: 51,
-    // top: 350,
-    marginTop: -50,
-    backgroundColor: '#03a5fc',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#000000',
-    borderRadius: 50,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  titleText: {
-    fontSize: 20,
-    fontWeight: "bold"
-  }
-});
+// Components
+import { ScreenWrapper } from '../components/ScreenWrapper';
+import { CustomButton } from '../components/CustomButton';
+
 export default () => {
-  /**
-   * Used to navigate between screens
-   */
-  const navigation = useNavigation();
-
   return (
-    <>
-      <ImageBackground
-        source={require('../img/images.jpg')}
-        style={styles.container}>
-        <Image source={require('../img/Voice.png')} style={styles.logo}></Image>
-        <Image source={require('../img/role.png')} style={styles.role}></Image>
-
-        <TouchableOpacity
-          style={styles.buttonContainer1}
-          onPress={() => navigation.navigate('Student Authentication')}>
-          <Text style={styles.titleText}>Student</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          style={styles.buttonContainer2}
-          
-          onPress={() => navigation.navigate('Teacher Create Session')}>
-          <Text style={styles.titleText}>Teacher</Text>
-        </TouchableOpacity>
-      </ImageBackground>
-    </>
+    <ScreenWrapper>
+      <View style={styles.logoWrapper}>
+        <Image source={require('../img/Voice.png')} style={styles.logo} />
+      </View>
+      <View style={styles.descriptionWrapper}>
+        <Image source={require('../img/role.png')} style={styles.role} />
+      </View>
+      <View style={styles.buttonWrapper}>
+        <CustomButton name='Student' screen='Student Authentication' />
+      </View>
+      <View style={styles.buttonWrapper}>
+        <CustomButton name='Teacher' screen='Teacher Create Session' />
+      </View>
+    </ScreenWrapper>
   );
 };
+
+const styles = StyleSheet.create({
+  logoWrapper: {
+    marginBottom: 30,
+  },
+  descriptionWrapper: {
+    marginBottom: 20,
+  },
+  buttonWrapper: {
+    marginVertical: 20,
+  },
+});

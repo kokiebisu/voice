@@ -65,7 +65,7 @@ export default function App() {
           name='Teacher Session'
           component={TeacherSessionScreen}
           options={({ route, navigation }) => ({
-            title: route.params.course,
+            title: route.params.data,
             headerLeft: () => (
               <HeaderBackButton onPress={() => leaveTeacherRoom(navigation)} />
             ),

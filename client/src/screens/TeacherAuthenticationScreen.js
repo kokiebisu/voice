@@ -4,17 +4,15 @@
 
 // Dependencies
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  Button,
-  TextInput,
-  AsyncStorage,
-  Alert,
-} from 'react-native';
+import { View, Text, Button, AsyncStorage, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import ENDPOINT from '../util/endpoint';
+
+/**
+ * Components
+ */
+import { Input } from '../components/Input';
 
 export default () => {
   // Used to navigate between screens
@@ -59,38 +57,54 @@ export default () => {
     <>
       <View>
         <Text>{isLogin ? 'Login' : 'Register'}</Text>
-        <TextInput
-          autoCapitalize='none'
-          value={email}
-          onChangeText={(text) => setEmail(text)}
-          placeholder='Enter email'
-        />
-        <TextInput
-          autoCapitalize='none'
-          value={password}
-          onChangeText={(text) => setPassword(text)}
-          secureTextEntry={true}
-          placeholder='Enter password'
-        />
-        {!isLogin ? (
-          <TextInput
-            secureTextEntry={true}
-            autoCapitalize='none'
-            value={confirmPassword}
-            onChangeText={(text) => setConfirmPassword(text)}
-            placeholder='Confirm Password'
+        <View>
+          <Input
+            placeholder='Enter email'
+            type={(text) => setEmail(text)}
+            value={email}
+            autoCapitalize={false}
+            autoCorrect={false}
+            trim={true}
           />
+        </View>
+        <View>
+          <Input
+            placeholder='Enter password'
+            type={(text) => setPassword(text)}
+            value={password}
+            autoCapitalize={false}
+            autoCorrect={false}
+            trim={true}
+          />
+        </View>
+        {!isLogin ? (
+          <View>
+            <Input
+              placeholder='Confirm Password'
+              type={(text) => setConfirmPassword(text)}
+              value={confirmPassword}
+              autoCapitalize={false}
+              autoCorrect={false}
+              trim={true}
+            />
+          </View>
         ) : null}
         {isLogin ? (
-          <Button title='Login' onPress={onLogin} />
+          <View>
+            <Button title='Login' onPress={onLogin} />
+          </View>
         ) : (
-          <Button title='Register' onPress={onSignup} />
+          <View>
+            <Button title='Register' onPress={onSignup} />
+          </View>
         )}
       </View>
-      <Button
-        title='Switch Authentication'
-        onPress={() => setIsLogin(!isLogin)}
-      />
+      <View>
+        <Button
+          title='Switch Authentication'
+          onPress={() => setIsLogin(!isLogin)}
+        />
+      </View>
     </>
   );
 };

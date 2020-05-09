@@ -6,72 +6,16 @@
  * Dependencies
  */
 import React, { useState } from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
+import { View, StyleSheet, Image } from 'react-native';
 
-const styles = StyleSheet.create({
-  textbox: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 51,
-    top: 350,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'grey',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-  },
+/**
+ * Components
+ */
+import { ScreenWrapper } from '../components/ScreenWrapper';
+import { CustomButton } from '../components/CustomButton';
+import { Input } from '../components/Input';
 
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-
-  logo: {
-    position: 'absolute',
-    top: 109,
-  },
-
-  buttonContainer: {
-    position: 'absolute',
-    width: 293,
-    height: 73,
-    left: 51,
-    top: 479,
-    backgroundColor: '#03a5fc',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#000000',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 export default () => {
-  /**
-   * Used to navigate between the screens
-   */
-  const navigation = useNavigation();
-
   /**
    * States
    */
@@ -79,29 +23,37 @@ export default () => {
 
   return (
     <>
-      <ImageBackground
-        source={require('../img/images.jpg')}
-        style={styles.container}>
+      <ScreenWrapper>
         <Image source={require('../img/Voice.png')} style={styles.logo}></Image>
-        <TextInput
-          autoCapitalize='none'
-          autoCorrect={false}
-          style={styles.textbox}
-          placeholder='Enter the session id'
-          value={session}
-          onChangeText={(text) => {
-            setSession(text.trim());
-          }}
-        />
-
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={() => {
-            navigation.navigate('Student Session', { sessionId: session });
-          }}>
-          <Text>Enter</Text>
-        </TouchableOpacity>
-      </ImageBackground>
+        <View style={styles.inputWrapper}>
+          <Input
+            placeholder='Enter the session id'
+            type={(text) => setSession(text)}
+            course={session}
+            autoCapitalize={false}
+            autoCorrect={false}
+            trim={true}
+          />
+        </View>
+        <View>
+          <CustomButton name='Enter' screen='Student Session' data={session} />
+        </View>
+      </ScreenWrapper>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputWrapper: {
+    marginBottom: 50,
+  },
+  logo: {
+    position: 'absolute',
+    top: 109,
+  },
+});
