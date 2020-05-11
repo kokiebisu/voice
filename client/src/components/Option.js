@@ -7,6 +7,7 @@ export const Option = ({
   imgSrc,
   sendFeedback,
   disableFeedbacks,
+  disableIAgree,
   isDisabled,
 }) => {
   return (
@@ -16,6 +17,7 @@ export const Option = ({
         onPress={() => {
           sendFeedback(feedbackName, roomId);
           disableFeedbacks();
+          disableIAgree();
         }}>
         <View>
           <Image source={imgSrc} style={styles.logo}></Image>
