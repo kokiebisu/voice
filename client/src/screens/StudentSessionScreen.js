@@ -64,7 +64,6 @@ export default () => {
   const [voices, setVoices] = useState([]);
   const [isDisabled, setIsDisabled] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
-
   /**
    * Redirects the student back to the authentication screen when
    * student gets the session id wrong
@@ -156,7 +155,13 @@ export default () => {
     setTimeout(function () {
       setIsDisabled(false);
     }, 10000);
-    setIsPressed(false);
+  };
+
+  const disableIAgree = () => {
+    setIsPressed(true);
+    setTimeout(function () {
+      setIsPressed(false);
+    }, 20000);
   };
 
   return (
@@ -167,6 +172,9 @@ export default () => {
           voices={voices}
           sendFeedback={sendFeedback}
           isPressed={isPressed}
+          roomId={roomId}
+          disableIAgree={disableIAgree}
+          disableFeedbacks={disableFeedbacks}
         />
       </Section>
       <Section title='Options'>
@@ -175,6 +183,7 @@ export default () => {
           sendFeedback={sendFeedback}
           disableFeedbacks={disableFeedbacks}
           isDisabled={isDisabled}
+          disableIAgree={disableIAgree}
         />
       </Section>
     </View>

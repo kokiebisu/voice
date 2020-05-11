@@ -6,6 +6,7 @@ export const OptionsWrapper = ({
   sendFeedback,
   disableFeedbacks,
   isDisabled,
+  disableIAgree,
 }) => {
   return (
     <>
@@ -16,6 +17,7 @@ export const OptionsWrapper = ({
         sendFeedback={sendFeedback}
         disableFeedbacks={disableFeedbacks}
         isDisabled={isDisabled}
+        disableIAgree={disableIAgree}
       />
       <Option
         feedbackName='Too Fast'
@@ -24,6 +26,7 @@ export const OptionsWrapper = ({
         sendFeedback={sendFeedback}
         disableFeedbacks={disableFeedbacks}
         isDisabled={isDisabled}
+        disableIAgree={disableIAgree}
       />
       <Option
         feedbackName='Repeat Last Phrase'
@@ -32,6 +35,7 @@ export const OptionsWrapper = ({
         sendFeedback={sendFeedback}
         disableFeedbacks={disableFeedbacks}
         isDisabled={isDisabled}
+        disableIAgree={disableIAgree}
       />
       <Option
         feedbackName='Confused'
@@ -40,6 +44,7 @@ export const OptionsWrapper = ({
         sendFeedback={sendFeedback}
         disableFeedbacks={disableFeedbacks}
         isDisabled={isDisabled}
+        disableIAgree={disableIAgree}
       />
     </>
   );

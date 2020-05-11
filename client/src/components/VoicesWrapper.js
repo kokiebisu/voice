@@ -1,7 +1,14 @@
 import React from 'react';
 import { Voice } from '../components/Voice';
 
-export const VoicesWrapper = ({ voices, sendFeedback, isPressed }) => {
+export const VoicesWrapper = ({
+  voices,
+  sendFeedback,
+  isPressed,
+  roomId,
+  disableFeedbacks,
+  disableIAgree,
+}) => {
   return (
     <>
       {console.log(voices)}
@@ -12,6 +19,9 @@ export const VoicesWrapper = ({ voices, sendFeedback, isPressed }) => {
           feedbackName='Too Slow'
           sendFeedback={sendFeedback}
           isPressed={isPressed}
+          roomId={roomId}
+          disableFeedbacks={disableFeedbacks}
+          disableIAgree={disableIAgree}
         />
       )}
       {voices['Too Fast'] === '' ||
@@ -21,6 +31,9 @@ export const VoicesWrapper = ({ voices, sendFeedback, isPressed }) => {
           feedbackName='Too Fast'
           sendFeedback={sendFeedback}
           isPressed={isPressed}
+          roomId={roomId}
+          disableFeedbacks={disableFeedbacks}
+          disableIAgree={disableIAgree}
         />
       )}
       {voices['Repeat Last Phrase'] === '' ||
@@ -30,6 +43,9 @@ export const VoicesWrapper = ({ voices, sendFeedback, isPressed }) => {
           feedbackName='Repeat Last Phrase'
           sendFeedback={sendFeedback}
           isPressed={isPressed}
+          roomId={roomId}
+          disableFeedbacks={disableFeedbacks}
+          disableIAgree={disableIAgree}
         />
       )}
       {voices['Confused'] === '' ||
@@ -39,6 +55,9 @@ export const VoicesWrapper = ({ voices, sendFeedback, isPressed }) => {
           feedbackName='Confused'
           sendFeedback={sendFeedback}
           isPressed={isPressed}
+          roomId={roomId}
+          disableFeedbacks={disableFeedbacks}
+          disableIAgree={disableIAgree}
         />
       )}
     </>
