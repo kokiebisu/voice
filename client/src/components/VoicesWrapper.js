@@ -4,6 +4,7 @@ import { Voice } from '../components/Voice';
 export const VoicesWrapper = ({ voices, sendFeedback, isPressed }) => {
   return (
     <>
+      {console.log(voices)}
       {voices['Too Slow'] === '' ||
       voices['Too Slow'] === undefined ||
       voices['Too Slow'].length === 0 ? null : (
