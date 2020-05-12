@@ -5,15 +5,15 @@ import { MenuButton } from './MenuButton';
 export const MenuBar = () => {
   return (
     <View style={styles.containerbottom}>
-      <MenuButton title='Home' imgSrc='../img/home.png' screen='Role Select' />
+      <MenuButton title='Home' imgsrc={require('../img/home.png')} screen='Role Select' />
       <MenuButton
         title='Student'
-        imgSrc='../img/s.png'
+        imgsrc={require('../img/s.png')}
         screen='Student Authentication'
       />
       <MenuButton
         title='Teacher'
-        imgSrc='../img/t.png'
+        imgsrc={require('../img/t.png')}
         screen='Teacher Create Session'
       />
     </View>

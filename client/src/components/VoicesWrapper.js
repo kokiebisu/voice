@@ -35,11 +35,11 @@ export const VoicesWrapper = ({
           disableIAgree={disableIAgree}
         />
       )}
-      {voices['Repeat Last Phrase'] === '' ||
-      voices['Repeat Last Phrase'] === undefined ||
-      voices['Repeat Last Phrase'].length === 0 ? null : (
+      {voices['Repeat'] === '' ||
+      voices['Repeat'] === undefined ||
+      voices['Repeat'].length === 0 ? null : (
         <Voice
-          feedbackName='Repeat Last Phrase'
+          feedbackName='Repeat'
           sendFeedback={sendFeedback}
           isPressed={isPressed}
           roomId={roomId}

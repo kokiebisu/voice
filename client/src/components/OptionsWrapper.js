@@ -22,16 +22,16 @@ export const OptionsWrapper = ({
       <Option
         feedbackName='Too Fast'
         roomId={roomId}
-        imgSrc={require('../img/1.png')}
+        imgSrc={require('../img/shape.png')}
         sendFeedback={sendFeedback}
         disableFeedbacks={disableFeedbacks}
         isDisabled={isDisabled}
         disableIAgree={disableIAgree}
       />
       <Option
-        feedbackName='Repeat Last Phrase'
+        feedbackName='Repeat'
         roomId={roomId}
-        imgSrc={require('../img/1.png')}
+        imgSrc={require('../img/arrows.png')}
         sendFeedback={sendFeedback}
         disableFeedbacks={disableFeedbacks}
         isDisabled={isDisabled}
@@ -40,7 +40,7 @@ export const OptionsWrapper = ({
       <Option
         feedbackName='Confused'
         roomId={roomId}
-        imgSrc={require('../img/1.png')}
+        imgSrc={require('../img/job.png')}
         sendFeedback={sendFeedback}
         disableFeedbacks={disableFeedbacks}
         isDisabled={isDisabled}

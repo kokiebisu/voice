@@ -15,11 +15,14 @@ import { Section } from '../components/Section';
 import { StudentSessionHeader } from '../components/StudentSessionHeader';
 import { VoicesWrapper } from '../components/VoicesWrapper';
 import { OptionsWrapper } from '../components/OptionsWrapper';
+import { Section1 } from '../components/Section1';
+import { Section2 } from '../components/Section2';
 
 /**
  * Endpoint for the WebSocket
  */
 import ENDPOINT from '../util/endpoint';
+import { MenuBar } from '../components/MenuBar';
 
 let socket;
 let roomId;
@@ -177,7 +180,8 @@ export default () => {
           disableFeedbacks={disableFeedbacks}
         />
       </Section>
-      <Section title='Options'>
+      <Section2 title='Options'></Section2>
+      <Section1>
         <OptionsWrapper
           roomId={roomId}
           sendFeedback={sendFeedback}
@@ -185,7 +189,8 @@ export default () => {
           isDisabled={isDisabled}
           disableIAgree={disableIAgree}
         />
-      </Section>
+      </Section1>
+      <MenuBar></MenuBar>
     </View>
   );
 };
