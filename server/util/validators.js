@@ -91,5 +91,5 @@ const validateSignUpData = (data) => {
 
 module.exports = {
   validateLoginData,
-  validateSignUpData,
+  validateSignUpData, isEmpty, isValid, isEmail, isSchool
 };
