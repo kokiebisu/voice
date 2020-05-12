@@ -22,13 +22,13 @@ export const TeacherCardWrapper = ({ respond, feedbacks }) => {
           length={feedbacks['Too Fast'].length}
         />
       )}
-      {feedbacks['Repeat Last Phrase'] === '' ||
-      feedbacks['Repeat Last Phrase'] === undefined ||
-      feedbacks['Repeat Last Phrase'].length === 0 ? null : (
+      {feedbacks['Repeat'] === '' ||
+      feedbacks['Repeat'] === undefined ||
+      feedbacks['Repeat'].length === 0 ? null : (
         <TeacherCard
           respond={respond}
-          feedbackName='Repeat Last Phrase'
-          length={feedbacks['Repeat Last Phrase'].length}
+          feedbackName='Repeat'
+          length={feedbacks['Repeat'].length}
         />
       )}
       {feedbacks['Confused'] === '' ||
