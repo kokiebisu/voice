@@ -14,6 +14,7 @@ import { View, StyleSheet, Image } from 'react-native';
 import { Input } from '../components/Input';
 import { CustomButton } from '../components/CustomButton';
 import { ScreenWrapper } from '../components/ScreenWrapper';
+import TextInput from "react-native-web/dist/exports/TextInput";
 
 export default () => {
   /**
@@ -24,9 +25,9 @@ export default () => {
   return (
     <>
       <ScreenWrapper>
-        <Image source={require('../img/Voice.png')} style={styles.appLogo} />
+        <Image source={require('../img/teach_today.png')} style={styles.headingImage} />
         <View style={styles.inputWrapper}>
-          <Input
+          <Input style={{ height: 40, backgroundColor: 'gray', borderWidth: 1 }}
             placeholder='Course Name'
             value={course}
             type={(text) => setCourse(text)}
@@ -49,8 +50,21 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#4195a7'
+
   },
   inputWrapper: {
-    marginBottom: 50,
+    marginBottom: 30,
   },
+  inputStyle: {
+    backgroundColor: '#5b9ead',
+    opacity: 0.2
+  },
+  headingImage: {
+    flex: 1,
+    width: 320,
+    height: 320,
+    resizeMode: 'contain',
+    marginTop: 150
+  }
 });

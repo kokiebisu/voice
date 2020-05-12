@@ -24,7 +24,7 @@ export default () => {
   return (
     <>
       <ScreenWrapper>
-        <Image source={require('../img/Voice.png')} style={styles.logo}></Image>
+        <Image source={require('../img/Learn_Today.png')} style={styles.headingImage} />
         <View style={styles.inputWrapper}>
           <Input
             placeholder='Enter the session id'
@@ -35,7 +35,7 @@ export default () => {
             trim={true}
           />
         </View>
-        <View>
+        <View style={styles.submitView}>
           <CustomButton name='Enter' screen='Student Session' data={session} />
         </View>
       </ScreenWrapper>
@@ -56,4 +56,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 109,
   },
+  headingImage: {
+    flex: 1,
+    resizeMode: 'contain',
+    marginTop: 150
+  },
+  submitView: {
+    marginBottom: 50
+  }
 });
