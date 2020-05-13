@@ -1,13 +1,14 @@
 import React from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, Text, View,Image, StyleSheet,backgroundColor} from 'react-native';
 
-export const TeacherCard = ({ respond, feedbackName, length }) => {
+export const TeacherCard = ({ respond, feedbackName, length, imgSrc}) => {
   return (
     <>
       <TouchableOpacity
         onPress={() => {
           respond(feedbackName);
         }}>
+          <Image source={imgSrc} style={styles.logo}></Image>
         <Text>
           {feedbackName}: {length}
         </Text>
@@ -15,3 +16,9 @@ export const TeacherCard = ({ respond, feedbackName, length }) => {
     </>
   );
 };
+const styles = StyleSheet.create({
+  logo: {
+    height: 50,
+    width: 50,
+  },
+});

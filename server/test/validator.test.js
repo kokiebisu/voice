@@ -44,44 +44,86 @@ describe ('../util/validators.js', () => {
             })
         })
 
-        //
-        // context('with properly formatted argument', function () {
-        //     it('should return true', function () {
-        //         expect(isSchool("bcit.ca")).to.eql(1);
-        //     })
-        // })
 
-        context('with integers', function () {
+        context('with properly formatted argument', function () {
+            it('should return true', function () {
+                expect(isSchool("bcit.ca")).to.not.equal(1);
+            })
+        })
+
+        context('with proper email', function () {
             it('should return true', function () {
                 // expect(isSchool(12345)).to.equal(null)
                 var str = "bcit.ca";
                 assert.equal(str.length, 7)
             })
         })
+    })
+
+        describe('isValid', () => {
+            context('with integers only', function () {
+                it('should return true', function () {
+                    expect(isValid('12345')).to.equal(null)
+                    // expect(isValid(12345)).to.equal(null)
+
+                })
+            })
+
+            context('with one lowercase, one uppercase, 4 characters , one special character, one number', function () {
+                it('should return true', function () {
+                    expect(isValid("q1Y*")).to.equal(null)
+                    // expect(isValid(12345)).to.equal(null)
+
+                })
+            })
+
+            context('with one lowercase, one uppercase,  7 characters one special character, one number', function () {
+                it('should return true', function () {
+                    expect(isValid("qff31Y*")).to.equal(null)
+                    // expect(isValid(12345)).to.equal(null)
+
+                })
+            })
+
+            context('with one lowercase, one uppercase,  8 characters one special character, one number', function () {
+                it('should return true', function () {
+                    expect(isValid("qff531Y*")).to.not.equal(null)
+                    // expect(isValid(12345)).to.equal(null)
+
+                })
+            })
+        })
+
+        describe('isEmail', () => {
+            context('with integers only', function () {
+                it('should return null', function () {
+                    expect(isEmail('12345')).to.equal(null)
+                    // expect(isValid(12345)).to.equal(null)
+
+                })
+            })
+
+            context('with proper email', function () {
+                it('should return true', function () {
+                    expect(isEmail('wwerr@gmail')).to.equal(null)
+                    // expect(isValid(12345)).to.equal(null)
+
+                })
+            })
+
+            context('with proper email', function () {
+                it('should return not null', function () {
+                    expect(isEmail('1*Qwwerr@gmail.com')).to.not.equal(null)
+                    // expect(isValid(12345)).to.equal(null)
+
+                })
+            })
 
 
-        // context('with integers', function () {
-        //     it('should return true', function () {
-        //         should(isValid(12345)).contains(true)
-        //         // expect(isValid(12345)).to.equal(null)
-        //
-        //     })
-        // })
-
-
-        // context('length one', function () {
-        //     it('should return null', function () {
-        //         expect(isSchool(12345)).to.equal(null)
-        //         // var str = "";
-        //         // assert.not.match(str.length, 4)
-        //     })
-        // })
-
-
-        // })
+        })
 
     })
-})
+
 
 
 
