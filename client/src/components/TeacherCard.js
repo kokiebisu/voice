@@ -1,7 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Text, View,Image, StyleSheet,backgroundColor} from 'react-native';
 
-export const TeacherCard = ({ respond, feedbackName, length }) => {
+export const TeacherCard = ({ respond, feedbackName, length, imgSrc}) => {
   return (
     <>
       <TouchableOpacity
