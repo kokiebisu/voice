@@ -84,7 +84,7 @@ export default () => {
       <Text style={styles.sessionHeader2}>People Joined: {studentNumber}</Text>
       </View>
       </View>
-      <View style={{flex:1}}>
+      <View style={{flex:1, }}>
       <TeacherCardWrapper feedbacks={feedbacks} respond={respond} />
       </View>
     </View>
