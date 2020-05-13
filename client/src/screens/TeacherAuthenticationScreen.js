@@ -62,7 +62,7 @@ export default () => {
             placeholder='Enter email'
             type={(text) => setEmail(text)}
             value={email}
-            autoCapitalize={false}
+            autoCapitalize='none'
             autoCorrect={false}
             trim={true}
           />
@@ -72,7 +72,7 @@ export default () => {
             placeholder='Enter password'
             type={(text) => setPassword(text)}
             value={password}
-            autoCapitalize={false}
+            autoCapitalize='none'
             autoCorrect={false}
             trim={true}
           />
@@ -83,7 +83,7 @@ export default () => {
               placeholder='Confirm Password'
               type={(text) => setConfirmPassword(text)}
               value={confirmPassword}
-              autoCapitalize={false}
+              autoCapitalize='none'
               autoCorrect={false}
               trim={true}
             />
