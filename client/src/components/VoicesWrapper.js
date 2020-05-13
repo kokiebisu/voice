@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import { Voice } from '../components/Voice';
+import { Voice } from '../components/Voice';
 
 import { Dimensions, FlatList, Text, View, StyleSheet } from 'react-native';
 const windowWidth = Dimensions.get('window').width;
@@ -7,11 +7,11 @@ const windowHeight = Dimensions.get('window').height;
 
 export const VoicesWrapper = ({
   voices,
-  // sendFeedback,
-  // isPressed,
-  // roomId,
-  // disableFeedbacks,
-  // disableIAgree,
+  sendFeedback,
+  isPressed,
+  roomId,
+  disableFeedbacks,
+  disableIAgree,
 }) => {
   let arrVoices = [];
   for (let property in voices) {
@@ -27,9 +27,17 @@ export const VoicesWrapper = ({
           horizontal={true}
           data={arrVoices}
           renderItem={({ item, index }) => (
-            <View>
-              <Text>{item}</Text>
-            </View>
+            // <View styles={}>
+            //   <Text>{item}</Text>
+            // </View>
+            <Voice
+              feedbackName={item}
+              sendFeedback={sendFeedback}
+              isPressed={isPressed}
+              roomId={roomId}
+              disableFeedbacks={disableFeedbacks}
+              disableIAgree={disableIAgree}
+            />
           )}
         />
       </View>
