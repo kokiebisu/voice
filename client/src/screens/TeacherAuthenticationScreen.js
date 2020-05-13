@@ -4,7 +4,7 @@
 
 // Dependencies
 import React, { useState } from 'react';
-import { View, Text, Button, AsyncStorage, Alert } from 'react-native';
+import {View, Text, Button, AsyncStorage, Alert, StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import ENDPOINT from '../util/endpoint';
@@ -13,6 +13,7 @@ import ENDPOINT from '../util/endpoint';
  * Components
  */
 import { Input } from '../components/Input';
+import {CustomButton} from "../components/CustomButton";
 
 export default () => {
   // Used to navigate between screens
@@ -91,11 +92,11 @@ export default () => {
         ) : null}
         {isLogin ? (
           <View>
-            <Button title='Login' onPress={onLogin} />
+            <CustomButton title='Login' onPress={onLogin} />
           </View>
         ) : (
           <View>
-            <Button title='Register' onPress={onSignup} />
+            <CustomButton title='Register' onPress={onSignup} />
           </View>
         )}
       </View>
@@ -108,3 +109,25 @@ export default () => {
     </>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  inputWrapper: {
+    marginBottom: 50,
+  },
+  logo: {
+    position: 'absolute',
+    top: 109,
+  },
+  headingImage: {
+    flex: 1,
+    resizeMode: 'contain',
+    marginTop: 150
+  },
+  submitView: {
+    marginBottom: 50
+  }
+});
