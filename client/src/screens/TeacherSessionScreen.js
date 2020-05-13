@@ -7,7 +7,7 @@
  * Dependencies
  */
 import React, { useEffect, useState } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet} from 'react-native';
 import io from 'socket.io-client';
 
 /**
@@ -77,10 +77,47 @@ export default () => {
   };
 
   return (
-    <View>
-      <Text>SessionID: {sessionId}</Text>
-      <Text>People Joined: {studentNumber}</Text>
+    <View style={styles.container}>
+      <View style={{flex:1}}>
+      <View style={styles.sessionWrapper}>
+      <Text style={styles.sessionHeader}>SessionID: {sessionId}</Text>
+      <Text style={styles.sessionHeader2}>People Joined: {studentNumber}</Text>
+      </View>
+      </View>
+      <View style={{flex:1}}>
       <TeacherCardWrapper feedbacks={feedbacks} respond={respond} />
+      </View>
     </View>
   );
 };
+const styles = StyleSheet.create({
+  container: {
+   
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flex: 1,
+  },
+  sessionWrapper: {
+    width: 300,
+    height: 87,
+    backgroundColor: '#2A526A',
+    borderRadius: 10,
+    
+  },
+  sessionHeader: {
+    position: 'absolute',
+    top: 25,
+    left: 90,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  sessionHeader2: {
+    position: 'absolute',
+    top: 45,
+    left: 90,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  
+});
