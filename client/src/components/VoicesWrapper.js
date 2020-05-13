@@ -1,7 +1,11 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Voice } from '../components/Voice';
 
 import { Dimensions, FlatList, Text, View, StyleSheet } from 'react-native';
+
+/**
+ * Retrieving the width, height of the device
+ */
 const windowWidth = Dimensions.get('window').width;
 const windowHeight = Dimensions.get('window').height;
 
@@ -27,9 +31,6 @@ export const VoicesWrapper = ({
           horizontal={true}
           data={arrVoices}
           renderItem={({ item, index }) => (
-            // <View styles={}>
-            //   <Text>{item}</Text>
-            // </View>
             <Voice
               feedbackName={item}
               sendFeedback={sendFeedback}
@@ -41,55 +42,6 @@ export const VoicesWrapper = ({
           )}
         />
       </View>
-      {/* {console.log(arrVoices)} */}
-      {/* {voices['Too Slow'] === '' ||
-      voices['Too Slow'] === undefined ||
-      voices['Too Slow'].length === 0 ? null : (
-        <Voice
-          feedbackName='Too Slow'
-          sendFeedback={sendFeedback}
-          isPressed={isPressed}
-          roomId={roomId}
-          disableFeedbacks={disableFeedbacks}
-          disableIAgree={disableIAgree}
-        />
-      )}
-      {voices['Too Fast'] === '' ||
-      voices['Too Fast'] === undefined ||
-      voices['Too Fast'].length === 0 ? null : (
-        <Voice
-          feedbackName='Too Fast'
-          sendFeedback={sendFeedback}
-          isPressed={isPressed}
-          roomId={roomId}
-          disableFeedbacks={disableFeedbacks}
-          disableIAgree={disableIAgree}
-        />
-      )}
-      {voices['Repeat'] === '' ||
-      voices['Repeat'] === undefined ||
-      voices['Repeat'].length === 0 ? null : (
-        <Voice
-          feedbackName='Repeat'
-          sendFeedback={sendFeedback}
-          isPressed={isPressed}
-          roomId={roomId}
-          disableFeedbacks={disableFeedbacks}
-          disableIAgree={disableIAgree}
-        />
-      )}
-      {voices['Confused'] === '' ||
-      voices['Confused'] === undefined ||
-      voices['Confused'].length === 0 ? null : (
-        <Voice
-          feedbackName='Confused'
-          sendFeedback={sendFeedback}
-          isPressed={isPressed}
-          roomId={roomId}
-          disableFeedbacks={disableFeedbacks}
-          disableIAgree={disableIAgree}
-        />
-      )} */}
     </>
   );
 };

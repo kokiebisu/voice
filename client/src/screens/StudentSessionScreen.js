@@ -174,11 +174,11 @@ export default () => {
         <VoicesWrapper
           styles={styles.VoicesWrapper}
           voices={voices}
-          // sendFeedback={sendFeedback}
-          // isPressed={isPressed}
-          // roomId={roomId}
-          // disableIAgree={disableIAgree}
-          // disableFeedbacks={disableFeedbacks}
+          sendFeedback={sendFeedback}
+          isPressed={isPressed}
+          roomId={roomId}
+          disableIAgree={disableIAgree}
+          disableFeedbacks={disableFeedbacks}
         />
       </Section>
       <Section2 title='Options'></Section2>
@@ -197,6 +197,7 @@ export default () => {
 
 const styles = StyleSheet.create({
   container: {
+    // I commented this out so that the flatlist stretches to full width - Ken
     // flexDirection: 'column',
     // justifyContent: 'space-between',
     // alignItems: 'center',

@@ -24,6 +24,9 @@ export default () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  /**
+   * Sends a login request to server
+   */
   const onLogin = async () => {
     try {
       const response = await axios.post(`${ENDPOINT}/auth/login`, {
@@ -39,6 +42,9 @@ export default () => {
     }
   };
 
+  /**
+   * Sends a signup request to server
+   */
   const onSignup = async () => {
     try {
       const response = await axios.post(`${ENDPOINT}/auth/signup`, {
