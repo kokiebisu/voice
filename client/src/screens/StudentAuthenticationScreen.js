@@ -24,13 +24,16 @@ export default () => {
   return (
     <>
       <ScreenWrapper>
-        <Image source={require('../img/Learn_Today.png')} style={styles.headingImage} />
+        <Image
+          source={require('../img/Learn_Today.png')}
+          style={styles.headingImage}
+        />
         <View style={styles.inputWrapper}>
           <Input
             placeholder='Enter the session id'
             type={(text) => setSession(text)}
             course={session}
-            autoCapitalize={false}
+            autoCapitalize='none'
             autoCorrect={false}
             trim={true}
           />
@@ -59,9 +62,9 @@ const styles = StyleSheet.create({
   headingImage: {
     flex: 1,
     resizeMode: 'contain',
-    marginTop: 150
+    marginTop: 150,
   },
   submitView: {
-    marginBottom: 50
-  }
+    marginBottom: 50,
+  },
 });

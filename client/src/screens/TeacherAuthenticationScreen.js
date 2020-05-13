@@ -25,6 +25,9 @@ export default () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
+  /**
+   * Sends a login request to server
+   */
   const onLogin = async () => {
     try {
       const response = await axios.post(`${ENDPOINT}/auth/login`, {
@@ -40,6 +43,9 @@ export default () => {
     }
   };
 
+  /**
+   * Sends a signup request to server
+   */
   const onSignup = async () => {
     try {
       const response = await axios.post(`${ENDPOINT}/auth/signup`, {
@@ -63,7 +69,7 @@ export default () => {
             placeholder='Enter email'
             type={(text) => setEmail(text)}
             value={email}
-            autoCapitalize={false}
+            autoCapitalize='none'
             autoCorrect={false}
             trim={true}
           />
@@ -73,7 +79,7 @@ export default () => {
             placeholder='Enter password'
             type={(text) => setPassword(text)}
             value={password}
-            autoCapitalize={false}
+            autoCapitalize='none'
             autoCorrect={false}
             trim={true}
           />
@@ -84,7 +90,7 @@ export default () => {
               placeholder='Confirm Password'
               type={(text) => setConfirmPassword(text)}
               value={confirmPassword}
-              autoCapitalize={false}
+              autoCapitalize='none'
               autoCorrect={false}
               trim={true}
             />

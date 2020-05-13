@@ -80,7 +80,7 @@ export default () => {
    * Creates a socket when it is successful and it fetches any voices in the room.
    */
   useEffect(() => {
-    socket = io(ENDPOINT);
+    socket = io(ENDPOINT, { forceNode: true });
     roomId = route.params.data;
     setSession(roomId);
     socket.emit('joinRoom', roomId, ({ error }) => {
@@ -172,6 +172,7 @@ export default () => {
       <StudentSessionHeader session={session} />
       <Section title='Voices'>
         <VoicesWrapper
+          styles={styles.VoicesWrapper}
           voices={voices}
           sendFeedback={sendFeedback}
           isPressed={isPressed}
@@ -190,16 +191,19 @@ export default () => {
           disableIAgree={disableIAgree}
         />
       </Section1>
-      <MenuBar></MenuBar>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    // I commented this out so that the flatlist stretches to full width - Ken
+    // flexDirection: 'column',
+    // justifyContent: 'space-between',
+    // alignItems: 'center',
     flex: 1,
+  },
+  VoicesWrapper: {
+    backgroundColor: 'blue',
   },
 });

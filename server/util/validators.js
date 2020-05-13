@@ -38,7 +38,7 @@ const isValid = (password) => {
 };
 
 /**
- * Validates whether if the email is valid
+ * Validates whether if the email is valid. It has
  * @param email
  */
 const isEmail = (email) => {
@@ -91,5 +91,5 @@ const validateSignUpData = (data) => {
 
 module.exports = {
   validateLoginData,
-  validateSignUpData,
+  validateSignUpData, isEmpty, isValid, isEmail, isSchool
 };
