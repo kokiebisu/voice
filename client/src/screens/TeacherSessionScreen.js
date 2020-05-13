@@ -78,13 +78,16 @@ export default () => {
 
   return (
     <View style={styles.container}>
-      <View style={{flex:1}}>
+      <View >
       <View style={styles.sessionWrapper}>
       <Text style={styles.sessionHeader}>SessionID: {sessionId}</Text>
       <Text style={styles.sessionHeader2}>People Joined: {studentNumber}</Text>
       </View>
       </View>
-      <View style={{flex:1, }}>
+      <View style={{flex:1,   
+    // width: '100%',
+    flexDirection: 'column',
+    justifyContent: 'center', }}>
       <TeacherCardWrapper feedbacks={feedbacks} respond={respond} />
       </View>
     </View>
