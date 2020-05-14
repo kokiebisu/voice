@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
   sessionWrapper: {
     width: 300,
     height: 87,
-    backgroundColor: '#FF5C5C',
+    backgroundColor: '#00263B',
     borderRadius: 10,
   },
   sessionHeader: {
