@@ -3,10 +3,10 @@
  * @todo Add in your endpoint: http://<YOUR IP ADDRESS>:5000
  */
 
-// const KENS_ENDPOINT = 'http://192.168.0.52:5000';
+const KENS_ENDPOINT = 'http://192.168.0.47:5000';
 // const BERT_ENDPOINT = '';
-// const DAVID_ENDPOINT = 'http://192.168.0.16:5000';
-const CRAIG_ENDPOINT = 'http://192.168.0.17:5000';
+const DAVID_ENDPOINT = 'http://192.168.0.16:5000';
+// const CRAIG_ENDPOINT = 'http://192.168.0.17:5000';
 
 /**
  * @todo Uncomment your part when you pull
@@ -14,5 +14,5 @@ const CRAIG_ENDPOINT = 'http://192.168.0.17:5000';
 
 // module.exports = KENS_ENDPOINT;
 // module.exports = BERT_ENDPOINT;
-module.exports = CRAIG_ENDPOINT;
-// module.exports = DAVID_ENDPOINT;
+// module.exports = CRAIG_ENDPOINT;
+module.exports = DAVID_ENDPOINT;
