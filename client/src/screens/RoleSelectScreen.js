@@ -23,7 +23,7 @@ export default () => {
         <CustomButton name='Student' screen='Student Authentication' />
       </View>
       <View style={styles.buttonWrapper}>
-        <CustomButton name='Teacher' screen='Teacher Create Session' />
+        <CustomButton name='Teacher' screen='Teacher Authentication' />
       </View>
     </ScreenWrapper>
   );

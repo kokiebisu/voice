@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   sessionWrapper: {
     width: 300,
     height: 87,
-    backgroundColor: '#2A526A',
+    backgroundColor: '#00263B',
     borderRadius: 10,
     
   },
