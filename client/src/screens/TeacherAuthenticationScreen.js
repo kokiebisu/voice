@@ -4,20 +4,16 @@
 
 // Dependencies
 import React, { useState } from 'react';
-import {View, Text, Button, AsyncStorage, Alert, StyleSheet} from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import axios from 'axios';
-import ENDPOINT from '../util/endpoint';
+import { View, Text, Button, StyleSheet } from 'react-native';
 
 /**
  * Components
  */
 import { Input } from '../components/Input';
-import {CustomButton} from "../components/CustomButton";
+import { AuthenticationButton } from '../components/AuthenticationButton';
 
 export default () => {
   // Used to navigate between screens
-  const navigation = useNavigation();
 
   // States
   const [isLogin, setIsLogin] = useState(true);
@@ -25,40 +21,40 @@ export default () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  /**
-   * Sends a login request to server
-   */
-  const onLogin = async () => {
-    try {
-      const response = await axios.post(`${ENDPOINT}/auth/login`, {
-        email,
-        password,
-      });
-      await AsyncStorage.setItem('AuthToken', response.data.token);
-      navigation.navigate('Teacher Create Session');
-    } catch (err) {
-      Alert.alert(err.response.data.message);
-      setEmail('');
-      setPassword('');
-    }
-  };
+  // /**
+  //  * Sends a login request to server
+  //  */
+  // const onLogin = async () => {
+  //   try {
+  //     const response = await axios.post(`${ENDPOINT}/auth/login`, {
+  //       email,
+  //       password,
+  //     });
+  //     await AsyncStorage.setItem('AuthToken', response.data.token);
+  //     navigation.navigate('Teacher Create Session');
+  //   } catch (err) {
+  //     Alert.alert(err.response.data.message);
+  //     setEmail('');
+  //     setPassword('');
+  //   }
+  // };
 
-  /**
-   * Sends a signup request to server
-   */
-  const onSignup = async () => {
-    try {
-      const response = await axios.post(`${ENDPOINT}/auth/signup`, {
-        email,
-        password,
-        confirmPassword,
-      });
-      await AsyncStorage.setItem('AuthToken', response.data.token);
-      navigation.navigate('Teacher Create Session');
-    } catch (err) {
-      Alert.alert(err.response.data.message);
-    }
-  };
+  // /**
+  //  * Sends a signup request to server
+  //  */
+  // const onSignup = async () => {
+  //   try {
+  //     const response = await axios.post(`${ENDPOINT}/auth/signup`, {
+  //       email,
+  //       password,
+  //       confirmPassword,
+  //     });
+  //     await AsyncStorage.setItem('AuthToken', response.data.token);
+  //     navigation.navigate('Teacher Create Session');
+  //   } catch (err) {
+  //     Alert.alert(err.response.data.message);
+  //   }
+  // };
 
   return (
     <>
@@ -97,13 +93,24 @@ export default () => {
           </View>
         ) : null}
         {isLogin ? (
-          <View>
-            <CustomButton title='Login' onPress={onLogin} />
-          </View>
+          <AuthenticationButton
+            title='Login'
+            email={email}
+            password={password}
+          />
         ) : (
-          <View>
-            <CustomButton title='Register' onPress={onSignup} />
-          </View>
+          // <View>
+          //   <CustomButton title='Login' screen='Teacher Create Session' />
+          // </View>
+          // <View>
+          //   <CustomButton title='Register' screen='Teacher Create Session' />
+          // </View>
+          <AuthenticationButton
+            title='Register'
+            email={email}
+            password={password}
+            confirmPassword={confirmPassword}
+          />
         )}
       </View>
       <View>
@@ -131,9 +138,9 @@ const styles = StyleSheet.create({
   headingImage: {
     flex: 1,
     resizeMode: 'contain',
-    marginTop: 150
+    marginTop: 150,
   },
   submitView: {
-    marginBottom: 50
-  }
+    marginBottom: 50,
+  },
 });

@@ -70,9 +70,13 @@ const validateSignUpData = (data) => {
   let errors = {};
   if (isEmpty(data.email)) {
     errors.email = 'Please enter your school email';
-  } else if (!isEmail(data.email) && !isSchool(data.email)) {
+  }
+  if (!isEmail(data.email)) {
+    errors.email = 'Must be valid email';
+  }
+  if (!isSchool(data.email)) {
     errors.email = 'Must be valid school email address';
-  } else errors.email = 'Valid email';
+  }
 
   if (isEmpty(data.password)) errors.password = 'Please enter an email';
   if (isValid(data.password))
@@ -91,5 +95,9 @@ const validateSignUpData = (data) => {
 
 module.exports = {
   validateLoginData,
-  validateSignUpData, isEmpty, isValid, isEmail, isSchool
+  validateSignUpData,
+  isEmpty,
+  isValid,
+  isEmail,
+  isSchool,
 };

@@ -61,7 +61,6 @@ const signup = async (req, res) => {
   };
 
   const { valid, errors } = validateSignUpData(newUser);
-
   if (!valid) return res.status(400).json(errors);
 
   let token, userId;
