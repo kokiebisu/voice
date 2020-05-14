@@ -4,21 +4,26 @@ import { TouchableOpacity, Text, View,Image, StyleSheet,backgroundColor} from 'r
 export const TeacherCard = ({ respond, feedbackName, length, imgSrc}) => {
   return (
     <>
-      <TouchableOpacity
+    <View style={{backgroundColor: '#FF5C5C',
+         width: 256,
+         height: 125,
+         borderRadius: 10,}}>
+      <TouchableOpacity style={{position:"absolute", top:10,left:85}}
         onPress={() => {
           respond(feedbackName);
         }}>
           <Image source={imgSrc} style={styles.logo}></Image>
-        <Text>
+        <Text style={{fontSize:20, fontWeight: 'bold',}}>
           {feedbackName}: {length}
         </Text>
       </TouchableOpacity>
+      </View>
     </>
   );
 };
 const styles = StyleSheet.create({
   logo: {
-    height: 50,
-    width: 50,
+    height: 80,
+    width: 80,
   },
 });

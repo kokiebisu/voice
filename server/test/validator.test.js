@@ -6,7 +6,7 @@ var should = require('chai').should;
 
 describe ('../util/validators.js', () => {
     describe('isEmpty', () => {
-        context('without arguments', function () {
+        context('without arguments, only empty string', function () {
             it('should return true', function () {
                 expect(isEmpty('')).to.equal(true);
             })
@@ -35,7 +35,7 @@ describe ('../util/validators.js', () => {
             })
         })
 
-        })
+    })
 
     describe('isSchool', () => {
         context('with string only', function () {
@@ -43,7 +43,6 @@ describe ('../util/validators.js', () => {
                 expect(isSchool("ertv b")).to.equal(null)
             })
         })
-
 
         context('with properly formatted argument', function () {
             it('should return true', function () {
@@ -69,33 +68,33 @@ describe ('../util/validators.js', () => {
                 })
             })
 
-            context('with one lowercase, one uppercase, 4 characters , one special character, one number', function () {
-                it('should return true', function () {
-                    expect(isValid("q1Y*")).to.equal(null)
-                    // expect(isValid(12345)).to.equal(null)
+        context('with one lowercase, one uppercase, 4 characters , one special character, one number', function () {
+            it('should return true', function () {
+                expect(isValid("q1Y*")).to.equal(null)
+                // expect(isValid(12345)).to.equal(null)
 
-                })
-            })
-
-            context('with one lowercase, one uppercase,  7 characters one special character, one number', function () {
-                it('should return true', function () {
-                    expect(isValid("qff31Y*")).to.equal(null)
-                    // expect(isValid(12345)).to.equal(null)
-
-                })
-            })
-
-            context('with one lowercase, one uppercase,  8 characters one special character, one number', function () {
-                it('should return true', function () {
-                    expect(isValid("qff531Y*")).to.not.equal(null)
-                    // expect(isValid(12345)).to.equal(null)
-
-                })
             })
         })
 
+        context('with one lowercase, one uppercase,  7 characters one special character, one number', function () {
+            it('should return true', function () {
+                expect(isValid("qff31Y*")).to.equal(null)
+                // expect(isValid(12345)).to.equal(null)
+
+            })
+        })
+
+        context('with one lowercase, one uppercase,  8 characters one special character, one number', function () {
+            it('should return true', function () {
+                expect(isValid("qff531Y*")).to.not.equal(null)
+                // expect(isValid(12345)).to.equal(null)
+
+            })
+        })
+    })
+
         describe('isEmail', () => {
-            context('with integers only', function () {
+            context('with integers only not formatted properly', function () {
                 it('should return null', function () {
                     expect(isEmail('12345')).to.equal(null)
                     // expect(isValid(12345)).to.equal(null)
@@ -103,27 +102,21 @@ describe ('../util/validators.js', () => {
                 })
             })
 
-            context('with proper email', function () {
-                it('should return true', function () {
-                    expect(isEmail('wwerr@gmail')).to.equal(null)
-                    // expect(isValid(12345)).to.equal(null)
+        context('with proper email format without special characters', function () {
+            it('should return null', function () {
+                expect(isEmail('wwerr@gmail')).to.equal(null)
+                // expect(isValid(12345)).to.equal(null)
 
-                })
             })
-
-            context('with proper email', function () {
-                it('should return not null', function () {
-                    expect(isEmail('1*Qwwerr@gmail.com')).to.not.equal(null)
-                    // expect(isValid(12345)).to.equal(null)
-
-                })
-            })
-
-
         })
 
+        context('with proper email', function () {
+            it('should return not null', function () {
+                expect(isEmail('1*Qwwerr@gmail.com')).to.not.equal(null)
+                // expect(isValid(12345)).to.equal(null)
+
+            })
+        })
     })
-
-
-
+})
 
