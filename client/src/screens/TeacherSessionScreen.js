@@ -9,7 +9,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet} from 'react-native';
 import io from 'socket.io-client';
-
+import { Col, Row, Grid } from 'react-native-easy-grid';
 
 /**
  * Components
@@ -78,35 +78,33 @@ export default () => {
   };
 
   return (
-    <View style={styles.container}>
-      <View >
+    <Grid>
+      <Row size={15} style={{ backgroundColor: '#F5F5F5'}}>
       <View style={styles.sessionWrapper}>
       <Text style={styles.sessionHeader}>SessionID: {sessionId}</Text>
       <Text style={styles.sessionHeader2}>People Joined: {studentNumber}</Text>
       </View>
-      </View>
-      <View style={{flex:1,   
-    // width: '100%',
-    flexDirection: 'column',
-    justifyContent: 'center', }}>
+      </Row>
+      <Row size={85} style={{ backgroundColor: '#F5F5F5'}}>
+      <View style={{
+        flexDirection:'column',
+        alignItems:'flex-start',
+        marginLeft: 68,
+        }}>
       <TeacherCardWrapper feedbacks={feedbacks} respond={respond} />
       </View>
-    </View>
+      </Row>
+   
+    </Grid>
   );
 };
 const styles = StyleSheet.create({
-  container: {
-   
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    flex: 1,
-  },
   sessionWrapper: {
     width: 300,
     height: 87,
     backgroundColor: '#00263B',
     borderRadius: 10,
+    marginLeft: 45
     
   },
   sessionHeader: {
