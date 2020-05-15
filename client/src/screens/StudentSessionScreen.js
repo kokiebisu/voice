@@ -6,6 +6,8 @@
  * Dependencies
  */
 import React, { useState, useEffect } from 'react';
+import { Container, Content, Text, Button } from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import { View, Alert, StyleSheet } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import io from 'socket.io-client';
@@ -168,9 +170,15 @@ export default () => {
   };
 
   return (
-    <View style={styles.container}>
-      <StudentSessionHeader session={session} />
-      <Section title='Voices'>
+    <Grid>
+      <Row size={20} style={{ backgroundColor: '#F5F5F5'}}>
+        <StudentSessionHeader session={session} />
+      </Row>
+      <Row size={10}style={{ backgroundColor: '#F5F5F5' }}>
+      <Section2 title='Voices'></Section2>
+      </Row>
+      <Row size={25}style={{ backgroundColor: '#F5F5F5' }}>
+        <Section1>
         <VoicesWrapper
           styles={styles.VoicesWrapper}
           voices={voices}
@@ -180,10 +188,14 @@ export default () => {
           disableIAgree={disableIAgree}
           disableFeedbacks={disableFeedbacks}
         />
-      </Section>
+        </Section1>
+      </Row>
+      <Row size={10}style={{ backgroundColor: '#F5F5F5', marginBottom: 50}}>
       <Section2 title='Options'></Section2>
+      </Row>
+      <Row size={30}style={{ backgroundColor: '#F5F5F5' }}>
       <Section1>
-        <OptionsWrapper
+        <OptionsWrapper style={styles.OptionsWrapper}
           roomId={roomId}
           sendFeedback={sendFeedback}
           disableFeedbacks={disableFeedbacks}
@@ -191,7 +203,8 @@ export default () => {
           disableIAgree={disableIAgree}
         />
       </Section1>
-    </View>
+      </Row>
+      </Grid>
   );
 };
 
@@ -204,6 +217,11 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   VoicesWrapper: {
-    backgroundColor: 'blue',
   },
+  OptionsWrapper:{
+    marginTop: 50
+  },
+  sessionHeaderStyle: {
+    marginLeft: 50
+  }
 });
