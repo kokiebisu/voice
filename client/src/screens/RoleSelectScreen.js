@@ -28,8 +28,14 @@ export default () => {
           </Row>
           <Row size={40} style={{ backgroundColor: '#1C365D' }}>
             <Content>
-              <CustomButton name='Student' screen='Student Authentication' />
-              <CustomButton name='Teacher' screen='Teacher Authentication' />
+              <CustomButton
+                name='Student'
+                press={() => navigation.navigate('Student Authentication')}
+              />
+              <CustomButton
+                name='Teacher'
+                press={() => navigation.navigate('Teacher Authentication')}
+              />
             </Content>
           </Row>
         </Grid>
