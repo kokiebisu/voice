@@ -8,19 +8,22 @@
 import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Content, Text } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Row, Grid } from 'react-native-easy-grid';
 /**
  * Components
  */
 import { ScreenWrapper } from '../components/ScreenWrapper';
 import { CustomButton } from '../components/CustomButton';
 import { CustomInput } from '../components/Input';
+import { useNavigation } from '@react-navigation/native';
 
 export default () => {
+  const navigation = useNavigation();
   /**
    * States
    */
   const [session, setSession] = useState('');
+
   return (
     <>
       <ScreenWrapper>
@@ -40,7 +43,7 @@ export default () => {
                 <CustomInput
                   placeholder='Session ID'
                   type={(text) => setSession(text)}
-                  course={session}
+                  value={session}
                   autoCapitalize='none'
                   autoCorrect={false}
                   trim={true}
@@ -50,9 +53,12 @@ export default () => {
             <Row size={25} style={{ backgroundColor: '#1C365D' }}>
               <Content>
                 <CustomButton
-                  name='Enter'
-                  screen='Student Session'
-                  data={session}
+                  name='Join Session'
+                  press={() => {
+                    navigation.navigate('Student Session', {
+                      data: session,
+                    });
+                  }}
                 />
               </Content>
             </Row>
