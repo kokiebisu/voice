@@ -7,7 +7,14 @@
  */
 import React, { useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import { Container, Header, Content, Text, Button, TextInput} from 'native-base';
+import {
+  Container,
+  Header,
+  Content,
+  Text,
+  Button,
+  TextInput,
+} from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 /**
  * Components
@@ -26,37 +33,38 @@ export default () => {
   return (
     <>
       <ScreenWrapper>
-      <Container>
-      <Grid>
-      <Row size={25} style={{ backgroundColor: '#1C365D' }}></Row>
-       
-        <Row size={30}>
-            <Container style={{ backgroundColor: '#1C365D' }}>
-              <Text style={styles.title}>Learn something new today</Text>
-              
-            </Container>
-          </Row>
-        <Row size={25} style={{ backgroundColor: '#1C365D' }}>
-              <Content>
-            
-            <Input
-            placeholder='Enter the session id'
-            type={(text) => setSession(text)}
-            course={session}
-            autoCapitalize='none'
-            autoCorrect={false}
-            trim={true}
-            />
-             </Content>
-             </Row>
+        <Container>
+          <Grid>
+            <Row size={25} style={{ backgroundColor: '#1C365D' }}></Row>
 
-             <Row size={20} style={{ backgroundColor: '#1C365D' }}>
-              <Content>
-              <CustomButton name='ENTER' screen='Student Session' data={session} />
-            </Content>
+            <Row size={30}>
+              <Container style={{ backgroundColor: '#1C365D' }}>
+                <Text style={styles.title}>Learn something new today</Text>
+              </Container>
             </Row>
-          
-        </Grid>
+            <Row size={25} style={{ backgroundColor: '#1C365D' }}>
+              <Content>
+                <Input
+                  placeholder='Enter the session id'
+                  type={(text) => setSession(text)}
+                  course={session}
+                  autoCapitalize='none'
+                  autoCorrect={false}
+                  trim={true}
+                />
+              </Content>
+            </Row>
+
+            <Row size={20} style={{ backgroundColor: '#1C365D' }}>
+              <Content>
+                <CustomButton
+                  name='ENTER'
+                  screen='Student Session'
+                  data={session}
+                />
+              </Content>
+            </Row>
+          </Grid>
         </Container>
       </ScreenWrapper>
     </>
@@ -64,7 +72,6 @@ export default () => {
 };
 
 const styles = StyleSheet.create({
-  
   title: {
     fontSize: 42,
     color: 'white',
@@ -88,7 +95,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
-    shadowRadius: 5,  
-    elevation: 5
+    shadowRadius: 5,
+    elevation: 5,
   },
 });

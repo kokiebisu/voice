@@ -11,6 +11,7 @@ import {
   createStackNavigator,
   HeaderBackButton,
 } from '@react-navigation/stack';
+import { Text } from 'react-native';
 
 /**
  * Helper
@@ -47,6 +48,21 @@ export default function App() {
         <Stack.Screen
           name='Student Authentication'
           component={StudentAuthenticationScreen}
+          options={({ navigation }) => {
+            return {
+              headerTitle: false,
+              headerTransparent: true,
+              headerStyle: {
+                borderBottomWidth: 0,
+              },
+              headerLeftContainerStyle: {
+                paddingHorizontal: 30,
+                paddingTop: 20,
+              },
+              headerTintColor: 'white',
+              headerBackTitle: ' ',
+            };
+          }}
         />
         <Stack.Screen
           name='Teacher Create Session'

@@ -4,9 +4,9 @@
 
 // Dependencies
 import React from 'react';
-import { View, StyleSheet, Image } from 'react-native';
+import { StyleSheet } from 'react-native';
 // import { Block, Text, Button } from 'galio-framework';
-import { Container, Header, Content, Text, Button } from 'native-base';
+import { Container, Content, Text, Button } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 // Components
 import { ScreenWrapper } from '../components/ScreenWrapper';
