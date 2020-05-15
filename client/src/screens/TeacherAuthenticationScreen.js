@@ -4,20 +4,19 @@
 
 // Dependencies
 import React, { useState } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Font, AppLoading } from 'expo';
+import { StyleSheet } from 'react-native';
 
 /**
  * Components
  */
-import { Input } from '../components/Input';
+import { CustomInput } from '../components/Input';
 import { AuthenticationButton } from '../components/AuthenticationButton';
 import { Grid, Row } from 'react-native-easy-grid';
-import { Container, Header, Content, Button } from 'native-base';
+import { Container, Header, Content, Button, Text } from 'native-base';
 import { CustomButton } from '../components/CustomButton';
+
 export default () => {
   // Used to navigate between screens
-
   // States
   const [isLogin, setIsLogin] = useState(true);
   const [email, setEmail] = useState('');
@@ -31,7 +30,7 @@ export default () => {
           <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
         </Row>
         <Row size={30} style={{ backgroundColor: '#1C365D' }}>
-          <Input
+          <CustomInput
             placeholder='Enter email'
             type={(text) => setEmail(text)}
             value={email}
@@ -41,7 +40,7 @@ export default () => {
           />
         </Row>
         <Row size={30} style={{ backgroundColor: '#1C365D' }}>
-          <Input
+          <CustomInput
             placeholder='Enter password'
             type={(text) => setPassword(text)}
             value={password}
@@ -79,42 +78,32 @@ export default () => {
             />
           )}
         </Row>
-        <View>
-          <Button
-            title='Switch Authentication'
-            onPress={() => setIsLogin(!isLogin)}
-          />
-        </View>
+        <Row>
+          <Container>
+            <Button
+              title='Switch Authentication'
+              onPress={() => setIsLogin(!isLogin)}
+            />
+          </Container>
+        </Row>
       </Grid>
     </>
   );
 };
-const styles = StyleSheet.create({
+
+const styles = {
   title: {
     fontSize: 42,
     color: 'white',
   },
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  inputWrapper: {
-    marginBottom: 50,
-  },
-  logo: {
-    position: 'absolute',
-    top: 109,
-  },
-  headingImage: {
-    flex: 1,
-    resizeMode: 'contain',
-    marginTop: 150,
-  },
-  submitView: {
-    marginBottom: 50,
+  buttons: {
+    marginVertical: 10,
+    backgroundColor: '#DD6B4D',
   },
   buttonText: {
     fontSize: 14,
   },
-});
+  inputWrapper: {
+    backgroundColor: '#1C365D',
+  },
+};
