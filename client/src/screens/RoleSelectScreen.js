@@ -15,6 +15,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default () => {
   const navigation = useNavigation();
+
   return (
     <ScreenWrapper>
       <Container>
@@ -28,20 +29,8 @@ export default () => {
           </Row>
           <Row size={40} style={{ backgroundColor: '#1C365D' }}>
             <Content>
-              <Button
-                large
-                style={styles.buttons}
-                block
-                onPress={() => navigation.navigate('Student Authentication')}>
-                <Text style={styles.buttonText}>Student</Text>
-              </Button>
-              <Button
-                large
-                style={styles.buttons}
-                block
-                onPress={() => navigation.navigate('Teacher Authentication')}>
-                <Text style={styles.buttonText}>Teacher</Text>
-              </Button>
+              <CustomButton name='Student' screen='Student Authentication' />
+              <CustomButton name='Teacher' screen='Teacher Authentication' />
             </Content>
           </Row>
         </Grid>
@@ -58,12 +47,5 @@ const styles = StyleSheet.create({
   subtitle: {
     fontSize: 24,
     color: 'white',
-  },
-  buttons: {
-    marginVertical: 10,
-    backgroundColor: '#DD6B4D',
-  },
-  buttonText: {
-    fontSize: 14,
   },
 });

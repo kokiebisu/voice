@@ -1,35 +1,29 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { Container, Header, Content, Text, Button } from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 import { useNavigation } from '@react-navigation/native';
 
-export const CustomButton = ({ name, screen, data }) => {
+export const CustomButton = ({ name, screen }) => {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity
-      style={styles.buttonWrapper}
-      onPress={() => navigation.navigate(screen, { data })}>
-      <Text style={{color:'white',  fontSize: 18}}>{name}</Text>
-    </TouchableOpacity>
+    <Button
+      large
+      style={styles.buttons}
+      block
+      onPress={() => navigation.navigate(screen)}>
+      <Text style={styles.buttonText}>{name}</Text>
+    </Button>
   );
 };
 
 const styles = StyleSheet.create({
-  buttonWrapper: {
-    width: 340,
-    height: 73,
-    backgroundColor: '#DD6B4D',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: '#000000',
-    // borderRadius: 50,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    alignItems: 'center',
-    justifyContent: 'center',
+  buttons: {
     marginVertical: 10,
-    
+    backgroundColor: '#DD6B4D',
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
