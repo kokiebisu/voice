@@ -58,7 +58,7 @@ export const AuthenticationButton = ({
       style={styles.buttons}
       block
       onPress={() => authenticate(title)}>
-      <Text>{title}</Text>
+      <Text style={styles.buttonText}>{title}</Text>
     </Button>
   );
 };
