@@ -1,19 +1,30 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Header, Content, Text, Button } from 'native-base';
-import { Col, Row, Grid } from 'react-native-easy-grid';
+import { Text, Button } from 'native-base';
 import { useNavigation } from '@react-navigation/native';
 
-export const CustomButton = ({ name, screen }) => {
+export const CustomButton = ({ name, screen, data }) => {
   const navigation = useNavigation();
   return (
-    <Button
-      large
-      style={styles.buttons}
-      block
-      onPress={() => navigation.navigate(screen)}>
-      <Text style={styles.buttonText}>{name}</Text>
-    </Button>
+    <>
+      {data ? (
+        <Button
+          large
+          style={styles.buttons}
+          block
+          onPress={() => navigation.navigate(screen, data)}>
+          <Text style={styles.buttonText}>{name}</Text>
+        </Button>
+      ) : (
+        <Button
+          large
+          style={styles.buttons}
+          block
+          onPress={() => navigation.navigate(screen)}>
+          <Text style={styles.buttonText}>{name}</Text>
+        </Button>
+      )}
+    </>
   );
 };
 

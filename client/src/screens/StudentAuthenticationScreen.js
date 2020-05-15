@@ -29,7 +29,6 @@ export default () => {
    * States
    */
   const [session, setSession] = useState('');
-  const navigation = useNavigation();
   return (
     <>
       <ScreenWrapper>
@@ -59,7 +58,7 @@ export default () => {
             <Row size={25} style={{ backgroundColor: '#1C365D' }}>
               <Content>
                 <CustomButton
-                  name='ENTER'
+                  name='Enter'
                   screen='Student Session'
                   data={session}
                 />

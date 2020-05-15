@@ -48,7 +48,7 @@ export default function App() {
         <Stack.Screen
           name='Student Authentication'
           component={StudentAuthenticationScreen}
-          options={({ navigation }) => {
+          options={() => {
             return {
               headerTitle: false,
               headerTransparent: true,
@@ -71,6 +71,21 @@ export default function App() {
         <Stack.Screen
           name='Teacher Authentication'
           component={TeacherAuthenticationScreen}
+          options={() => {
+            return {
+              headerTitle: false,
+              headerTransparent: true,
+              headerStyle: {
+                borderBottomWidth: 0,
+              },
+              headerLeftContainerStyle: {
+                paddingHorizontal: 30,
+                paddingTop: 20,
+              },
+              headerTintColor: 'white',
+              headerBackTitle: ' ',
+            };
+          }}
         />
         <Stack.Screen
           name='Student Session'
