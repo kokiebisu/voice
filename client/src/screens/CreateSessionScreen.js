@@ -49,13 +49,11 @@ export default () => {
         
              <Row size={20} style={{ backgroundColor: '#1C365D' }}>
               <Content>
-              <Button
-                large
-                style={styles.buttons}
-                block
-                onPress={() => navigation.navigate('Teacher Session', { course })}>
-                <Text style={styles.buttonText}>Create Session</Text>
-              </Button>
+              <CustomButton
+              name='CREATE SESSION'
+              screen='Teacher Session'
+              data={course}
+              />
             </Content>
             </Row>
         </Grid>

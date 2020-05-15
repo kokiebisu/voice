@@ -52,13 +52,7 @@ export default () => {
 
              <Row size={20} style={{ backgroundColor: '#1C365D' }}>
               <Content>
-              <Button
-                large
-                style={styles.buttons}
-                block
-                onPress={() => navigation.navigate('Student Session', { sessionId: session })}>
-                <Text style={styles.buttonText}>Enter</Text>
-              </Button>
+              <CustomButton name='ENTER' screen='Student Session' data={session} />
             </Content>
             </Row>
           
