@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
-
-export const Input = ({
+import { StyleSheet } from 'react-native';
+import { Label, Form, Item, Input } from 'native-base';
+export const CustomInput = ({
   placeholder,
   type,
   value,
@@ -10,37 +10,39 @@ export const Input = ({
   trim,
 }) => {
   return (
-    <View style={styles.inputWrapper}>
-      <TextInput
-        autoCorrect={autoCorrect}
-        autoCapitalize={autoCapitalize}
-        placeholder={placeholder}
-        value={value}
-        onChangeText={(text) => {
-          if (!!trim) {
-            text = text.trim();
-          }
-          type(text);
-        }}
-      />
-    </View>
+    <Form style={styles.wrapper}>
+      <Item floatingLabel>
+        <Label style={styles.placeholder}>{placeholder}</Label>
+        <Input
+          value={value}
+          onChangeText={(text) => {
+            if (!!trim) {
+              text = text.trim();
+            }
+            type(text);
+          }}
+          autoCapitalize={autoCapitalize}
+          autoCorrect={autoCorrect}
+          style={styles.input}
+        />
+      </Item>
+    </Form>
   );
 };
 
 const styles = StyleSheet.create({
-  inputWrapper: {
-    width: 293,
-    height: 73,
-    paddingTop: 25,
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'grey',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
-    marginTop: 180,
+  wrapper: {
+    position: 'relative',
+    right: 10,
+  },
+  placeholder: {
+    color: 'white',
+    fontSize: 24,
+  },
+  input: {
+    marginTop: 20,
+    fontSize: 36,
+    color: 'white',
+    marginBottom: 10,
   },
 });

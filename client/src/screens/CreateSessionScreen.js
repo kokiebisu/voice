@@ -7,64 +7,87 @@
  */
 import React, { useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-
+import { Container, Header, Content, Text, Button, TextInput} from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 /**
  * Components
  */
 import { Input } from '../components/Input';
 import { CustomButton } from '../components/CustomButton';
 import { ScreenWrapper } from '../components/ScreenWrapper';
-import TextInput from "react-native-web/dist/exports/TextInput";
-
+// import TextInput from "react-native-web/dist/exports/TextInput";
+import { useNavigation } from '@react-navigation/native';
 export default () => {
   /**
    * States
    */
   const [course, setCourse] = useState('');
-
+  const navigation = useNavigation();
   return (
     <>
       <ScreenWrapper>
-        <Image source={require('../img/teach_today.png')} style={styles.headingImage} />
-        <View style={styles.inputWrapper}>
-          <Input style={{ height: 40, backgroundColor: 'gray', borderWidth: 1 }}
+      <Container>
+      <Grid>
+      <Row size={25} style={{ backgroundColor: '#1C365D' }}></Row>
+       
+       <Row size={30}>
+           <Container style={{ backgroundColor: '#1C365D' }}>
+             <Text style={styles.title}>Teach something new today</Text>
+             
+           </Container>
+         </Row>
+         <Row size={25} style={{ backgroundColor: '#1C365D' }}>
+          <Content>
+            
+          <Input 
             placeholder='Course Name'
             value={course}
             type={(text) => setCourse(text)}
           />
-        </View>
-        <View>
-          <CustomButton
-            name='Create Session'
-            screen='Teacher Session'
-            data={course}
-          />
-        </View>
+          </Content>
+          </Row>
+        
+             <Row size={20} style={{ backgroundColor: '#1C365D' }}>
+              <Content>
+              <CustomButton
+              name='CREATE SESSION'
+              screen='Teacher Session'
+              data={course}
+              />
+            </Content>
+            </Row>
+        </Grid>
+        </Container>
       </ScreenWrapper>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  backgroundWrapper: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#4195a7'
-
+  title: {
+    fontSize: 42,
+    color: 'white',
   },
-  inputWrapper: {
-    marginBottom: 30,
+  subtitle: {
+    fontSize: 24,
+    color: 'white',
   },
-  inputStyle: {
-    backgroundColor: '#5b9ead',
-    opacity: 0.2
+  buttons: {
+    marginVertical: 10,
+    backgroundColor: '#DD6B4D',
   },
-  headingImage: {
-    flex: 1,
-    width: 320,
-    height: 320,
-    resizeMode: 'contain',
-    marginTop: 150
-  }
+  buttonText: {
+    fontSize: 14,
+  },
+  textbox: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'grey',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,  
+    elevation: 5
+  },
 });

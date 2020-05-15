@@ -1,17 +1,18 @@
 import React from 'react';
 import { TeacherCard } from '../components/TeacherCard';
-
+import { TouchableOpacity, Text, View,Image, StyleSheet,} from 'react-native';
 export const TeacherCardWrapper = ({ respond, feedbacks }) => {
   return (
     <>
       {feedbacks['Too Slow'] === '' ||
       feedbacks['Too Slow'] === undefined ||
       feedbacks['Too Slow'].length === 0 ? null : (
-        <TeacherCard
+        <TeacherCard 
           respond={respond}
           feedbackName='Too Slow'
           length={feedbacks['Too Slow'].length}
           imgSrc={require('../img/1.png')}
+          
         />
       )}
       {feedbacks['Too Fast'] === '' ||
