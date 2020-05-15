@@ -21,7 +21,7 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
  */
 import { ScreenWrapper } from '../components/ScreenWrapper';
 import { CustomButton } from '../components/CustomButton';
-import { Input } from '../components/Input';
+import { CustomInput } from '../components/Input';
 import { useNavigation } from '@react-navigation/native';
 
 export default () => {
@@ -35,27 +35,28 @@ export default () => {
       <ScreenWrapper>
         <Container>
           <Grid>
-            <Row size={25} style={{ backgroundColor: '#1C365D' }}></Row>
-
-            <Row size={30}>
-              <Container style={{ backgroundColor: '#1C365D' }}>
+            <Row size={15} style={{ backgroundColor: '#1C365D' }} />
+            <Row size={35}>
+              <Container
+                style={{
+                  backgroundColor: '#1C365D',
+                }}>
                 <Text style={styles.title}>Learn something new today</Text>
               </Container>
             </Row>
-            <Row size={25} style={{ backgroundColor: '#1C365D' }}>
-              <Content>
-                <Input
-                  placeholder='Enter the session id'
+            <Row size={20}>
+              <Container style={styles.inputWrapper}>
+                <CustomInput
+                  placeholder='Session ID'
                   type={(text) => setSession(text)}
                   course={session}
                   autoCapitalize='none'
                   autoCorrect={false}
                   trim={true}
                 />
-              </Content>
+              </Container>
             </Row>
-
-            <Row size={20} style={{ backgroundColor: '#1C365D' }}>
+            <Row size={25} style={{ backgroundColor: '#1C365D' }}>
               <Content>
                 <CustomButton
                   name='ENTER'
@@ -76,10 +77,7 @@ const styles = StyleSheet.create({
     fontSize: 42,
     color: 'white',
   },
-  subtitle: {
-    fontSize: 24,
-    color: 'white',
-  },
+
   buttons: {
     marginVertical: 10,
     backgroundColor: '#DD6B4D',
@@ -87,15 +85,7 @@ const styles = StyleSheet.create({
   buttonText: {
     fontSize: 14,
   },
-  textbox: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1,
-    borderStyle: 'solid',
-    borderColor: 'grey',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 3 },
-    shadowOpacity: 0.5,
-    shadowRadius: 5,
-    elevation: 5,
+  inputWrapper: {
+    backgroundColor: '#1C365D',
   },
 });

@@ -20,11 +20,10 @@ export default () => {
     <ScreenWrapper>
       <Container>
         <Grid>
-          <Row size={25} style={{ backgroundColor: '#1C365D' }}></Row>
-          <Row size={35}>
+          <Row size={15} style={{ backgroundColor: '#1C365D' }}></Row>
+          <Row size={45}>
             <Container style={{ backgroundColor: '#1C365D' }}>
               <Text style={styles.title}>Voice</Text>
-              <Text style={styles.subtitle}>Select your role</Text>
             </Container>
           </Row>
           <Row size={40} style={{ backgroundColor: '#1C365D' }}>
