@@ -67,6 +67,21 @@ export default function App() {
         <Stack.Screen
           name='Teacher Create Session'
           component={CreateSessionScreen}
+          options={() => {
+            return {
+              headerTitle: false,
+              headerTransparent: true,
+              headerStyle: {
+                borderBottomWidth: 0,
+              },
+              headerLeftContainerStyle: {
+                paddingHorizontal: 30,
+                paddingTop: 20,
+              },
+              headerTintColor: 'white',
+              headerBackTitle: ' ',
+            };
+          }}
         />
         <Stack.Screen
           name='Teacher Authentication'

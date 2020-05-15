@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Label, Form, Item, Input } from 'native-base';
+
 export const CustomInput = ({
   placeholder,
   type,

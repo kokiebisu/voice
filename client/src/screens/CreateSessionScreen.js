@@ -7,56 +7,60 @@
  */
 import React, { useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-import { Container, Header, Content, Text, Button, TextInput} from 'native-base';
+import {
+  Container,
+  Header,
+  Content,
+  Text,
+  Button,
+  TextInput,
+} from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 /**
  * Components
  */
-import { Input } from '../components/Input';
+import { CustomInput } from '../components/Input';
 import { CustomButton } from '../components/CustomButton';
 import { ScreenWrapper } from '../components/ScreenWrapper';
 // import TextInput from "react-native-web/dist/exports/TextInput";
 import { useNavigation } from '@react-navigation/native';
+
 export default () => {
+  const navigation = useNavigation();
   /**
    * States
    */
   const [course, setCourse] = useState('');
-  const navigation = useNavigation();
   return (
     <>
       <ScreenWrapper>
-      <Container>
-      <Grid>
-      <Row size={25} style={{ backgroundColor: '#1C365D' }}></Row>
-       
-       <Row size={30}>
-           <Container style={{ backgroundColor: '#1C365D' }}>
-             <Text style={styles.title}>Teach something new today</Text>
-             
-           </Container>
-         </Row>
-         <Row size={25} style={{ backgroundColor: '#1C365D' }}>
-          <Content>
-            
-          <Input 
-            placeholder='Course Name'
-            value={course}
-            type={(text) => setCourse(text)}
-          />
-          </Content>
-          </Row>
-        
-             <Row size={20} style={{ backgroundColor: '#1C365D' }}>
-              <Content>
-              <CustomButton
-              name='CREATE SESSION'
-              screen='Teacher Session'
-              data={course}
-              />
-            </Content>
+        <Container>
+          <Grid>
+            <Row size={15} style={{ backgroundColor: '#1C365D' }} />
+
+            <Row size={40}>
+              <Container style={{ backgroundColor: '#1C365D' }}>
+                <Text style={styles.title}>Teach something new today</Text>
+              </Container>
             </Row>
-        </Grid>
+            <Row size={25} style={{ backgroundColor: '#1C365D' }}>
+              <Content>
+                <CustomInput
+                  placeholder='Course Name'
+                  value={course}
+                  type={(text) => setCourse(text)}
+                />
+              </Content>
+            </Row>
+            <Row size={20} style={{ backgroundColor: '#1C365D' }}>
+              <Content>
+                <CustomButton
+                  name='Create Session'
+                  press={() => navigation.navigate('Teacher Session', course)}
+                />
+              </Content>
+            </Row>
+          </Grid>
         </Container>
       </ScreenWrapper>
     </>
@@ -87,7 +91,7 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.5,
-    shadowRadius: 5,  
-    elevation: 5
+    shadowRadius: 5,
+    elevation: 5,
   },
 });

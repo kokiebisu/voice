@@ -1,14 +1,9 @@
 import React from 'react';
-import {
-  TouchableOpacity,
-  View,
-  Text,
-  AsyncStorage,
-  Alert,
-} from 'react-native';
+import { StyleSheet, AsyncStorage, Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import axios from 'axios';
 import ENDPOINT from '../util/endpoint';
+import { Button, Text } from 'native-base';
 
 export const AuthenticationButton = ({
   title,
@@ -58,10 +53,23 @@ export const AuthenticationButton = ({
   };
 
   return (
-    <TouchableOpacity onPress={() => authenticate(title)}>
-      <View>
-        <Text>{title}</Text>
-      </View>
-    </TouchableOpacity>
+    <Button
+      large
+      style={styles.buttons}
+      block
+      onPress={() => authenticate(title)}>
+      <Text style={styles.buttonText}>{title}</Text>
+    </Button>
   );
 };
+
+const styles = StyleSheet.create({
+  buttons: {
+    marginVertical: 10,
+    backgroundColor: '#DD6B4D',
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+});
