@@ -102,15 +102,11 @@ export default () => {
       <Row size={20} style={{ backgroundColor: '#1C365D' }}>
         {isLogin ? (
           <Content>
-            <CustomButton>
-            large
-            style={styles.buttons}
-            block
+            <AuthenticationButton style={styles.buttons}
             title='Login'
             email={email}
             password={password}
-            <Text style={styles.buttonText}>Log in</Text>
-            </CustomButton>
+            />
 
 
           </Content>
