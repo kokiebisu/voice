@@ -4,14 +4,17 @@
 
 // Dependencies
 import React, { useState } from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
+import { Font, AppLoading } from "expo";
 
 /**
  * Components
  */
 import { Input } from '../components/Input';
 import { AuthenticationButton } from '../components/AuthenticationButton';
-
+import {Grid, Row} from "react-native-easy-grid";
+import { Container, Header, Content, Button } from 'native-base';
+import {CustomButton} from "../components/CustomButton";
 export default () => {
   // Used to navigate between screens
 
@@ -58,9 +61,11 @@ export default () => {
 
   return (
     <>
-      <View>
-        <Text>{isLogin ? 'Login' : 'Register'}</Text>
-        <View>
+    <Grid>
+        <Row size={20} style={{ backgroundColor: '#1C365D' }}>
+        <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
+        </Row>
+        <Row size={30}style={{ backgroundColor: '#1C365D' }}>
           <Input
             placeholder='Enter email'
             type={(text) => setEmail(text)}
@@ -69,8 +74,8 @@ export default () => {
             autoCorrect={false}
             trim={true}
           />
-        </View>
-        <View>
+        </Row>
+      <Row size={30} style={{ backgroundColor: '#1C365D' }}>
           <Input
             placeholder='Enter password'
             type={(text) => setPassword(text)}
@@ -79,9 +84,10 @@ export default () => {
             autoCorrect={false}
             trim={true}
           />
-        </View>
+      </Row>
+
         {!isLogin ? (
-          <View>
+
             <Input
               placeholder='Confirm Password'
               type={(text) => setConfirmPassword(text)}
@@ -90,14 +96,24 @@ export default () => {
               autoCorrect={false}
               trim={true}
             />
-          </View>
+
+
         ) : null}
+      <Row size={20} style={{ backgroundColor: '#1C365D' }}>
         {isLogin ? (
-          <AuthenticationButton
+          <Content>
+            <CustomButton>
+            large
+            style={styles.buttons}
+            block
             title='Login'
             email={email}
             password={password}
-          />
+            <Text style={styles.buttonText}>Log in</Text>
+            </CustomButton>
+
+
+          </Content>
         ) : (
           <AuthenticationButton
             title='Register'
@@ -106,17 +122,22 @@ export default () => {
             confirmPassword={confirmPassword}
           />
         )}
-      </View>
+      </Row>
       <View>
         <Button
           title='Switch Authentication'
           onPress={() => setIsLogin(!isLogin)}
         />
       </View>
+    </Grid>
     </>
   );
 };
 const styles = StyleSheet.create({
+  title: {
+    fontSize: 42,
+    color: 'white',
+  },
   container: {
     flex: 1,
     alignItems: 'center',
@@ -136,5 +157,8 @@ const styles = StyleSheet.create({
   },
   submitView: {
     marginBottom: 50,
+  },
+  buttonText: {
+    fontSize: 14,
   },
 });
