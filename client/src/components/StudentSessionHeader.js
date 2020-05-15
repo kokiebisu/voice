@@ -15,12 +15,14 @@ const styles = StyleSheet.create({
     height: 87,
     backgroundColor: '#00263B',
     borderRadius: 10,
+    marginLeft: 50,
+    marginTop: 10
   },
   sessionHeader: {
     position: 'absolute',
     top: 35,
     left: 60,
     fontWeight: 'bold',
-    color: 'white'
+    color: 'white',
   },
 });
