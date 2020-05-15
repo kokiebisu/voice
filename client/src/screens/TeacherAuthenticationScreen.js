@@ -99,12 +99,6 @@ export default () => {
             password={password}
           />
         ) : (
-          // <View>
-          //   <CustomButton title='Login' screen='Teacher Create Session' />
-          // </View>
-          // <View>
-          //   <CustomButton title='Register' screen='Teacher Create Session' />
-          // </View>
           <AuthenticationButton
             title='Register'
             email={email}

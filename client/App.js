@@ -39,7 +39,11 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName='Role Select'>
-        <Stack.Screen name='Role Select' component={RoleSelectScreen} />
+        <Stack.Screen
+          name='Role Select'
+          component={RoleSelectScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name='Student Authentication'
           component={StudentAuthenticationScreen}
