@@ -6,15 +6,8 @@
  * Dependencies
  */
 import React, { useState } from 'react';
-import { View, StyleSheet, Image } from 'react-native';
-import {
-  Container,
-  Header,
-  Content,
-  Text,
-  Button,
-  TextInput,
-} from 'native-base';
+import { StyleSheet } from 'react-native';
+import { Container, Content, Text } from 'native-base';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 /**
  * Components
@@ -22,7 +15,6 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import { ScreenWrapper } from '../components/ScreenWrapper';
 import { CustomButton } from '../components/CustomButton';
 import { CustomInput } from '../components/Input';
-import { useNavigation } from '@react-navigation/native';
 
 export default () => {
   /**

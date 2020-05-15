@@ -5,16 +5,16 @@
 // Dependencies
 import React, { useState } from 'react';
 import { View, StyleSheet, Text } from 'react-native';
-import { Font, AppLoading } from "expo";
+import { Font, AppLoading } from 'expo';
 
 /**
  * Components
  */
 import { Input } from '../components/Input';
 import { AuthenticationButton } from '../components/AuthenticationButton';
-import {Grid, Row} from "react-native-easy-grid";
+import { Grid, Row } from 'react-native-easy-grid';
 import { Container, Header, Content, Button } from 'native-base';
-import {CustomButton} from "../components/CustomButton";
+import { CustomButton } from '../components/CustomButton';
 export default () => {
   // Used to navigate between screens
 
@@ -24,48 +24,13 @@ export default () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  // /**
-  //  * Sends a login request to server
-  //  */
-  // const onLogin = async () => {
-  //   try {
-  //     const response = await axios.post(`${ENDPOINT}/auth/login`, {
-  //       email,
-  //       password,
-  //     });
-  //     await AsyncStorage.setItem('AuthToken', response.data.token);
-  //     navigation.navigate('Teacher Create Session');
-  //   } catch (err) {
-  //     Alert.alert(err.response.data.message);
-  //     setEmail('');
-  //     setPassword('');
-  //   }
-  // };
-
-  // /**
-  //  * Sends a signup request to server
-  //  */
-  // const onSignup = async () => {
-  //   try {
-  //     const response = await axios.post(`${ENDPOINT}/auth/signup`, {
-  //       email,
-  //       password,
-  //       confirmPassword,
-  //     });
-  //     await AsyncStorage.setItem('AuthToken', response.data.token);
-  //     navigation.navigate('Teacher Create Session');
-  //   } catch (err) {
-  //     Alert.alert(err.response.data.message);
-  //   }
-  // };
-
   return (
     <>
-    <Grid>
+      <Grid>
         <Row size={20} style={{ backgroundColor: '#1C365D' }}>
-        <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
+          <Text style={styles.title}>{isLogin ? 'Login' : 'Register'}</Text>
         </Row>
-        <Row size={30}style={{ backgroundColor: '#1C365D' }}>
+        <Row size={30} style={{ backgroundColor: '#1C365D' }}>
           <Input
             placeholder='Enter email'
             type={(text) => setEmail(text)}
@@ -75,7 +40,7 @@ export default () => {
             trim={true}
           />
         </Row>
-      <Row size={30} style={{ backgroundColor: '#1C365D' }}>
+        <Row size={30} style={{ backgroundColor: '#1C365D' }}>
           <Input
             placeholder='Enter password'
             type={(text) => setPassword(text)}
@@ -84,48 +49,43 @@ export default () => {
             autoCorrect={false}
             trim={true}
           />
-      </Row>
-
+        </Row>
         {!isLogin ? (
-
-            <Input
-              placeholder='Confirm Password'
-              type={(text) => setConfirmPassword(text)}
-              value={confirmPassword}
-              autoCapitalize='none'
-              autoCorrect={false}
-              trim={true}
-            />
-
-
-        ) : null}
-      <Row size={20} style={{ backgroundColor: '#1C365D' }}>
-        {isLogin ? (
-          <Content>
-            <AuthenticationButton style={styles.buttons}
-            title='Login'
-            email={email}
-            password={password}
-            />
-
-
-          </Content>
-        ) : (
-          <AuthenticationButton
-            title='Register'
-            email={email}
-            password={password}
-            confirmPassword={confirmPassword}
+          <Input
+            placeholder='Confirm Password'
+            type={(text) => setConfirmPassword(text)}
+            value={confirmPassword}
+            autoCapitalize='none'
+            autoCorrect={false}
+            trim={true}
           />
-        )}
-      </Row>
-      <View>
-        <Button
-          title='Switch Authentication'
-          onPress={() => setIsLogin(!isLogin)}
-        />
-      </View>
-    </Grid>
+        ) : null}
+        <Row size={20} style={{ backgroundColor: '#1C365D' }}>
+          {isLogin ? (
+            <Content>
+              <AuthenticationButton
+                style={styles.buttons}
+                title='Login'
+                email={email}
+                password={password}
+              />
+            </Content>
+          ) : (
+            <AuthenticationButton
+              title='Register'
+              email={email}
+              password={password}
+              confirmPassword={confirmPassword}
+            />
+          )}
+        </Row>
+        <View>
+          <Button
+            title='Switch Authentication'
+            onPress={() => setIsLogin(!isLogin)}
+          />
+        </View>
+      </Grid>
     </>
   );
 };

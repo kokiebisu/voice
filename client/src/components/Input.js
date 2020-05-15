@@ -1,14 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, TextInput } from 'react-native';
-import {
-  Container,
-  Label,
-  Header,
-  Content,
-  Form,
-  Item,
-  Input,
-} from 'native-base';
+import { StyleSheet } from 'react-native';
+import { Label, Form, Item, Input } from 'native-base';
 export const CustomInput = ({
   placeholder,
   type,
