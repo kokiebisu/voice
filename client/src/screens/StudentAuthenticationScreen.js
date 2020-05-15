@@ -56,7 +56,7 @@ export default () => {
                 large
                 style={styles.buttons}
                 block
-                onPress={() => navigation.navigate('Teacher Session')}>
+                onPress={() => navigation.navigate('Student Session')}>
                 <Text style={styles.buttonText}>Enter</Text>
               </Button>
             </Content>
