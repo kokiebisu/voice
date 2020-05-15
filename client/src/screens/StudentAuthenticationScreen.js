@@ -7,64 +7,94 @@
  */
 import React, { useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
-
+import { Container, Header, Content, Text, Button, TextInput} from 'native-base';
+import { Col, Row, Grid } from 'react-native-easy-grid';
 /**
  * Components
  */
 import { ScreenWrapper } from '../components/ScreenWrapper';
 import { CustomButton } from '../components/CustomButton';
 import { Input } from '../components/Input';
+import { useNavigation } from '@react-navigation/native';
 
 export default () => {
   /**
    * States
    */
   const [session, setSession] = useState('');
-
+  const navigation = useNavigation();
   return (
     <>
       <ScreenWrapper>
-        <Image
-          source={require('../img/Learn_Today.png')}
-          style={styles.headingImage}
-        />
-        <View style={styles.inputWrapper}>
-          <Input
+      <Container>
+      <Grid>
+      <Row size={25} style={{ backgroundColor: '#1C365D' }}></Row>
+       
+        <Row size={30}>
+            <Container style={{ backgroundColor: '#1C365D' }}>
+              <Text style={styles.title}>Learn something new today</Text>
+              
+            </Container>
+          </Row>
+        <Row size={25} style={{ backgroundColor: '#1C365D' }}>
+              <Content>
+            
+            <Input
             placeholder='Enter the session id'
             type={(text) => setSession(text)}
             course={session}
             autoCapitalize='none'
             autoCorrect={false}
             trim={true}
-          />
-        </View>
-        <View style={styles.submitView}>
-          <CustomButton name='Enter' screen='Student Session' data={session} />
-        </View>
+            />
+             </Content>
+             </Row>
+
+             <Row size={20} style={{ backgroundColor: '#1C365D' }}>
+              <Content>
+              <Button
+                large
+                style={styles.buttons}
+                block
+                onPress={() => navigation.navigate('Teacher Session')}>
+                <Text style={styles.buttonText}>Enter</Text>
+              </Button>
+            </Content>
+            </Row>
+          
+        </Grid>
+        </Container>
       </ScreenWrapper>
     </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+  
+  title: {
+    fontSize: 42,
+    color: 'white',
   },
-  inputWrapper: {
-    marginBottom: 50,
+  subtitle: {
+    fontSize: 24,
+    color: 'white',
   },
-  logo: {
-    position: 'absolute',
-    top: 109,
+  buttons: {
+    marginVertical: 10,
+    backgroundColor: '#DD6B4D',
   },
-  headingImage: {
-    flex: 1,
-    resizeMode: 'contain',
-    marginTop: 150,
+  buttonText: {
+    fontSize: 14,
   },
-  submitView: {
-    marginBottom: 50,
+  textbox: {
+    backgroundColor: '#FFFFFF',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderColor: 'grey',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,  
+    elevation: 5
   },
 });

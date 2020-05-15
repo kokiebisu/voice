@@ -29,7 +29,7 @@ export const Input = ({
 
 const styles = StyleSheet.create({
   inputWrapper: {
-    width: 293,
+    width: 330,
     height: 73,
     paddingTop: 25,
     backgroundColor: '#FFFFFF',
@@ -41,6 +41,8 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     elevation: 5,
-    marginTop: 180,
+    
+    
+    
   },
 });
