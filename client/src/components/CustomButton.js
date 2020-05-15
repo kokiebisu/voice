@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { Text, Button } from 'native-base';
 
-export const CustomButton = ({ name, press, data }) => {
+export const CustomButton = ({ name, press }) => {
   return (
     <>
       <Button large style={styles.buttons} block onPress={press}>

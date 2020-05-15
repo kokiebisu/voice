@@ -26,6 +26,7 @@ import { ScreenWrapper } from '../components/ScreenWrapper';
 import { useNavigation } from '@react-navigation/native';
 
 export default () => {
+  const navigation = useNavigation();
   /**
    * States
    */
@@ -51,13 +52,11 @@ export default () => {
                 />
               </Content>
             </Row>
-
             <Row size={20} style={{ backgroundColor: '#1C365D' }}>
               <Content>
                 <CustomButton
-                  name='CREATE SESSION'
-                  screen='Teacher Session'
-                  data={course}
+                  name='Create Session'
+                  press={() => navigation.navigate('Teacher Session', course)}
                 />
               </Content>
             </Row>
