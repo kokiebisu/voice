@@ -10,7 +10,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="61adbb07-6769-4e56-b7a2-e1f31e83367e" name="Default Changelist" comment="" />
+    <list default="true" id="d0824cc8-23b6-4ef5-b3ce-6abb75c7df5d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/client/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/screens/StudentSessionScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/screens/StudentSessionScreen.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,25 +41,28 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="61adbb07-6769-4e56-b7a2-e1f31e83367e" name="Default Changelist" comment="" />
+      <changelist id="d0824cc8-23b6-4ef5-b3ce-6abb75c7df5d" name="Default Changelist" comment="" />
       <created>1589494593855</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589494593855</updated>
       <workItem from="1589494595924" duration="817000" />
       <workItem from="1589495624782" duration="3039000" />
+      <workItem from="1589823865205" duration="148000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -66,9 +73,15 @@
       <screen x="0" y="0" width="1536" height="783" />
     </state>
     <state x="548" y="134" key="FileChooserDialogImpl/0.0.1536.783@0.0.1536.783" timestamp="1589495373311" />
-    <state x="508" y="181" key="git4idea.merge.GitPullDialog" timestamp="1589501556664">
-      <screen x="0" y="0" width="1536" height="783" />
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2" timestamp="1589582857181">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="552" y="253" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589582857181" />
+    <state x="2555" y="240" key="git4idea.merge.GitPullDialog" timestamp="1589823941978">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="508" y="181" key="git4idea.merge.GitPullDialog/0.0.1536.783@0.0.1536.783" timestamp="1589501556664" />
+    <state x="635" y="240" key="git4idea.merge.GitPullDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589584243422" />
+    <state x="2555" y="240" key="git4idea.merge.GitPullDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589823941978" />
   </component>
 </project>

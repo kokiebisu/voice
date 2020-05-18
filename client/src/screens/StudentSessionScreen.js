@@ -171,7 +171,7 @@ export default () => {
 
   return (
     <Grid>
-      <Row size={20} style={{ backgroundColor: '#F5F5F5'}}>
+      <Row size={20} style={{ backgroundColor: '#F5F5F5', marginBottom: 50}}>
         <StudentSessionHeader session={session} />
       </Row>
       <Row size={10}style={{ backgroundColor: '#F5F5F5' }}>
