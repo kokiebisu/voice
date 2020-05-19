@@ -42,9 +42,7 @@ const login = (req, res) => {
     })
     .catch((error) => {
       console.error(error);
-      return res
-        .status(403)
-        .json({ general: 'wrong credentials, please try again' });
+      return res.status(403).json({ message: 'Oops! Something is not right!' });
     });
 };
 
@@ -61,6 +59,7 @@ const signup = async (req, res) => {
   };
 
   const { valid, errors } = validateSignUpData(newUser);
+
   if (!valid) return res.status(400).json(errors);
 
   let token, userId;
@@ -68,9 +67,7 @@ const signup = async (req, res) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        return res
-          .status(400)
-          .json({ username: 'this username is already taken' });
+        return res.status(400).json({ message: 'Username is already taken' });
       } else {
         return firebase
           .auth()
@@ -97,11 +94,10 @@ const signup = async (req, res) => {
     .catch((err) => {
       console.error(err);
       if (err.code === 'auth/email-already-in-use') {
-        console.log('email already in use');
         return res.status(400).json({ message: 'Email already in use' });
       } else {
         return res
-          .status(500)
+          .status(400)
           .json({ message: 'Something went wrong, please try again' });
       }
     });

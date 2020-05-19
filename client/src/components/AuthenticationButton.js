@@ -22,9 +22,8 @@ export const AuthenticationButton = ({
       });
       await AsyncStorage.setItem('AuthToken', response.data.token);
       navigation.navigate('Teacher Create Session');
-      console.log('response', response);
     } catch (err) {
-      Alert.alert(err.response.data.message);
+      Alert.alert('Something went wrong');
     }
   };
 
